@@ -60,6 +60,9 @@ namespace ShareFile.Api.Powershell
         [Parameter]
         public string Filter { get; set; }
 
+        [Parameter]
+        public string BodyText { get; set; }
+
 
         [Parameter]
         public string Account { get; set; }
@@ -93,6 +96,10 @@ namespace ShareFile.Api.Powershell
             if (Body != null)
             {
                 query.Body = Body;
+            }
+            else if (BodyText != null)
+            {
+                query.Body = BodyText;
             }
             try
             {
