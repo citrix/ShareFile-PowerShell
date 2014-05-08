@@ -6,10 +6,10 @@ Download release v1.0 here: https://github.com/citrix/ShareFile-PowerShell/relea
 
 INSTALLATION
 To install the snap-in, just download the files in the "ShareFileSnapIn\bin\Release" folder and then follow these steps:
-1. Right-click each .dll, select "Properties" and Unblock the DLL
-2. Open a command prompt or PowerShell window as Administrator
-3. Navigate to the directory where you copied the binaries
-4. Run C:\Windows\Microsoft.NET\v4.0.30319\installutil -i .\ShareFileSnapIn.dll
+* Right-click each .dll, select "Properties" and Unblock the DLL
+* Open a command prompt or PowerShell window as Administrator
+* Navigate to the directory where you copied the binaries
+* Run C:\Windows\Microsoft.NET\v4.0.30319\installutil -i .\ShareFileSnapIn.dll
 
 
 For examples of usage, check out the PowerShell SDK Wiki here:
