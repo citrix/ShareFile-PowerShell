@@ -4,7 +4,7 @@ The ShareFile PowerShell SDK is a PowerShell snap-in that provides support for s
 
 Download release v1.0 here: https://github.com/citrix/ShareFile-PowerShell/releases/tag/v1.0
 
-INSTALLATION
+Installation
 -----------
 To install the snap-in, just download the files in the "ShareFileSnapIn\bin\Release" folder and then follow these steps:
 * Right-click each .dll, select "Properties" and Unblock the DLL
