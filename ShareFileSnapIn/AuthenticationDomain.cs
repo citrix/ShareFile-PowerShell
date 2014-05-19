@@ -81,13 +81,33 @@ namespace ShareFile.Api.Powershell
             }
         }
 
-        public string Account { get; set; }
+        public string Account 
+        {
+            get { return _account;  }
+            set { _account = value != null ? value.ToLower() : null;  }
+        }
+        private string _account;
 
-        public string Domain { get; set; }
+        public string Domain
+        {
+            get { return _domain; }
+            set { _domain = value != null ? value.ToLower() : null; }
+        }
+        private string _domain;
 
-        public string Root { get; set; }
+        public string Root
+        {
+            get { return _root; }
+            set { _root = value != null ? value.ToLower() : null; }
+        }
+        private string _root;
 
-        public string ApiVersion { get; set; }
+        public string ApiVersion
+        {
+            get { return _apiVersion; }
+            set { _apiVersion = value != null ? value.ToLower() : null; }
+        }
+        private string _apiVersion;
 
         public string OAuthToken { get; set; }
 
