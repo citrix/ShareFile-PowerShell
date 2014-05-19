@@ -9,7 +9,7 @@ Download release v1.0 here: https://github.com/citrix/ShareFile-PowerShell/relea
 
 Install
 ----
-    To install the snap-in, just download the files in the "ShareFileSnapIn\bin\Release" folder and then follow these steps:
+    To install the snap-in, just download and extract the files in ShareFileSnapIn.zip from the link above and then follow these steps:
     * Right-click each .dll, select "Properties" and Unblock the DLL
     * Open a command prompt or PowerShell window as Administrator
     * Navigate to the directory where you copied the binaries
