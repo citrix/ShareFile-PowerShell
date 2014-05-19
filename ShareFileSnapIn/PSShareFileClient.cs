@@ -35,7 +35,7 @@ namespace ShareFile.Api.Powershell
 
         public Dictionary<string, AuthenticationDomain> Domains { get; set; }
 
-        public PSShareFileClient(string path, AuthenticationDomain domain = null, NetworkCredential credentials = null)
+        public PSShareFileClient(string path, AuthenticationDomain domain = null)
         {
             Path = path;
             Domains = new Dictionary<string, AuthenticationDomain>();
@@ -69,10 +69,9 @@ namespace ShareFile.Api.Powershell
                 }
                 else
                 {
-                    authDomain.Username = dialog.Username;
-                    authDomain.Password = dialog.Password;
+                    authDomain.Credentials = new NetworkCredential(dialog.Username, dialog.Password);
                     if (Client == null) Client = CreateClient(authDomain);
-                    Client.AddCredentials(new Uri(authDomain.Uri), "basic", new NetworkCredential(authDomain.Username, authDomain.Password));
+                    Client.AddCredentials(new Uri(authDomain.Uri), "basic", authDomain.Credentials);
                 }
                 if (Domains.ContainsKey(authDomain.Uri)) Domains.Remove(authDomain.Uri);
                 Domains.Add(authDomain.Uri, authDomain);
@@ -128,8 +127,7 @@ namespace ShareFile.Api.Powershell
                 Client = CreateClient(authDomain);
                 var session = Client.Sessions.Get().Execute();
                 authDomain.AuthID = session.Id;
-                authDomain.Username = username;
-                authDomain.Password = password;
+                authDomain.Credentials = new NetworkCredential(username, password);
                 this.Save();
             }
             return authDomain;
@@ -200,15 +198,15 @@ namespace ShareFile.Api.Powershell
                             Save();
                             return new EventHandlerResponse() { Action = EventHandlerResponseAction.Retry };
                         }
-                        else if (!string.IsNullOrEmpty(Domains[id].Username) && !string.IsNullOrEmpty(Domains[id].Password) && retryCount <= 1)
+                        else if (Domains[id].Credentials != null && retryCount <= 1)
                         {
                             if (Domains[id].Provider.Equals(Resources.ShareFileProvider) && Domains[id].IsShareFileUri)
                             {
-                                Domains[id] = AuthenticateUsernamePassword(Domains[id].Account, Domains[id].Domain, Domains[id].Username, Domains[id].Password);
+                                Domains[id] = AuthenticateUsernamePassword(Domains[id].Account, Domains[id].Domain, Domains[id].Credentials.UserName, Domains[id].Credentials.Password);
                             }
                             else
                             {
-                                Client.AddCredentials(new Uri(Domains[id].Uri), "Basic", new NetworkCredential(Domains[id].Username, Domains[id].Password));
+                                Client.AddCredentials(new Uri(Domains[id].Uri), "Basic", Domains[id].Credentials);
                             }
                             return new EventHandlerResponse() { Action = EventHandlerResponseAction.Retry };
                         }
@@ -317,14 +315,16 @@ namespace ShareFile.Api.Powershell
 
         private ShareFileClient CreateClient(AuthenticationDomain domain)
         {
-            var client = new ShareFileClient(domain.Uri);
+            var configuration = new Configuration();
+            configuration.HttpTimeout = 10 * 60 * 1000;
+            var client = new ShareFileClient(domain.Uri, configuration);
             if (domain.OAuthToken != null)
             {
                 client.AddOAuthCredentials(new Uri(domain.Uri), domain.OAuthToken);
             }
-            else if (domain.Username != null && domain.Password != null)
+            else if (domain.Credentials != null)
             {
-                Client.AddCredentials(new Uri(domain.Uri), "basic", new NetworkCredential(domain.Username, domain.Password));
+                client.AddCredentials(new Uri(domain.Uri), "basic", domain.Credentials);
             }
             client.AddExceptionHandler(OnException);
             return client;

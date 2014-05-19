@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace ShareFile.Api.Powershell
 {
@@ -94,9 +95,7 @@ namespace ShareFile.Api.Powershell
 
         public string AuthID { get; set; }
 
-        public string Username { get; set; }
-
-        public string Password { get; set; }
+        public NetworkCredential Credentials { get; set; }
 
         public bool IsApiUri
         {

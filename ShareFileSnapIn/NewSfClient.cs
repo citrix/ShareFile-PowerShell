@@ -51,7 +51,8 @@ namespace ShareFile.Api.Powershell
                 ApiVersion = ApiVersion,
                 Provider = Provider
             };
-            PSShareFileClient psc = new PSShareFileClient(Name, authDomain, Credential != null? Credential.GetNetworkCredential() : null);
+            authDomain.Credentials = Credential != null ? Credential.GetNetworkCredential() : null;
+            PSShareFileClient psc = new PSShareFileClient(Name, authDomain);
             psc.GetSession();
             WriteObject(psc);
         }
