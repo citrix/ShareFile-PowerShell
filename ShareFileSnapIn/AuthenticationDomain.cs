@@ -95,7 +95,7 @@ namespace ShareFile.Api.Powershell
 
         public string AuthID { get; set; }
 
-        public NetworkCredential Credentials { get; set; }
+        public NetworkCredential Credential { get; set; }
 
         public bool IsApiUri
         {

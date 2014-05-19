@@ -27,9 +27,9 @@ namespace ShareFile.Api.Powershell
     /// </summary>
     public class PSShareFileClient
     {
-        public string Path { get; set;  }
+        public string Path { get; set; }
 
-        public ShareFileClient Client { get; set;  }
+        public ShareFileClient Client { get; set; }
 
         public AuthenticationDomain PrimaryDomain { get; set; }
 
@@ -69,9 +69,9 @@ namespace ShareFile.Api.Powershell
                 }
                 else
                 {
-                    authDomain.Credentials = new NetworkCredential(dialog.Username, dialog.Password);
+                    authDomain.Credential = new NetworkCredential(dialog.Username, dialog.Password);
                     if (Client == null) Client = CreateClient(authDomain);
-                    Client.AddCredentials(new Uri(authDomain.Uri), "basic", authDomain.Credentials);
+                    Client.AddCredentials(new Uri(authDomain.Uri), "basic", authDomain.Credential);
                 }
                 if (Domains.ContainsKey(authDomain.Uri)) Domains.Remove(authDomain.Uri);
                 Domains.Add(authDomain.Uri, authDomain);
@@ -124,10 +124,9 @@ namespace ShareFile.Api.Powershell
                 authDomain.Uri = uri;
                 if (Domains.ContainsKey(authDomain.Uri)) Domains.Remove(authDomain.Uri);
                 Domains.Add(authDomain.Uri, authDomain);
-                Client = CreateClient(authDomain);
+                if (Client == null) Client = CreateClient(authDomain);
                 var session = Client.Sessions.Get().Execute();
                 authDomain.AuthID = session.Id;
-                authDomain.Credentials = new NetworkCredential(username, password);
                 this.Save();
             }
             return authDomain;
@@ -198,15 +197,15 @@ namespace ShareFile.Api.Powershell
                             Save();
                             return new EventHandlerResponse() { Action = EventHandlerResponseAction.Retry };
                         }
-                        else if (Domains[id].Credentials != null && retryCount <= 1)
+                        else if (Domains[id].Credential != null && retryCount <= 1)
                         {
                             if (Domains[id].Provider.Equals(Resources.ShareFileProvider) && Domains[id].IsShareFileUri)
                             {
-                                Domains[id] = AuthenticateUsernamePassword(Domains[id].Account, Domains[id].Domain, Domains[id].Credentials.UserName, Domains[id].Credentials.Password);
+                                Domains[id] = AuthenticateUsernamePassword(Domains[id].Account, Domains[id].Domain, Domains[id].Credential.UserName, Domains[id].Credential.Password);
                             }
                             else
                             {
-                                Client.AddCredentials(new Uri(Domains[id].Uri), "Basic", Domains[id].Credentials);
+                                Client.AddCredentials(new Uri(Domains[id].Uri), "basic", Domains[id].Credential);
                             }
                             return new EventHandlerResponse() { Action = EventHandlerResponseAction.Retry };
                         }
@@ -291,23 +290,26 @@ namespace ShareFile.Api.Powershell
 
         public void Save()
         {
-            if (Path != null) 
+            if (Path != null)
             {
                 if (Path.IndexOf('.') < 0) Path += ".sfps";
                 using (var writer = new StreamWriter(new FileStream(Path, FileMode.Create)))
                 {
                     foreach (var id in Domains.Keys)
                     {
-                        writer.WriteLine(string.Format("[{0}]", id));
-                        writer.WriteLine("Provider=" + Domains[id].Provider);
-                        writer.WriteLine("IsDefault=" + (Client.BaseUri.ToString() == Domains[id].Uri));
-                        writer.WriteLine("Version=" + Resources.Version);
-                        writer.WriteLine("Uri=" + Domains[id].Uri ?? "");
-                        writer.WriteLine("AccessToken=" + Domains[id].OAuthToken ?? "");
-                        writer.WriteLine("RefreshToken=" + Domains[id].OAuthRefreshToken ?? "");
-                        writer.WriteLine("Account=" + Domains[id].Account ?? "");
-                        writer.WriteLine("Domain=" + Domains[id].Domain ?? "");
-                        writer.WriteLine("ApiVersion=" + Domains[id].ApiVersion ?? "");
+                        if (Domains[id].Domain != null && !Domains[id].Domain.ToLower().Equals("secure"))
+                        {
+                            writer.WriteLine(string.Format("[{0}]", id));
+                            writer.WriteLine("Provider=" + Domains[id].Provider);
+                            writer.WriteLine("IsDefault=" + (Client.BaseUri.ToString().ToLower() == Domains[id].Uri.ToLower()));
+                            writer.WriteLine("Version=" + Resources.Version);
+                            writer.WriteLine("Uri=" + Domains[id].Uri ?? "");
+                            writer.WriteLine("AccessToken=" + Domains[id].OAuthToken ?? "");
+                            writer.WriteLine("RefreshToken=" + Domains[id].OAuthRefreshToken ?? "");
+                            writer.WriteLine("Account=" + Domains[id].Account ?? "");
+                            writer.WriteLine("Domain=" + Domains[id].Domain ?? "");
+                            writer.WriteLine("ApiVersion=" + Domains[id].ApiVersion ?? "");
+                        }
                     }
                 }
             }
@@ -315,16 +317,10 @@ namespace ShareFile.Api.Powershell
 
         private ShareFileClient CreateClient(AuthenticationDomain domain)
         {
-            var configuration = new Configuration();
-            configuration.HttpTimeout = 10 * 60 * 1000;
-            var client = new ShareFileClient(domain.Uri, configuration);
+            var client = new ShareFileClient(domain.Uri);
             if (domain.OAuthToken != null)
             {
                 client.AddOAuthCredentials(new Uri(domain.Uri), domain.OAuthToken);
-            }
-            else if (domain.Credentials != null)
-            {
-                client.AddCredentials(new Uri(domain.Uri), "basic", domain.Credentials);
             }
             client.AddExceptionHandler(OnException);
             return client;
