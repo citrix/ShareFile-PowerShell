@@ -50,6 +50,16 @@ namespace ShareFile.Api.Powershell
         {
             if (PrimaryDomain != null)
             {
+                // Add username/password credentials if domain is ShareFile; Account is known; and credentials were provided
+                if (PrimaryDomain.IsShareFileUri
+                    && PrimaryDomain.Credential != null 
+                    && PrimaryDomain.Account != null 
+                    && !PrimaryDomain.Account.Equals("secure") 
+                    && !PrimaryDomain.Account.Equals("g"))
+                {
+                    AuthenticateUsernamePassword(PrimaryDomain.Account, PrimaryDomain.Domain, PrimaryDomain.Credential.UserName, PrimaryDomain.Credential.Password);
+                }
+                // Handle all other auth scenarios
                 if (Client == null) Client = CreateClient(PrimaryDomain);
                 return Client.Sessions.Get().Execute();
             }
