@@ -4,7 +4,7 @@ The ShareFile PowerShell SDK is a PowerShell snap-in that provides support for s
 
 Download
 ----
-Download release v1.0 here: https://github.com/citrix/ShareFile-PowerShell/releases/tag/v1.2
+Download release v1.0 here: https://github.com/citrix/ShareFile-PowerShell/releases/tag/v1.3
 
 
 Install
