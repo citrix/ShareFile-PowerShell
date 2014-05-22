@@ -20,6 +20,12 @@ Install
     Note: The PowerShell SDK is not signed, so you will need to modify the execution policy in PowerShell. The easiest way is to run "Set-ExecutionPolicy RemoteSigned", but check the documentation on script signing to understand what the options are. http://technet.microsoft.com/en-us/library/hh849812.aspx
 
 
+License
+----
+All code is licensed under the [MIT
+License](https://github.com/citrix/ShareFile-PowerShell/blob/master/ShareFileSnapIn/LICENSE.txt).
+
+
 References
 ----
 For examples of usage, check out the PowerShell SDK Wiki here:
