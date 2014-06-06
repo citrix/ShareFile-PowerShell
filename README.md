@@ -16,7 +16,8 @@ http://msdn.microsoft.com/en-us/library/5a4x27ek(v=vs.110).aspx
 
 Install
 ----
-    To install the snap-in, just download and extract the files in ShareFileSnapIn.zip from the link above and then follow these steps:
+    To install the snap-in, just download and extract the files in ShareFileSnapIn.zip from the link above 
+    and then follow these steps:
     * Right-click each .dll, select "Properties" and Unblock the DLL (or just run "gci | Unblock-File" in PowerShell)
     * Open a command prompt or PowerShell window as Administrator
     * Navigate to the directory where you copied the binaries
