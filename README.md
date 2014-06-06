@@ -6,6 +6,13 @@ Download
 ----
 Download release v1.0 here: https://github.com/citrix/ShareFile-PowerShell/releases/tag/v1.3
 
+Requirements
+----
+The PowerShell SDK requires PowerShell version 4.0 which you can learn more about here
+http://social.technet.microsoft.com/wiki/contents/articles/21016.how-to-install-windows-powershell-4-0.aspx
+
+As well as .Net version 4.x
+http://msdn.microsoft.com/en-us/library/5a4x27ek(v=vs.110).aspx
 
 Install
 ----
