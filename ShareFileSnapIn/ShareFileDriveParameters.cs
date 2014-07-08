@@ -8,13 +8,13 @@ namespace ShareFile.Api.Powershell
         public ShareFileDriveParameters()
         {
             Client = null;
-            Id = null;
+            RootUri = null;
         }
 
         [Parameter(Mandatory=true)]
         public PSShareFileClient Client { get; set; }
 
         [Parameter(Mandatory = false)]
-        public string Id { get; set; }
+        public Uri RootUri { get; set; }
     }
 }

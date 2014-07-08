@@ -125,7 +125,7 @@ namespace ShareFile.Api.Powershell
                         var targetClient = ((ShareFileDriveInfo)targetDrive).Client;
                         // TODO: verify that source and target drives are on the same account
                         var sourceItem = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)sourceDrive, filePath);
-                        sourceClient.Items.Copy(sourceItem.Id, targetItem.Id, Force).Execute();
+                        sourceClient.Items.Copy(sourceItem.url, targetItem.Id, Force).Execute();
                     }
                     else if (isSourceLocal && isTargetSF)
                     {
@@ -167,7 +167,7 @@ namespace ShareFile.Api.Powershell
             if (source is DirectoryInfo)
             {
                 var newFolder = new Models.Folder() { Name = source.Name };
-                newFolder = client.Items.CreateFolder(target.url.ToString(), newFolder, Force, false).Execute();
+                newFolder = client.Items.CreateFolder(target.url, newFolder, Force, false).Execute();
                 foreach (var fsInfo in ((DirectoryInfo)source).EnumerateFileSystemInfos())
                 {
                     RecursiveUpload(client, uploadId, fsInfo, newFolder);
@@ -185,11 +185,11 @@ namespace ShareFile.Api.Powershell
                         FileName = fileInfo.Name,
                         FileSize = fileInfo.Length,
                         Method = UploadMethod.Threaded,
-                        ParentId = target.url.ToString(),
+                        Parent = target.url,
                         ThreadCount = 4,
                         Raw = true
                     };
-                    var uploader = client.GetAsyncFileUploader(uploadSpec, new PlatformFileInfo(fileInfo));
+                    var uploader = client.GetFileUploader(uploadSpec, new PlatformFileInfo(fileInfo));
 
                     var progressBar = new ProgressBar(uploadId, "Uploading...", this);
                     progressBar.SetProgress(fileInfo.Name, 0);
@@ -215,7 +215,7 @@ namespace ShareFile.Api.Powershell
         {
             if (source is Models.Folder)
             {
-                var children = client.Items.GetChildren(source.url.ToString()).Execute();
+                var children = client.Items.GetChildren(source.url).Execute();
                 var subdirCheck = new DirectoryInfo(System.IO.Path.Combine(target.FullName, source.FileName));
                 if (subdirCheck.Exists && !Force) throw new IOException("Path " + subdirCheck.FullName + " already exists. Use -Force to ignore");
                 var subdir = target.CreateSubdirectory(source.FileName);
@@ -233,7 +233,7 @@ namespace ShareFile.Api.Powershell
                 {
                     var progressBar = new ProgressBar(downloadId, "Downloading...", this);
                     progressBar.SetProgress(source.FileName, 0);
-                    var downloader = client.GetFileDownloader(source);
+                    var downloader = client.GetAsyncFileDownloader(source);
                     downloader.OnTransferProgress =
                         (sender, args) =>
                         {

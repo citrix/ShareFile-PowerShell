@@ -1,4 +1,5 @@
 ﻿using ShareFile.Api.Client;
+using System;
 using System.Management.Automation;
 
 namespace ShareFile.Api.Powershell
@@ -7,13 +8,15 @@ namespace ShareFile.Api.Powershell
     {
         public ShareFileClient Client { get; private set; }
 
-        public string RootId { get; set; }
+        public Uri RootUri { get; set; }
+
+        public Models.Item RootItem { get; set; }
 
         public ShareFileDriveInfo(PSDriveInfo driveInfo, ShareFileDriveParameters driveParams)
             : base( driveInfo )
         {
             Client = driveParams.Client.Client;
-            RootId = driveParams.Id;
+            RootUri = driveParams.RootUri;
         }      
     }
 }

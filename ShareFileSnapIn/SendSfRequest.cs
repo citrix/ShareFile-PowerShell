@@ -111,7 +111,11 @@ namespace ShareFile.Api.Powershell
                     {
                         if (t.GetGenericTypeDefinition() == typeof(ODataFeed<>))
                         {
-                            WriteObject(t.GetProperty("Feed").GetValue(response, null));
+                            var feed = t.GetProperty("Feed").GetValue(response, null) as IEnumerable<ODataObject>;
+                            foreach (var o in feed)
+                            {
+                                WriteObject(o);
+                            }
                         }
                     }
                     else

@@ -56,7 +56,7 @@ namespace ShareFile.Api.Powershell
         protected override void GetChildNames(string path, ReturnContainers returnContainers)
         {
             var di = (ShareFileDriveInfo)this.PSDriveInfo;
-            var children = GetShareFileChildren(di, path, new string[] { "FileName" });
+            var children = GetShareFileChildren(di, path, new string[] { "FileName" } );
             if (children != null)
             {
                 foreach (var child in children.Feed)
@@ -104,7 +104,7 @@ namespace ShareFile.Api.Powershell
             {
                 var source = GetShareFileItem(di, path, new string[] { "Id" });
                 var target = GetShareFileItem(di, copyPath, new string[] { "Id" });
-                di.Client.Items.Copy(source.url.ToString(), target.Id, Force).Select("Id").Execute();
+                di.Client.Items.Copy(source.url, target.Id, Force).Select("Id").Execute();
             }
             catch (Exception e)
             {
@@ -118,7 +118,7 @@ namespace ShareFile.Api.Powershell
             try
             {
                 var source = GetShareFileItem(di, path, new string[] { "Id", "url" });
-                di.Client.Items.Delete(source.url.ToString())
+                di.Client.Items.Delete(source.url)
                     .Execute();
             }
             catch (Exception e)
@@ -136,7 +136,7 @@ namespace ShareFile.Api.Powershell
                 Models.Item newItem = new Models.Item();
                 newItem.Name = newName;
                 newItem.FileName = newName;
-                di.Client.Items.Update(source.url.ToString(), newItem).Execute();
+                di.Client.Items.Update(source.url, newItem).Execute();
             }
             catch (Exception e)
             {
@@ -160,7 +160,7 @@ namespace ShareFile.Api.Powershell
             if (itemTypeName == null || itemTypeName.ToLower().Equals("folder") || itemTypeName.ToLower().Equals("directory"))
             {
                 var folder = new Models.Folder() { Name = itemName, Description = p.Details };
-                newItem = di.Client.Items.CreateFolder(parent.url.ToString(), folder, Force.ToBool()).Execute();
+                newItem = di.Client.Items.CreateFolder(parent.url, folder, Force.ToBool()).Execute();
                 isContainer = true;
             }
             else if (itemTypeName.ToLower().Equals("symboliclink"))
@@ -168,7 +168,7 @@ namespace ShareFile.Api.Powershell
                 if (p.Uri != null) 
                 {
                     var symlink = new Models.SymbolicLink() { Name = itemName, Link = p.Uri, Description = p.Details };
-                    newItem = di.Client.Items.CreateSymbolicLink(parent.url.ToString(), symlink, Force.ToBool()).Execute();
+                    newItem = di.Client.Items.CreateSymbolicLink(parent.url, symlink, Force.ToBool()).Execute();
                     isContainer = false;
                 }
             }
@@ -190,12 +190,12 @@ namespace ShareFile.Api.Powershell
                     string sfPath = match.Groups["path"].Value;
                     sfPath = sfPath.Replace('\\', '/');
                     if (!sfPath.StartsWith("/")) sfPath = "/" + sfPath;
-                    query = driveInfo.Client.Items.ByPath(driveInfo.RootId ?? "", sfPath);
+                    query = driveInfo.RootUri != null ? driveInfo.Client.Items.ByPath(driveInfo.RootUri, sfPath) : driveInfo.Client.Items.ByPath(sfPath);
                 }
             }
             else
             {
-                query = driveInfo.RootId != null ? driveInfo.Client.Items.Get(driveInfo.RootId) : driveInfo.Client.Items.ByPath("/");
+                query = driveInfo.RootUri != null ? driveInfo.Client.Items.Get(driveInfo.RootUri) : driveInfo.Client.Items.ByPath("/");
             }
             if (query != null)
             {
@@ -227,9 +227,9 @@ namespace ShareFile.Api.Powershell
                         {
                             var sfPathParent = parentIdx > 0 ? sfPath.Substring(0, parentIdx) : "/";
                             var sfPathFile = sfPath.Substring(parentIdx + 1, starIndex - parentIdx - 1);
-                            var sfItem = driveInfo.Client.Items.ByPath(driveInfo.RootId ?? "", sfPathParent).Select("Id").Execute();
+                            var sfItem = (driveInfo.RootUri != null ? driveInfo.Client.Items.ByPath(driveInfo.RootUri, sfPathParent) : driveInfo.Client.Items.ByPath(sfPathParent)).Select("Id").Execute();
                             var filter = new StartsWithFilter("Name", sfPathFile, true);
-                            query = driveInfo.Client.Items.GetChildren(sfItem.Id).Filter(filter);
+                            query = driveInfo.Client.Items.GetChildren(sfItem.url).Filter(filter);
                         }
                     }
                 }
@@ -244,10 +244,10 @@ namespace ShareFile.Api.Powershell
 
         public static Models.ODataFeed<Models.Item> GetShareFileChildren(ShareFileDriveInfo driveInfo, string path, string[] select = null, string[] expand = null)
         {
-            var item = GetShareFileItem(driveInfo, path, new string[] { "Id" });
+            var item = GetShareFileItem(driveInfo, path, new string[] { "Id", "url" });
             if (item != null && item is Models.Folder)
             {
-                var query = item.url != null ? driveInfo.Client.Items.GetChildren(item.url.ToString()) : driveInfo.Client.Items.GetChildren(item.Id);
+                var query = driveInfo.Client.Items.GetChildren(item.url);
                 return ExecuteQuery<Models.ODataFeed<Models.Item>>(query, select, expand);
             }
             return null;
