@@ -40,3 +40,6 @@ References
 ----
 For examples of usage, check out the PowerShell SDK Wiki here:
 https://github.com/citrix/ShareFile-PowerShell/wiki
+
+For some blogs on using the PoswerShell SDK take a look here:
+http://blogs.citrix.com/tag/powershell-sdk/
