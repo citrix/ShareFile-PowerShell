@@ -177,6 +177,9 @@ namespace ShareFile.Api.Powershell
             return new EventHandlerResponse() { Action = EventHandlerResponseAction.Redirect, Redirection = redirection };
         }
 
+        // Workaround for SDK issue - retryCount not increasing on OAuth refresh flow
+        private bool OAuthRefreshRetry = false;
+
         private EventHandlerResponse OnException(HttpResponseMessage response, int retryCount)
         {
             if (retryCount > int.Parse(Resources.MaxExceptionRetry))
@@ -190,12 +193,13 @@ namespace ShareFile.Api.Powershell
                 {
                     if (response.RequestMessage.RequestUri.Host.EndsWith(Domains[id].Domain))
                     {
-                        if (!string.IsNullOrEmpty(Domains[id].OAuthToken) && retryCount == 0)
+                        if (!string.IsNullOrEmpty(Domains[id].OAuthToken) && retryCount == 0 && !OAuthRefreshRetry)
                         {
                             Client.AddOAuthCredentials(new Uri(Domains[id].Uri), Domains[id].OAuthToken);
+                            OAuthRefreshRetry = true;
                             return new EventHandlerResponse() { Action = EventHandlerResponseAction.Retry };
                         }
-                        else if (!string.IsNullOrEmpty(Domains[id].OAuthRefreshToken) && retryCount == 1)
+                        else if (!string.IsNullOrEmpty(Domains[id].OAuthRefreshToken)) /*Commented-out for workaround retryCount :  && retryCount == 1) */
                         {
                             var token = GetTokenResponse(
                                 string.Format("https://{0}.{1}/oauth/token", Domains[id].Account, Domains[id].Domain),
@@ -205,6 +209,7 @@ namespace ShareFile.Api.Powershell
                             Domains[id].OAuthRefreshToken = token.RefreshToken;
                             Client.AddOAuthCredentials(new Uri(Domains[id].Uri), token.AccessToken);
                             Save();
+                            OAuthRefreshRetry = false;
                             return new EventHandlerResponse() { Action = EventHandlerResponseAction.Retry };
                         }
                         else if (Domains[id].Credential != null && retryCount <= 1)

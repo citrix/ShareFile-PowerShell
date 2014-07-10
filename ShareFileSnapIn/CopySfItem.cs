@@ -189,7 +189,7 @@ namespace ShareFile.Api.Powershell
                         ThreadCount = 4,
                         Raw = true
                     };
-                    var uploader = client.GetFileUploader(uploadSpec, new PlatformFileInfo(fileInfo));
+                    var uploader = client.GetAsyncFileUploader(uploadSpec, new PlatformFileInfo(fileInfo));
 
                     var progressBar = new ProgressBar(uploadId, "Uploading...", this);
                     progressBar.SetProgress(fileInfo.Name, 0);

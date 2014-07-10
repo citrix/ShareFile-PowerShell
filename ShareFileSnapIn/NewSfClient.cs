@@ -36,8 +36,6 @@ namespace ShareFile.Api.Powershell
         [Parameter]
         public string Provider { get; set; }
 
-
-
         protected override void ProcessRecord()
         {
             if (ApiVersion == null) ApiVersion = Resources.DefaultApiVersion;
