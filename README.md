@@ -30,6 +30,10 @@ Install
     signing to understand what the options are. http://technet.microsoft.com/en-us/library/hh849812.aspx
 
 
+Samples
+----
+Sample scripts using the SDK are posted in the wiki: https://github.com/citrix/ShareFile-PowerShell/wiki
+
 License
 ----
 All code is licensed under the [MIT
