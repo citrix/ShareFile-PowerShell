@@ -317,6 +317,7 @@ namespace ShareFile.Api.Powershell
         {
             CurrentPct = 100;
             Finished = true;
+            WaitHandle.Set();
         }
 
         public void UpdateLoop()
