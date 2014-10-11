@@ -132,8 +132,17 @@
   <data name="DefaultGlobalApiSubdomain" xml:space="preserve">
     <value>secure</value>
   </data>
+  <data name="LogConfigFile" xml:space="preserve">
+    <value>NLog.config</value>
+  </data>
+  <data name="LogFile" xml:space="preserve">
+    <value>main.log</value>
+  </data>
   <data name="MaxExceptionRetry" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="ProgressFile" xml:space="preserve">
+    <value />
   </data>
   <data name="RedirectURL" xml:space="preserve">
     <value>https://secure.sharefile.com/oauth/oauthcomplete.aspx</value>

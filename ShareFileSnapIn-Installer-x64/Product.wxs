@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" 
+     xmlns:ps="http://schemas.microsoft.com/wix/PSExtension" 
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+  <Product Id="*" Name="ShareFile SnapIn Installer" Language="1033" Version="1.0.0.0" Manufacturer="Ebricks-Inc" UpgradeCode="51c1b824-3eb6-4e34-8696-021bf7b56734">
+    <Package Id="*" InstallerVersion="200" Platform="x64" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <UIRef Id="WixUI_InstallDir" />
+
+    <Feature Id="ProductFeature" Title="ShareFileSnapIn_Installer" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="CMP_DocumentationShortcut" />
+    </Feature>
+
+    <Icon Id="ShareFileIcon.ico" SourceFile="..\ShareFileSnapIn\bin\Release\Assets\sf-icon.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="ShareFileIcon.ico" />
+
+    <PropertyRef Id="NETFRAMEWORK45"/>
+    <Condition Message="This setup requires Microsoft .NET Framework 4.5 package or greater needs to be installed for this installation to continue.">
+      <![CDATA[Installed OR NETFRAMEWORK45]]>
+    </Condition>
+
+    <PropertyRef Id="POWERSHELLVERSION"/>
+    <PropertyRef Id="POWERSHELL3VERSION" />
+    <Condition Message="Installing [ProductName] requires PowerShell Version 4.0 or later.">
+      <![CDATA[Installed OR (POWERSHELLVERSION >= "2.0" AND POWERSHELL3VERSION >= "4.0")]]>
+    </Condition>
+
+    <DirectoryRef Id="ShareFilePSShortcutsDir">
+      <Component Id="CMP_DocumentationShortcut" Guid="519f5bda-fc88-45f1-a670-9e7d74dc83db" Win64="yes">
+        <Shortcut Id="RunPowershell" Name="ShareFile PowerShell Console" Description="Start a PowerShell console with ShareFile support"
+                  Target="[System64Folder]windowspowershell\v1.0\powershell.exe" Arguments="-NoExit -ExecutionPolicy Bypass -Command &quot;&amp; '[#InstallTestSnapIn.ps1]'&quot;" />
+        <RemoveFolder Id="RemoveShareFileShortcutsDir" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\[ProductName]" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+  </Product>
+
+  <Fragment>
+    <Property Id="POWERSHELL3VERSION" Secure="yes">
+      <RegistrySearch Id="PowerShell3VersionSearch"
+                      Key="SOFTWARE\Microsoft\PowerShell\3\PowerShellEngine"
+                      Name="PowerShellVersion"
+                      Root="HKLM"
+                      Type="raw" />
+    </Property>
+  </Fragment>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLFOLDER" Name="ShareFileSnapIn_Installer">
+          <Directory Id="SubModulesFolder" Name="$(var.ShareFileSnapIn.TargetName)" />
+        </Directory>
+        <Directory Id="ProgramMenuFolder">
+          <Directory Id="ShareFilePSShortcutsDir" Name="ShareFile-PowerShell Software" />
+        </Directory>
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Guid="e5550174-46ff-4919-9bcf-6216364f16a3" Win64="yes">
+        <File Id="ShareFileSnapIn.dll" Name="ShareFileSnapIn.dll" Vital="yes" Source="..\ShareFileSnapIn\bin\Release\ShareFileSnapIn.dll"
+              KeyPath="yes" Assembly=".net" AssemblyApplication="ShareFileSnapIn.dll">
+          <ps:SnapIn Id="ShareFile" Description="ShareFile Formats" Vendor="Citrix ShareFile">
+            <ps:FormatsFile FileId="ShareFile.Formats" />
+          </ps:SnapIn>
+        </File>
+        <File Id="ShareFile.Formats" Name="ShareFile.Format.ps1xml" Source="..\ShareFileSnapIn\bin\Release\ShareFile.Format.ps1xml" />
+      </Component>
+      <Component Id="ShareFile.Api.Client.Net45.dll" Guid="197793b8-c7a0-4cce-829a-56061065ea72" Win64="yes">
+        <File Id="ShareFile.Api.Client.Net45.dll" Name="ShareFile.Api.Client.Net45.dll" Source="..\ShareFileSnapIn\bin\Release\ShareFile.Api.Client.Net45.dll">
+        </File>
+      </Component>
+      <Component Id="ShareFile.Api.Client.Core.dll" Guid="19c723f4-43be-4d3a-aef4-f9ecfe1fd13b" Win64="yes">
+        <File Id="ShareFile.Api.Client.Core.dll" Name="ShareFile.Api.Client.Core.dll" Source="..\ShareFileSnapIn\bin\Release\ShareFile.Api.Client.Core.dll">
+        </File>
+      </Component>
+      <Component Id="Newtonsoft.Json.dll" Guid="4b1b1ae5-b719-4d7d-b6ce-cfe20a09a0ea" Win64="yes">
+        <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="..\ShareFileSnapIn\bin\Release\Newtonsoft.Json.dll">
+        </File>
+      </Component>
+      <Component Id="NLog.dll" Guid="36a2c4e5-746a-4310-a8b3-f7fc7b587c06" Win64="yes">
+        <File Id="NLog.dll" Name="NLog.dll" Source="..\ShareFileSnapIn\bin\Release\NLog.dll">
+        </File>
+      </Component>
+      <Component Guid="8f1a297e-8bec-4ccc-9051-4d53e876194b" Win64="yes">
+        <File Id="NLog.config" Name="NLog.config" KeyPath="yes" Source="..\ShareFileSnapIn\bin\Release\NLog.config">
+        </File>
+      </Component>
+      <Component Guid="9e8a9642-059f-41a4-8fc2-533da4e73e4a" Win64="yes">
+        <File Name="InstallTestSnapIn.ps1" KeyPath="yes" Source="..\ShareFileSnapIn\bin\Release\Add-ShareFile-SnapIn.ps1" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
