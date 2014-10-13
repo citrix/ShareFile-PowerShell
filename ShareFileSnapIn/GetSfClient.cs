@@ -4,11 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Management.Automation;
 using ShareFile.Api;
 using ShareFile.Api.Models;
@@ -23,6 +18,7 @@ using System.Security;
 using System.Runtime.InteropServices;
 using System.Resources;
 using Microsoft.Win32;
+using ShareFile.Api.Client.Exceptions;
 
 namespace ShareFile.Api.Powershell
 {
@@ -39,7 +35,16 @@ namespace ShareFile.Api.Powershell
             if (Name.IndexOf('.') < 0) Name += ".sfps";
             var psc = new PSShareFileClient(Name);
             psc.Load();
-            psc.Client.Sessions.Get().Execute();
+            try
+            {
+                psc.Client.Sessions.Get().Execute();
+            }
+            catch (WebAuthenticationException)
+            {
+                psc = new PSShareFileClient(Name);
+                psc.Load();
+                psc.Client.Sessions.Get().Execute();
+            }
             WriteObject(psc);
         }
     }

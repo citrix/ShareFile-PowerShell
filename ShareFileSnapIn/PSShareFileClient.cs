@@ -207,10 +207,12 @@ namespace ShareFile.Api.Powershell
                                     Resources.RedirectURL, Domains[id].OAuthRefreshToken, Resources.ClientId, Resources.ClientSecret));
                             Domains[id].OAuthToken = token.AccessToken;
                             Domains[id].OAuthRefreshToken = token.RefreshToken;
+
                             Client.AddOAuthCredentials(new Uri(Domains[id].Uri), token.AccessToken);
+                            
                             Save();
                             OAuthRefreshRetry = false;
-                            return new EventHandlerResponse() { Action = EventHandlerResponseAction.Retry };
+                            return new EventHandlerResponse() { Action = EventHandlerResponseAction.Throw };
                         }
                         else if (Domains[id].Credential != null && retryCount <= 1)
                         {
@@ -338,6 +340,7 @@ namespace ShareFile.Api.Powershell
                 client.AddOAuthCredentials(new Uri(domain.Uri), domain.OAuthToken);
             }
             client.AddExceptionHandler(OnException);
+
             return client;
         }
 

@@ -12,9 +12,13 @@ using ShareFile.Api.Client.Transfers;
 using ShareFile.Api.Client.FileSystem;
 using ShareFile.Api.Client.Transfers.Uploaders;
 using System.Threading;
+using ShareFile.Api.Powershell.Parallel;
+using ShareFile.Api.Powershell.Log;
 
 namespace ShareFile.Api.Powershell
 {
+    delegate void FileSupport(String Name);
+
     [Cmdlet(VerbsCommon.Copy, Noun, DefaultParameterSetName = ParmamSetPath, SupportsShouldProcess = true)]
     public class CopySfItem : PSCmdlet
     {
@@ -23,7 +27,9 @@ namespace ShareFile.Api.Powershell
         private const string ParmamSetPath = "Path";
         private string[] _paths;
         private bool _shouldExpandWildcards;
-        
+        private Resume.ResumeSupport ResumeSupport { get; set; }
+        private FileSupport FileSupport;
+
         [Parameter(
             Position = 0,
             Mandatory = true,
@@ -67,7 +73,43 @@ namespace ShareFile.Api.Powershell
 
         protected override void ProcessRecord()
         {
-            foreach (string path in _paths)
+            ResumeSupport = new Resume.ResumeSupport();
+            FileSupport = new FileSupport(MarkFileStatus);
+            
+            if (ResumeSupport.IsPending)
+            {
+                Logger.Instance.Info("Last command wasn't successful due to discconnection.");
+
+                Console.Write("Last command wasn't successful due to discconnection, enter 'y' to complete or any other key to ignore: ");
+                String userOption = Console.ReadLine();
+                
+                if (userOption.ToLower().Equals("y"))
+                {
+                    Logger.Instance.Info("Copying those files which were missed due to discconnection with following parameters. Source Path:{0} Destination:{1} Forced:{2} Details:{3}", 
+                        String.Join(",", ResumeSupport.GetPath), ResumeSupport.GetDestination, ResumeSupport.GetForce, ResumeSupport.GetDetails);
+
+                    StartCopying(ResumeSupport.GetPath, ResumeSupport.GetDestination, ResumeSupport.GetForce, ResumeSupport.GetDetails);
+
+                    Logger.Instance.Info("Copying operation completed for missing files");
+                    ResumeSupport.End();
+                    Console.Write("Last command completed, starting current operation");
+                }
+            }
+
+            Logger.Instance.Info(String.Format("Starting Copy Operation with following parameters. Source Path:{0} Destination:{1} Forced:{2} Details:{3}", 
+                String.Join(",", Path), Destination, Force, Details));
+            ResumeSupport.Start(Path, Destination, Force, Details);
+
+            StartCopying(Path, Destination, Force, Details);
+
+            ResumeSupport.End();
+            Logger.Instance.Info("Command executed successfully");
+            WriteObject("Files copied successfully");
+        }
+
+        private void StartCopying(String[] paramPath, String paramDestination, bool paramForce, String paramDetails)
+        {
+            foreach (string path in paramPath)
             {
                 // Handle the source Paths. They may be provided as a wildcard, or literal paths
                 ProviderInfo sourceProvider;
@@ -95,10 +137,10 @@ namespace ShareFile.Api.Powershell
                 bool isSourceSF = sourceProvider.ImplementingType == typeof(ShareFileProvider);
 
                 // Handle the target Path.
-                if (Destination == null) Destination = this.SessionState.Path.CurrentFileSystemLocation.ProviderPath;
+                if (paramDestination == null) paramDestination = this.SessionState.Path.CurrentFileSystemLocation.ProviderPath;
                 ProviderInfo targetProvider = null;
                 PSDriveInfo targetDrive = null;
-                var targetProviderPath = this.SessionState.Path.GetUnresolvedProviderPathFromPSPath(Destination, out targetProvider, out targetDrive);
+                var targetProviderPath = this.SessionState.Path.GetUnresolvedProviderPathFromPSPath(paramDestination, out targetProvider, out targetDrive);
                 bool isTargetLocal = targetProvider.ImplementingType == typeof(Microsoft.PowerShell.Commands.FileSystemProvider);
                 bool isTargetSF = targetProvider.ImplementingType == typeof(ShareFileProvider);
                 Models.Item targetItem = null;
@@ -106,7 +148,7 @@ namespace ShareFile.Api.Powershell
                 {
                     targetItem = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)targetDrive, targetProviderPath);
                 }
-                
+
                 // Process each input path
                 foreach (string filePath in filePaths)
                 {
@@ -115,7 +157,8 @@ namespace ShareFile.Api.Powershell
                         // ShareFile to local: perform download
                         var client = ((ShareFileDriveInfo)sourceDrive).Client;
                         var item = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)sourceDrive, filePath, null, null);
-                        var target = new DirectoryInfo(Destination);
+                        var target = new DirectoryInfo(paramDestination);
+                        Logger.Instance.Info("Downloading files from ShareFile server.");
                         RecursiveDownload(client, new Random((int)DateTime.Now.Ticks).Next(), item, target);
                     }
                     else if (isSourceSF && isTargetSF)
@@ -125,7 +168,7 @@ namespace ShareFile.Api.Powershell
                         var targetClient = ((ShareFileDriveInfo)targetDrive).Client;
                         // TODO: verify that source and target drives are on the same account
                         var sourceItem = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)sourceDrive, filePath);
-                        sourceClient.Items.Copy(sourceItem.url, targetItem.Id, Force).Execute();
+                        sourceClient.Items.Copy(sourceItem.url, targetItem.Id, paramForce).Execute();
                     }
                     else if (isSourceLocal && isTargetSF)
                     {
@@ -141,6 +184,7 @@ namespace ShareFile.Api.Powershell
                         {
                             source = new FileInfo(filePath);
                         }
+                        Logger.Instance.Info("Uploading files to ShareFile server.");
                         RecursiveUpload(client, new Random((int)DateTime.Now.Ticks).Next(), source, targetItem);
                     }
                     else if (isSourceLocal && isTargetLocal)
@@ -156,99 +200,197 @@ namespace ShareFile.Api.Powershell
                         {
                             source = new FileInfo(filePath);
                         }
-                        RecursiveCopy(source, new DirectoryInfo(Destination));
+                        RecursiveCopy(source, new DirectoryInfo(paramDestination));
                     }
                 }
             }
         }
 
-        protected void RecursiveUpload(ShareFileClient client, int uploadId, FileSystemInfo source, Models.Item target)
+        private void RecursiveUpload(ShareFileClient client, int uploadId, FileSystemInfo source, Models.Item target)
         {
             if (source is DirectoryInfo)
             {
                 var newFolder = new Models.Folder() { Name = source.Name };
-                newFolder = client.Items.CreateFolder(target.url, newFolder, Force, false).Execute();
+                newFolder = client.Items.CreateFolder(target.url, newFolder, Force || ResumeSupport.IsPending, false).Execute();
+                
+                ActionManager actionManager = new ActionManager();
+                ActionType actionType = Force ? ActionType.Force : ActionType.None;
+
                 foreach (var fsInfo in ((DirectoryInfo)source).EnumerateFileSystemInfos())
                 {
-                    RecursiveUpload(client, uploadId, fsInfo, newFolder);
+                    if (fsInfo is DirectoryInfo)
+                    {
+                        RecursiveUpload(client, uploadId, fsInfo, newFolder);
+                    }
+                    else if (fsInfo is FileInfo)
+                    {
+                        if (!ResumeSupport.IsPending || !ResumeSupport.CheckFileStatus(fsInfo.Name))
+                        {
+                            IAction uploadAction = new UploadAction(FileSupport, client, fsInfo, newFolder, Details, actionType);
+                            actionManager.AddAction(uploadAction);
+                        }
+                    }
                 }
+                
+                actionManager.Execute();
             }
             else if (source is FileInfo)
             {
-                var fileInfo = (FileInfo)source;
-                try
+                ActionManager actionManager = new ActionManager();
+                if (!ResumeSupport.IsPending || !ResumeSupport.CheckFileStatus(source.Name))
                 {
-                    var uploadSpec = new UploadSpecificationRequest
-                    {
-                        CanResume = false,
-                        Details = Details,
-                        FileName = fileInfo.Name,
-                        FileSize = fileInfo.Length,
-                        Method = UploadMethod.Threaded,
-                        Parent = target.url,
-                        ThreadCount = 4,
-                        Raw = true
-                    };
-                    var uploader = client.GetAsyncFileUploader(uploadSpec, new PlatformFileInfo(fileInfo));
-
-                    var progressBar = new ProgressBar(uploadId, "Uploading...", this);
-                    progressBar.SetProgress(fileInfo.Name, 0);
-                    uploader.OnTransferProgress =
-                        (sender, args) =>
-                        {
-                            int pct = 100;
-                            if (args.Progress.TotalBytes > 0) 
-                                pct = (int)(((float)args.Progress.BytesTransferred / args.Progress.TotalBytes) * 100);
-                            progressBar.SetProgress(fileInfo.Name, pct);                          
-                        };
-                    Task.Run(() => uploader.UploadAsync()).ContinueWith(t => progressBar.Finish());
-                    progressBar.UpdateLoop();
+                    ActionType actionType = Force || ResumeSupport.IsPending ? ActionType.Force : ActionType.None;
+                    IAction uploadAction = new UploadAction(FileSupport, client, source, target, Details, actionType);
+                    actionManager.AddAction(uploadAction);
                 }
-                catch (Exception e)
-                {
-                    WriteError(new ErrorRecord(e, "ShareFile", ErrorCategory.NotSpecified, source));
-                }
+                actionManager.Execute();
             }
         }
 
-        protected void RecursiveDownload(ShareFileClient client, int downloadId, Models.Item source, DirectoryInfo target)
+        private void RecursiveDownload(ShareFileClient client, int downloadId, Models.Item source, DirectoryInfo target)
         {
             if (source is Models.Folder)
             {
                 var children = client.Items.GetChildren(source.url).Execute();
                 var subdirCheck = new DirectoryInfo(System.IO.Path.Combine(target.FullName, source.FileName));
-                if (subdirCheck.Exists && !Force) throw new IOException("Path " + subdirCheck.FullName + " already exists. Use -Force to ignore");
+                if (subdirCheck.Exists && !Force && !ResumeSupport.IsPending) throw new IOException("Path " + subdirCheck.FullName + " already exists. Use -Force to ignore");
                 var subdir = target.CreateSubdirectory(source.FileName);
                 if (children != null)
                 {
+                    ActionManager actionManager = new ActionManager();
+
                     foreach (var child in children.Feed)
                     {
-                        RecursiveDownload(client, downloadId, child, subdir);
+
+                        if (child is Models.Folder)
+                        {
+                            RecursiveDownload(client, downloadId, child, subdir);
+                        }
+                        else if (child is Models.File)
+                        {
+                            if (!ResumeSupport.IsPending || !ResumeSupport.CheckFileStatus(child.FileName))
+                            {
+                                ActionType actionType = Force || ResumeSupport.IsPending ? ActionType.Force : ActionType.None;
+                                DownloadAction downloadAction = new DownloadAction(FileSupport, client, downloadId, (Models.File)child, subdir, actionType);
+                                actionManager.AddAction(downloadAction);
+                            }
+                        }
                     }
+
+                    actionManager.Execute();
                 }
             }
             else if (source is Models.File)
             {
-                using (var fileStream = new FileStream(System.IO.Path.Combine(target.FullName, source.FileName), Force ? FileMode.Create : FileMode.CreateNew))
+                ActionManager actionManager = new ActionManager();
+                if (!ResumeSupport.IsPending || !ResumeSupport.CheckFileStatus(source.FileName))
                 {
-                    var progressBar = new ProgressBar(downloadId, "Downloading...", this);
-                    progressBar.SetProgress(source.FileName, 0);
-                    var downloader = client.GetAsyncFileDownloader(source);
-                    downloader.OnTransferProgress =
-                        (sender, args) =>
-                        {
-                            if (args.Progress.TotalBytes > 0)
-                            {
-                                var pct = (int)(((double)args.Progress.BytesTransferred / (double)args.Progress.TotalBytes) * 100);
-                                progressBar.SetProgress(source.FileName, pct);
-                            }
-                        };
-                    Task.Run(() => downloader.DownloadToAsync(fileStream)).ContinueWith(t => progressBar.Finish());
-                    progressBar.UpdateLoop();
-                    fileStream.Close();
+                    ActionType actionType = Force || ResumeSupport.IsPending ? ActionType.Force : ActionType.None;
+                    DownloadAction downloadAction = new DownloadAction(FileSupport, client, downloadId, (Models.File)source, target, actionType);
+                    actionManager.AddAction(downloadAction);
                 }
+                actionManager.Execute();
             }
         }
+
+        private void MarkFileStatus(String fileName)
+        {
+            ResumeSupport.MarkFileStatus(fileName);
+        }
+
+        #region Previous Implementations (commented) > Upload/Download
+
+        //protected void RecursiveUpload(ShareFileClient client, int uploadId, FileSystemInfo source, Models.Item target)
+        //{
+        //    if (source is DirectoryInfo)
+        //    {
+        //        var newFolder = new Models.Folder() { Name = source.Name };
+        //        newFolder = client.Items.CreateFolder(target.url, newFolder, Force, false).Execute();
+
+        //        foreach (var fsInfo in ((DirectoryInfo)source).EnumerateFileSystemInfos())
+        //        {
+        //            RecursiveUpload(client, uploadId, fsInfo, newFolder);
+        //        }
+        //    }
+        //    else if (source is FileInfo)
+        //    {
+        //        var fileInfo = (FileInfo)source;
+        //        try
+        //        {
+        //            var uploadSpec = new UploadSpecificationRequest
+        //            {
+        //                CanResume = false,
+        //                Details = Details,
+        //                FileName = fileInfo.Name,
+        //                FileSize = fileInfo.Length,
+        //                Method = UploadMethod.Threaded,
+        //                Parent = target.url,
+        //                ThreadCount = 4,
+        //                Raw = true
+        //            };
+        //            var uploader = client.GetAsyncFileUploader(uploadSpec, new PlatformFileInfo(fileInfo));
+
+        //            var progressBar = new ProgressBar(uploadId, "Uploading...", this);
+        //            progressBar.SetProgress(fileInfo.Name, 0);
+        //            uploader.OnTransferProgress =
+        //                (sender, args) =>
+        //                {
+        //                    int pct = 100;
+        //                    if (args.Progress.TotalBytes > 0)
+        //                        pct = (int)(((float)args.Progress.BytesTransferred / args.Progress.TotalBytes) * 100);
+        //                    progressBar.SetProgress(fileInfo.Name, pct);
+        //                };
+        //            Task.Run(() => uploader.UploadAsync()).ContinueWith(t => progressBar.Finish());
+        //            progressBar.UpdateLoop();
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            WriteError(new ErrorRecord(e, "ShareFile", ErrorCategory.NotSpecified, source));
+        //        }
+        //    }
+        //}
+
+        //protected void RecursiveDownload(ShareFileClient client, int downloadId, Models.Item source, DirectoryInfo target)
+        //{
+        //    if (source is Models.Folder)
+        //    {
+        //        var children = client.Items.GetChildren(source.url).Execute();
+        //        var subdirCheck = new DirectoryInfo(System.IO.Path.Combine(target.FullName, source.FileName));
+        //        if (subdirCheck.Exists && !Force) throw new IOException("Path " + subdirCheck.FullName + " already exists. Use -Force to ignore");
+        //        var subdir = target.CreateSubdirectory(source.FileName);
+        //        if (children != null)
+        //        {
+        //            foreach (var child in children.Feed)
+        //            {
+        //                RecursiveDownload(client, downloadId, child, subdir);
+        //            }
+        //        }
+        //    }
+        //    else if (source is Models.File)
+        //    {
+        //        using (var fileStream = new FileStream(System.IO.Path.Combine(target.FullName, source.FileName), Force ? FileMode.Create : FileMode.CreateNew))
+        //        {
+        //            var progressBar = new ProgressBar(downloadId, "Downloading...", this);
+        //            progressBar.SetProgress(source.FileName, 0);
+        //            var downloader = client.GetAsyncFileDownloader(source);
+        //            downloader.OnTransferProgress =
+        //                (sender, args) =>
+        //                {
+        //                    if (args.Progress.TotalBytes > 0)
+        //                    {
+        //                        var pct = (int)(((double)args.Progress.BytesTransferred / (double)args.Progress.TotalBytes) * 100);
+        //                        progressBar.SetProgress(source.FileName, pct);
+        //                    }
+        //                };
+        //            Task.Run(() => downloader.DownloadToAsync(fileStream)).ContinueWith(t => progressBar.Finish());
+        //            progressBar.UpdateLoop();
+
+        //            fileStream.Close();
+        //        }
+        //    }
+        //}
+        
+        #endregion
 
         protected void RecursiveCopy(FileSystemInfo source, DirectoryInfo target)
         {
@@ -268,65 +410,66 @@ namespace ShareFile.Api.Powershell
                 fileInfo.CopyTo(System.IO.Path.Combine(target.FullName, source.Name), Force);
             }
         }
-
     }
 
-    class ProgressBar
-    {
-        private int Id { get; set; }
+    #region ProgressBar Class (commented)
+    //class ProgressBar
+    //{
+    //    private int Id { get; set; }
 
-        private string CurrentFile { get; set; }
+    //    private string CurrentFile { get; set; }
 
-        private int CurrentPct { get; set; }
+    //    private int CurrentPct { get; set; }
 
-        private Cmdlet Cmdlet { get; set; }
+    //    private Cmdlet Cmdlet { get; set; }
 
-        private bool Finished { get; set; }
+    //    private bool Finished { get; set; }
 
-        private string Title { get; set; }
+    //    private string Title { get; set; }
 
-        private AutoResetEvent WaitHandle = new AutoResetEvent(true); 
+    //    private AutoResetEvent WaitHandle = new AutoResetEvent(true); 
 
-        public ProgressBar(int id, string title, Cmdlet cmdlet)
-        {
-            Id = id;
-            Cmdlet = cmdlet;
-            Finished = false;
-            CurrentFile = null;
-            CurrentPct = 0;
-            Title = title;
-        }
+    //    public ProgressBar(int id, string title, Cmdlet cmdlet)
+    //    {
+    //        Id = id;
+    //        Cmdlet = cmdlet;
+    //        Finished = false;
+    //        CurrentFile = null;
+    //        CurrentPct = 0;
+    //        Title = title;
+    //    }
 
-        public void SetProgress(string filename, int percentage)
-        {
-            CurrentFile = filename;
-            CurrentPct = percentage;
-            WaitHandle.Set();
-        }
+    //    public void SetProgress(string filename, int percentage)
+    //    {
+    //        CurrentFile = filename;
+    //        CurrentPct = percentage;
+    //        WaitHandle.Set();
+    //    }
 
-        public void WriteProgress()
-        {
-            if (CurrentFile != null)
-            {
-                var pr = new ProgressRecord(Id, Title, string.Format("{0} - {1}%", CurrentFile, CurrentPct));
-                Cmdlet.WriteProgress(pr);
-            }
-        }
+    //    public void WriteProgress()
+    //    {
+    //        if (CurrentFile != null)
+    //        {
+    //            var pr = new ProgressRecord(Id, Title, string.Format("{0} - {1}%", CurrentFile, CurrentPct));
+    //            Cmdlet.WriteProgress(pr);
+    //        }
+    //    }
 
-        public void Finish()
-        {
-            CurrentPct = 100;
-            Finished = true;
-        }
+    //    public void Finish()
+    //    {
+    //        CurrentPct = 100;
+    //        Finished = true;
+    //    }
 
-        public void UpdateLoop()
-        {
-            while (!Finished)
-            {
-                WriteProgress();
-                WaitHandle.Reset();
-                WaitHandle.WaitOne(5000);
-            }
-        }
-    }
+    //    public void UpdateLoop()
+    //    {
+    //        while (!Finished)
+    //        {
+    //            WriteProgress();
+    //            WaitHandle.Reset();
+    //            WaitHandle.WaitOne(5000);
+    //        }
+    //    }
+    //}
+    #endregion
 }
