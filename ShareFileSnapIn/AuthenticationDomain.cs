@@ -132,5 +132,7 @@ namespace ShareFile.Api.Powershell
                 return Provider.Equals("sf");
             }
         }
+
+        public string Username { get; set; }
    }
 }

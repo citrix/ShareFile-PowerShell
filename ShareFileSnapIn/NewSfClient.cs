@@ -36,6 +36,9 @@ namespace ShareFile.Api.Powershell
         [Parameter]
         public string Provider { get; set; }
 
+        [Parameter]
+        public string Email { get; set; }
+
         protected override void ProcessRecord()
         {
             if (ApiVersion == null) ApiVersion = Resources.DefaultApiVersion;
@@ -47,7 +50,8 @@ namespace ShareFile.Api.Powershell
                 Account = Account,
                 Domain = Domain,
                 ApiVersion = ApiVersion,
-                Provider = Provider
+                Provider = Provider,
+                Username = Email
             };
             authDomain.Credential = Credential != null ? Credential.GetNetworkCredential() : null;
             PSShareFileClient psc = new PSShareFileClient(Name, authDomain);
