@@ -160,7 +160,7 @@ namespace ShareFile.Api.Powershell.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1.7.
+        ///   Looks up a localized string similar to 1.8.
         /// </summary>
         internal static string Version {
             get {
