@@ -43,12 +43,13 @@ namespace ShareFile.Api.Powershell.Resume
         /// <summary>
         /// 
         /// </summary>
+         [XmlIgnore]
         public bool IsExist;
         
         /// <summary>
         /// 
         /// </summary>
-        public bool IsExecuted;
+        public bool IsPending;
 
         /// <summary>
         /// 

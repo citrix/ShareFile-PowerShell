@@ -1,0 +1,1061 @@
+10/02/2014 17:06:18 Info Starting copying file 'ToUpload.txt'.
+10/02/2014 17:06:18 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:18 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:18 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:18 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:18 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:18 Info File 'Resume - Talal Asghar.docx' copied successfully.
+10/02/2014 17:06:18 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:19 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:19 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:19 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:19 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:20 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:20 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:20 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:20 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:20 Info Starting copying file 'ToUpload.txt'.
+10/02/2014 17:06:20 Info Starting copying file 'ToUpload.txt'.
+10/02/2014 17:06:20 Info File 'ToUpload.txt' copied successfully.
+10/02/2014 17:06:20 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:20 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:20 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:20 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:20 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:20 Info File '1water.jpg' copied successfully.
+10/02/2014 17:06:20 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:20 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:20 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:20 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:20 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:20 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:20 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:20 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:21 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:22 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:22 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:22 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:22 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:22 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:22 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:22 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:22 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:22 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:22 Info File 'water.jpg' copied successfully.
+10/02/2014 17:06:22 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:22 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:22 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:22 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:22 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:22 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:22 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:22 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:23 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:23 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:23 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:23 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:23 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:23 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:23 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:23 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:23 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:23 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:23 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:23 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:23 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:23 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:23 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:23 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:24 Info File 'website_mockup_scaled.jpg' copied successfully.
+10/02/2014 17:06:28 Info Downloading files from ShareFile server.
+10/02/2014 17:06:29 Info Starting copying file 'Test123.java'.
+10/02/2014 17:06:29 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:29 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:29 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:32 Info Starting copying file 'Test123.java'.
+10/02/2014 17:06:32 Info Starting copying file 'Test123.java'.
+10/02/2014 17:06:32 Info Starting copying file 'ToUpload.txt'.
+10/02/2014 17:06:32 Info File 'Test123.java' copied successfully.
+10/02/2014 17:06:32 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:32 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:32 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:32 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:32 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:32 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:32 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:32 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:33 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:33 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:33 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:33 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:33 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:33 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:33 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:33 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:33 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:33 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:33 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:33 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:33 Info File 'Resume - Talal Asghar.docx' copied successfully.
+10/02/2014 17:06:33 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:33 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:33 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:33 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:33 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:33 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:33 Info File '1water.jpg' copied successfully.
+10/02/2014 17:06:33 Info Starting copying file 'ToUpload.txt'.
+10/02/2014 17:06:33 Info Starting copying file 'ToUpload.txt'.
+10/02/2014 17:06:33 Info File 'ToUpload.txt' copied successfully.
+10/02/2014 17:06:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:36 Info File 'water.jpg' copied successfully.
+10/02/2014 17:06:36 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:36 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:38 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:38 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:38 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:38 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:38 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:38 Info File 'website_mockup_scaled.jpg' copied successfully.
+10/02/2014 17:06:40 Info Downloading files from ShareFile server.
+10/02/2014 17:06:42 Info Starting copying file 'dashboard-build.xml'.
+10/02/2014 17:06:45 Info Starting copying file 'dashboard-build.xml'.
+10/02/2014 17:06:45 Info Starting copying file 'dashboard-build.xml'.
+10/02/2014 17:06:45 Info Starting copying file 'dashboard-build.xml'.
+10/02/2014 17:06:45 Info File 'dashboard-build.xml' copied successfully.
+10/02/2014 17:06:45 Info Starting copying file 'Test123.java'.
+10/02/2014 17:06:45 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:45 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:45 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:49 Info Starting copying file 'Test123.java'.
+10/02/2014 17:06:49 Info Starting copying file 'Test123.java'.
+10/02/2014 17:06:49 Info File 'Test123.java' copied successfully.
+10/02/2014 17:06:49 Info Starting copying file 'ToUpload.txt'.
+10/02/2014 17:06:51 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:51 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:51 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:51 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:51 Info Starting copying file 'ToUpload.txt'.
+10/02/2014 17:06:51 Info Starting copying file 'ToUpload.txt'.
+10/02/2014 17:06:51 Info File 'ToUpload.txt' copied successfully.
+10/02/2014 17:06:51 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:51 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:51 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:51 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:51 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:51 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:51 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:51 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:51 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:52 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:52 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:52 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:52 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:52 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:52 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:52 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:52 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:53 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:53 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:53 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:53 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:54 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:54 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:54 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:54 Info Starting copying file 'Resume - Talal Asghar.docx'.
+10/02/2014 17:06:54 Info File 'Resume - Talal Asghar.docx' copied successfully.
+10/02/2014 17:06:54 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'water.jpg'.
+10/02/2014 17:06:54 Info File 'water.jpg' copied successfully.
+10/02/2014 17:06:54 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:54 Info Starting copying file '1water.jpg'.
+10/02/2014 17:06:54 Info File '1water.jpg' copied successfully.
+10/02/2014 17:06:54 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:54 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:56 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:56 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:56 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:56 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:56 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:56 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:56 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:56 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:56 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:56 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:56 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:56 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:57 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:57 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:57 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:57 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:57 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:57 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:57 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:57 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:57 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:57 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:57 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:57 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:58 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:58 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:58 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:58 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:58 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:58 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:58 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:58 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:58 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:58 Info Starting copying file 'website_mockup_scaled.jpg'.
+10/02/2014 17:06:58 Info File 'website_mockup_scaled.jpg' copied successfully.
+10/02/2014 17:07:02 Info Uploading files to ShareFile server.
+10/02/2014 17:07:02 Info Starting copying file 'ToUpload.txt'.
+10/02/2014 17:07:05 Info Starting copying file 'ToUpload.txt'.
+10/02/2014 17:07:06 Info File 'ToUpload.txt' copied successfully.
+10/02/2014 17:07:10 Info Uploading files to ShareFile server.
+10/02/2014 17:07:11 Info Starting copying file '1website_mockup_scaled.jpg'.
+10/02/2014 17:07:11 Info Starting copying file '1water.jpg'.
+10/02/2014 17:07:18 Info Starting copying file '1water.jpg'.
+10/02/2014 17:07:19 Info File '1water.jpg' copied successfully.
+10/02/2014 17:07:20 Info Starting copying file '1website_mockup_scaled.jpg'.
+10/02/2014 17:07:21 Info File '1website_mockup_scaled.jpg' copied successfully.
+10/02/2014 17:08:53 Info Uploading files to ShareFile server.
+10/02/2014 17:08:56 Info Starting copying file 'temp1.txt'.
+10/02/2014 17:08:58 Info Starting copying file 'temp1.txt'.
+10/02/2014 17:08:59 Info File 'temp1.txt' copied successfully.
+10/02/2014 17:09:00 Info Starting copying file 'temp2.txt'.
+10/02/2014 17:09:06 Info Starting copying file 'temp2.txt'.
+10/02/2014 17:09:07 Info File 'temp2.txt' copied successfully.
+10/02/2014 17:09:07 Info Starting copying file '1water.jpg'.
+10/02/2014 17:09:08 Info Starting copying file '1website_mockup_scaled.jpg'.
+10/02/2014 17:09:11 Info Starting copying file '1water.jpg'.
+10/02/2014 17:09:12 Info Starting copying file '1website_mockup_scaled.jpg'.
+10/02/2014 17:09:12 Info File '1water.jpg' copied successfully.
+10/02/2014 17:09:13 Info File '1website_mockup_scaled.jpg' copied successfully.
+10/02/2014 17:10:50 Info Uploading files to ShareFile server.
+10/02/2014 17:10:51 Info Starting copying file '1website_mockup_scaled.jpg'.
+10/02/2014 17:10:52 Info Starting copying file '1SampleFileUpload.txt'.
+10/02/2014 17:10:55 Info Starting copying file '1SampleFileUpload.txt'.
+10/02/2014 17:10:56 Info Starting copying file '1website_mockup_scaled.jpg'.
+10/02/2014 17:10:56 Info File '1SampleFileUpload.txt' copied successfully.
+10/02/2014 17:10:57 Info File '1website_mockup_scaled.jpg' copied successfully.
+10/02/2014 17:12:33 Info Uploading files to ShareFile server.
+10/02/2014 17:12:34 Info Starting copying file 'ToUpload.txt'.
+10/02/2014 17:12:37 Info Starting copying file 'ToUpload.txt'.
+10/02/2014 17:12:38 Info File 'ToUpload.txt' copied successfully.
+10/02/2014 17:12:44 Info Downloading files from ShareFile server.
+10/02/2014 17:12:45 Info Starting copying file 'DeepText.txt'.
+10/02/2014 17:12:47 Info Starting copying file 'DeepText.txt'.
+10/02/2014 17:12:47 Info Starting copying file 'DeepText.txt'.
+10/02/2014 17:12:47 Info File 'DeepText.txt' copied successfully.
+11/07/2014 15:56:14 Info Starting Copy Operation with following parameters. Source Path:sf:/My Files & Folders/DeepText.txt Destination:D:\SFTemp Forced:False Details:
+11/07/2014 15:56:15 Info Downloading files from ShareFile server.
+11/07/2014 15:56:15 Info Starting copying file 'DeepText.txt'.
+11/07/2014 15:56:20 Info Starting copying file 'DeepText.txt'.
+11/07/2014 15:56:20 Info Starting copying file 'DeepText.txt'.
+11/07/2014 15:56:20 Info File 'DeepText.txt' copied successfully.
+11/07/2014 15:56:21 Info Command executed successfully
+11/07/2014 15:56:23 Info Starting Copy Operation with following parameters. Source Path:sf:/My Files & Folders/DeepText.txt Destination:D:\SFTemp Forced:True Details:
+11/07/2014 15:56:23 Info Downloading files from ShareFile server.
+11/07/2014 15:56:23 Info Starting copying file 'DeepText.txt'.
+11/07/2014 15:56:26 Info Starting copying file 'DeepText.txt'.
+11/07/2014 15:56:26 Info Starting copying file 'DeepText.txt'.
+11/07/2014 15:56:26 Info File 'DeepText.txt' copied successfully.
+11/07/2014 15:56:26 Info Command executed successfully
+11/07/2014 15:56:27 Info Starting Copy Operation with following parameters. Source Path:D:\SFTemp\ToUpload.txt Destination:sf:/My Files & Folders Forced:True Details:
+11/07/2014 15:56:28 Info Uploading files to ShareFile server.
+11/07/2014 15:56:28 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:56:31 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:56:32 Info File 'ToUpload.txt' copied successfully.
+11/07/2014 15:56:32 Info Command executed successfully
+11/07/2014 15:56:35 Info Starting Copy Operation with following parameters. Source Path:D:\SFTemp\ToUpload.txt Destination:sf:/My Files & Folders Forced:True Details:
+11/07/2014 15:56:35 Info Uploading files to ShareFile server.
+11/07/2014 15:56:36 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:56:38 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:56:39 Info File 'ToUpload.txt' copied successfully.
+11/07/2014 15:56:39 Info Command executed successfully
+11/07/2014 15:56:42 Info Starting Copy Operation with following parameters. Source Path:D:\SFTemp\Folder1Q\*.* Destination:sf:/My Files & Folders Forced:True Details:
+11/07/2014 15:56:44 Info Uploading files to ShareFile server.
+11/07/2014 15:56:46 Info Uploading files to ShareFile server.
+11/07/2014 15:56:46 Info Starting copying file '1SampleFileUpload.txt'.
+11/07/2014 15:56:49 Info Starting copying file '1SampleFileUpload.txt'.
+11/07/2014 15:56:50 Info Uploading files to ShareFile server.
+11/07/2014 15:56:50 Info File '1SampleFileUpload.txt' copied successfully.
+11/07/2014 15:56:50 Info Starting copying file '1water.jpg'.
+11/07/2014 15:56:53 Info Starting copying file '1water.jpg'.
+11/07/2014 15:56:54 Info Uploading files to ShareFile server.
+11/07/2014 15:56:54 Info File '1water.jpg' copied successfully.
+11/07/2014 15:56:54 Info Starting copying file '1website_mockup_scaled.jpg'.
+11/07/2014 15:56:59 Info Starting copying file '1website_mockup_scaled.jpg'.
+11/07/2014 15:57:00 Info File '1website_mockup_scaled.jpg' copied successfully.
+11/07/2014 15:57:00 Info Command executed successfully
+11/07/2014 15:57:05 Info Downloading files from ShareFile server.
+11/07/2014 15:57:06 Info Starting copying file 'DeepText.txt'.
+11/07/2014 15:57:09 Info Starting copying file 'DeepText.txt'.
+11/07/2014 15:57:09 Info Starting copying file 'DeepText.txt'.
+11/07/2014 15:57:09 Info File 'DeepText.txt' copied successfully.
+11/07/2014 15:57:11 Info Downloading files from ShareFile server.
+11/07/2014 15:57:12 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:12 Info Starting copying file 'Test123.java'.
+11/07/2014 15:57:12 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:12 Info Starting copying file 'lanip.txt'.
+11/07/2014 15:57:15 Info Starting copying file 'Test123.java'.
+11/07/2014 15:57:15 Info Starting copying file 'Test123.java'.
+11/07/2014 15:57:15 Info File 'Test123.java' copied successfully.
+11/07/2014 15:57:15 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:15 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:15 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:15 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:15 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:16 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:16 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:16 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:16 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:16 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:16 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:16 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:16 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:16 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:16 Info File 'Resume - Talal Asghar.docx' copied successfully.
+11/07/2014 15:57:16 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:16 Info Starting copying file 'lanip.txt'.
+11/07/2014 15:57:16 Info Starting copying file 'lanip.txt'.
+11/07/2014 15:57:16 Info File 'lanip.txt' copied successfully.
+11/07/2014 15:57:16 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:57:16 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:16 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:16 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:16 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:17 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:18 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:18 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:18 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:18 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:18 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:18 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:18 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:18 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:18 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:18 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:18 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:18 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:18 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:18 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:18 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:18 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:18 Info File 'IT-calculator-tax-year-20131.xls' copied successfully.
+11/07/2014 15:57:18 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:18 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:18 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:18 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:18 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:18 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:18 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:18 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:18 Info File 'website_mockup_scaled.jpg' copied successfully.
+11/07/2014 15:57:18 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:57:18 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:57:18 Info File 'ToUpload.txt' copied successfully.
+11/07/2014 15:57:19 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:19 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:19 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:19 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:19 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:19 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:19 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:19 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:19 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:19 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:19 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:19 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:19 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:19 Info File '1water.jpg' copied successfully.
+11/07/2014 15:57:21 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:21 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:21 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:21 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:21 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:21 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:21 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:21 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:21 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:21 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:21 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:21 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:21 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:21 Info File 'water.jpg' copied successfully.
+11/07/2014 15:57:24 Info Downloading files from ShareFile server.
+11/07/2014 15:57:26 Info Starting copying file 'dashboard-build.xml'.
+11/07/2014 15:57:29 Info Starting copying file 'dashboard-build.xml'.
+11/07/2014 15:57:29 Info Starting copying file 'dashboard-build.xml'.
+11/07/2014 15:57:29 Info Starting copying file 'dashboard-build.xml'.
+11/07/2014 15:57:29 Info File 'dashboard-build.xml' copied successfully.
+11/07/2014 15:57:29 Info Starting copying file 'Test123.java'.
+11/07/2014 15:57:29 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:29 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:29 Info Starting copying file 'lanip.txt'.
+11/07/2014 15:57:31 Info Starting copying file 'Test123.java'.
+11/07/2014 15:57:31 Info Starting copying file 'Test123.java'.
+11/07/2014 15:57:31 Info File 'Test123.java' copied successfully.
+11/07/2014 15:57:31 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:32 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:32 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:32 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:32 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:33 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:33 Info File 'Resume - Talal Asghar.docx' copied successfully.
+11/07/2014 15:57:33 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:33 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:33 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:33 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:33 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:34 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:34 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:34 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:34 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:34 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:34 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:34 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:34 Info File 'IT-calculator-tax-year-20131.xls' copied successfully.
+11/07/2014 15:57:34 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:34 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:35 Info Starting copying file 'lanip.txt'.
+11/07/2014 15:57:35 Info Starting copying file 'lanip.txt'.
+11/07/2014 15:57:35 Info File 'lanip.txt' copied successfully.
+11/07/2014 15:57:35 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:35 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:35 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:35 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:35 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:36 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:36 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:36 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:36 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:36 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:57:36 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:57:36 Info File 'ToUpload.txt' copied successfully.
+11/07/2014 15:57:36 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:36 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:36 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:36 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:36 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:36 Info File '1water.jpg' copied successfully.
+11/07/2014 15:57:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:37 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:38 Info File 'website_mockup_scaled.jpg' copied successfully.
+11/07/2014 15:57:38 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:38 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:38 Info File 'water.jpg' copied successfully.
+11/07/2014 15:57:42 Info Downloading files from ShareFile server.
+11/07/2014 15:57:43 Info Starting copying file 'Test123.java'.
+11/07/2014 15:57:43 Info Starting copying file 'lanip.txt'.
+11/07/2014 15:57:43 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:43 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:46 Info Starting copying file 'lanip.txt'.
+11/07/2014 15:57:46 Info Starting copying file 'lanip.txt'.
+11/07/2014 15:57:46 Info File 'lanip.txt' copied successfully.
+11/07/2014 15:57:46 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:46 Info Starting copying file 'Test123.java'.
+11/07/2014 15:57:46 Info Starting copying file 'Test123.java'.
+11/07/2014 15:57:46 Info File 'Test123.java' copied successfully.
+11/07/2014 15:57:46 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:47 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:47 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:47 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:47 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:47 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:47 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:47 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:47 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:48 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:48 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:48 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:48 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:48 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:48 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:48 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:48 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:49 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:49 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:49 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:49 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:49 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:57:49 Info File 'IT-calculator-tax-year-20131.xls' copied successfully.
+11/07/2014 15:57:49 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:57:49 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:49 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:49 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:49 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:49 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:49 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:49 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:49 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:49 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:57:49 Info File 'Resume - Talal Asghar.docx' copied successfully.
+11/07/2014 15:57:49 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:50 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:50 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:50 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:50 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:50 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:50 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:50 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:50 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:50 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:50 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:50 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:50 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:50 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:57:50 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:57:50 Info File 'ToUpload.txt' copied successfully.
+11/07/2014 15:57:51 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:51 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:51 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:51 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:51 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:51 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:51 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:51 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:52 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:52 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:52 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:52 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:52 Info Starting copying file '1water.jpg'.
+11/07/2014 15:57:52 Info File '1water.jpg' copied successfully.
+11/07/2014 15:57:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'water.jpg'.
+11/07/2014 15:57:52 Info File 'water.jpg' copied successfully.
+11/07/2014 15:57:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:52 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:53 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:54 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:54 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:54 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:54 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:54 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:54 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:54 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:54 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:55 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:57:55 Info File 'website_mockup_scaled.jpg' copied successfully.
+11/07/2014 15:57:57 Info Downloading files from ShareFile server.
+11/07/2014 15:57:59 Info Starting copying file 'dashboard-build.xml'.
+11/07/2014 15:58:02 Info Starting copying file 'dashboard-build.xml'.
+11/07/2014 15:58:02 Info Starting copying file 'dashboard-build.xml'.
+11/07/2014 15:58:02 Info Starting copying file 'dashboard-build.xml'.
+11/07/2014 15:58:02 Info File 'dashboard-build.xml' copied successfully.
+11/07/2014 15:58:02 Info Starting copying file 'Test123.java'.
+11/07/2014 15:58:02 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:58:02 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:02 Info Starting copying file 'lanip.txt'.
+11/07/2014 15:58:04 Info Starting copying file 'Test123.java'.
+11/07/2014 15:58:04 Info Starting copying file 'Test123.java'.
+11/07/2014 15:58:04 Info File 'Test123.java' copied successfully.
+11/07/2014 15:58:04 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:58:04 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:58:04 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:58:04 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:58:04 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:58:05 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:58:05 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:58:05 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:58:05 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:58:05 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:58:05 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:58:05 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:58:05 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:58:05 Info Starting copying file 'Resume - Talal Asghar.docx'.
+11/07/2014 15:58:05 Info Starting copying file '1water.jpg'.
+11/07/2014 15:58:05 Info File 'Resume - Talal Asghar.docx' copied successfully.
+11/07/2014 15:58:05 Info Starting copying file 'lanip.txt'.
+11/07/2014 15:58:05 Info Starting copying file 'lanip.txt'.
+11/07/2014 15:58:05 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:58:06 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:06 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:06 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:06 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:06 Info File 'lanip.txt' copied successfully.
+11/07/2014 15:58:06 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:06 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:06 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:06 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:06 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:06 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:06 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:06 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:58:07 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:58:07 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:58:07 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:58:07 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:58:07 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:58:07 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:58:07 Info Starting copying file 'IT-calculator-tax-year-20131.xls'.
+11/07/2014 15:58:07 Info File 'IT-calculator-tax-year-20131.xls' copied successfully.
+11/07/2014 15:58:07 Info Starting copying file 'water.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info Starting copying file 'website_mockup_scaled.jpg'.
+11/07/2014 15:58:07 Info File 'website_mockup_scaled.jpg' copied successfully.
+11/07/2014 15:58:07 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:58:07 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:58:07 Info File 'ToUpload.txt' copied successfully.
+11/07/2014 15:58:08 Info Starting copying file '1water.jpg'.
+11/07/2014 15:58:08 Info Starting copying file '1water.jpg'.
+11/07/2014 15:58:08 Info Starting copying file '1water.jpg'.
+11/07/2014 15:58:08 Info Starting copying file '1water.jpg'.
+11/07/2014 15:58:08 Info Starting copying file '1water.jpg'.
+11/07/2014 15:58:08 Info Starting copying file '1water.jpg'.
+11/07/2014 15:58:08 Info Starting copying file '1water.jpg'.
+11/07/2014 15:58:08 Info Starting copying file '1water.jpg'.
+11/07/2014 15:58:09 Info Starting copying file '1water.jpg'.
+11/07/2014 15:58:09 Info Starting copying file '1water.jpg'.
+11/07/2014 15:58:09 Info Starting copying file '1water.jpg'.
+11/07/2014 15:58:09 Info Starting copying file '1water.jpg'.
+11/07/2014 15:58:09 Info Starting copying file '1water.jpg'.
+11/07/2014 15:58:09 Info File '1water.jpg' copied successfully.
+11/07/2014 15:58:09 Info Starting copying file 'water.jpg'.
+11/07/2014 15:58:09 Info Starting copying file 'water.jpg'.
+11/07/2014 15:58:09 Info Starting copying file 'water.jpg'.
+11/07/2014 15:58:09 Info Starting copying file 'water.jpg'.
+11/07/2014 15:58:10 Info Starting copying file 'water.jpg'.
+11/07/2014 15:58:10 Info Starting copying file 'water.jpg'.
+11/07/2014 15:58:10 Info Starting copying file 'water.jpg'.
+11/07/2014 15:58:10 Info Starting copying file 'water.jpg'.
+11/07/2014 15:58:10 Info Starting copying file 'water.jpg'.
+11/07/2014 15:58:10 Info Starting copying file 'water.jpg'.
+11/07/2014 15:58:10 Info Starting copying file 'water.jpg'.
+11/07/2014 15:58:10 Info Starting copying file 'water.jpg'.
+11/07/2014 15:58:10 Info Starting copying file 'water.jpg'.
+11/07/2014 15:58:10 Info File 'water.jpg' copied successfully.
+11/07/2014 15:58:13 Info Uploading files to ShareFile server.
+11/07/2014 15:58:14 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:58:17 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 15:58:18 Info File 'ToUpload.txt' copied successfully.
+11/07/2014 15:58:21 Info Uploading files to ShareFile server.
+11/07/2014 15:58:22 Info Starting copying file '1website_mockup_scaled.jpg'.
+11/07/2014 15:58:23 Info Starting copying file '1water.jpg'.
+11/07/2014 15:58:27 Info Starting copying file '1water.jpg'.
+11/07/2014 15:58:28 Info Starting copying file '1website_mockup_scaled.jpg'.
+11/07/2014 15:58:28 Info File '1water.jpg' copied successfully.
+11/07/2014 15:58:29 Info File '1website_mockup_scaled.jpg' copied successfully.
+11/07/2014 16:00:05 Info Uploading files to ShareFile server.
+11/07/2014 16:00:06 Info Starting copying file '1water.jpg'.
+11/07/2014 16:00:07 Info Starting copying file '1SampleFileUpload.txt'.
+11/07/2014 16:00:12 Info Starting copying file '1SampleFileUpload.txt'.
+11/07/2014 16:00:13 Info File '1SampleFileUpload.txt' copied successfully.
+11/07/2014 16:00:14 Info Starting copying file '1water.jpg'.
+11/07/2014 16:00:16 Info File '1water.jpg' copied successfully.
+11/07/2014 16:01:48 Info Uploading files to ShareFile server.
+11/07/2014 16:01:49 Info Starting copying file '1SampleFileUpload.txt'.
+11/07/2014 16:01:50 Info Starting copying file '1website_mockup_scaled.jpg'.
+11/07/2014 16:01:52 Info Starting copying file '1SampleFileUpload.txt'.
+11/07/2014 16:01:53 Info File '1SampleFileUpload.txt' copied successfully.
+11/07/2014 16:01:54 Info Starting copying file '1website_mockup_scaled.jpg'.
+11/07/2014 16:01:56 Info File '1website_mockup_scaled.jpg' copied successfully.
+11/07/2014 16:03:32 Info Uploading files to ShareFile server.
+11/07/2014 16:03:33 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 16:03:35 Info Starting copying file 'ToUpload.txt'.
+11/07/2014 16:03:37 Info File 'ToUpload.txt' copied successfully.
+11/07/2014 16:03:45 Info Downloading files from ShareFile server.
+11/07/2014 16:03:46 Info Starting copying file 'DeepText.txt'.
+11/07/2014 16:03:48 Info Starting copying file 'DeepText.txt'.
+11/07/2014 16:03:48 Info Starting copying file 'DeepText.txt'.
+11/07/2014 16:03:48 Info File 'DeepText.txt' copied successfully.

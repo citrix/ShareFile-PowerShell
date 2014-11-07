@@ -61,6 +61,15 @@ namespace ShareFile.Api.Powershell.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ShareFile.
+        /// </summary>
+        internal static string AppName {
+            get {
+                return ResourceManager.GetString("AppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to IOdm0AhEu7RclDqhC5vKtpcyyJrdcGSK.
         /// </summary>
         internal static string ClientId {
@@ -129,15 +138,6 @@ namespace ShareFile.Api.Powershell.Properties {
         internal static string MaxExceptionRetry {
             get {
                 return ResourceManager.GetString("MaxExceptionRetry", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string ProgressFile {
-            get {
-                return ResourceManager.GetString("ProgressFile", resourceCulture);
             }
         }
         

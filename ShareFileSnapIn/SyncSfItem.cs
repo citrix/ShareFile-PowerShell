@@ -17,6 +17,8 @@ using ShareFile.Api.Powershell.Log;
 using ShareFile.Api.Client.Requests;
 using ShareFile.Api.Client.Exceptions;
 using ShareFile.Api.Powershell.Properties;
+using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace ShareFile.Api.Powershell
 {
@@ -29,14 +31,14 @@ namespace ShareFile.Api.Powershell
         #region Local Variables
 
         private const string Noun = "SfItem";
-        
+
         // different Parameter Set Names for different type of behaviors of command
         private const string SetNameAttr = "SetAttr";
         private const string SetNamePos = "SetPos";
         private const string SetNameHelp = "SetHelp";
 
         private const string DefaultSharefileFolder = "My Files & Folders";
-        
+
         private FileSupport FileSupport;
 
         // Keep track of abandone/resume functionality if disconnected meanwhile any operation
@@ -117,12 +119,12 @@ namespace ShareFile.Api.Powershell
         [Alias("KF")]
         [Parameter()]
         public SwitchParameter KeepFolders { get; set; }
-        
+
         /// <summary>
         /// Strict param flag
         /// </summary>
         public SwitchParameter Strict { get; set; }
-        
+
         /// <summary>
         /// Version param flag
         /// </summary>
@@ -158,7 +160,7 @@ namespace ShareFile.Api.Powershell
                 {
                     throw new PSArgumentException("Upload or Download switch must be specified");
                 }
-                    
+
                 if (string.IsNullOrEmpty(LocalPath))
                 {
                     // use current user directory location if Local path is not specified in arguments
@@ -184,6 +186,25 @@ namespace ShareFile.Api.Powershell
 
                 int transactionId = new Random((int)DateTime.Now.Ticks).Next();
 
+                // if current user directory is local storage and ShareFile path provided withouth drive letter then append the drive letter with sharefile location
+                if (this.SessionState.Path.CurrentLocation.Provider.ImplementingType != typeof(ShareFileProvider) && ShareFilePath.IndexOf(":") < 1)
+                {
+                    Collection<PSDriveInfo> providerDrives = this.SessionState.Drive.GetAll();// ForProvider("ShareFile");
+                    foreach (PSDriveInfo driveObj in providerDrives)
+                    {
+                        if (driveObj.Provider.ImplementingType == typeof(ShareFileProvider))
+                        {
+                            if (ShareFilePath.StartsWith("/") || ShareFilePath.StartsWith(@"\"))
+                            {
+                                ShareFilePath = ShareFilePath.Substring(1);
+                            }
+                            string sfDrive = String.Format("{0}:/", driveObj.Name);
+                            ShareFilePath = Path.Combine(sfDrive, ShareFilePath);
+                            break;
+                        }
+                    }
+                }
+
                 var sourcePath = Upload ? LocalPath : ShareFilePath;
 
                 // it will resolve paths if wildcards are used e.g. "D:\\*.txt" then get paths of all files with txt extension from D:\\ location
@@ -204,6 +225,21 @@ namespace ShareFile.Api.Powershell
                     var client = ((ShareFileDriveInfo)driveInfo).Client;
                     Item targetItem = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)driveInfo, unresolvedPath);
 
+                    if (targetItem == null && !unresolvedPath.StartsWith(String.Format(@"\{0}\", DefaultSharefileFolder)))
+                    {
+                        string updatedPath = String.Format(@"\{0}\{1}", DefaultSharefileFolder, unresolvedPath);
+                        targetItem = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)driveInfo, updatedPath, null, null);
+                    }
+                    //else if (targetItem == null)
+                    //{
+                    //    targetItem = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)driveInfo, ShareFilePath, null, null);
+                    //}
+
+                    if (targetItem == null)
+                    {
+                        throw new FileNotFoundException("Destination path not found on ShareFile server.");
+                    }
+
                     // if user didn't specify the Sharefile HomeFolder in path then appending in path
                     // e.g. if user tries sf:/Folder1 as sharefile target then resolve this path to sf:/My Files & Folders/Folder1
                     if ((targetItem as Folder).Info.IsAccountRoot == true)
@@ -217,8 +253,8 @@ namespace ShareFile.Api.Powershell
 
                 WriteObject("Sync operation successfully completed.");
             }
-            
-            if(Help)
+
+            if (Help)
             {
                 WriteObject("SFCLI version " + Resources.Version);
             }
@@ -240,7 +276,7 @@ namespace ShareFile.Api.Powershell
             foreach (string path in resolvedPaths)
             {
                 var item = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)driveInfo, path, null, null);
-                
+
                 // if user didn't specify the Sharefile HomeFolder in path then append in path
                 // e.g. if user tries sf:/Folder1 as sharefile source then resolve this path to sf:/My Files & Folders/Folder1
                 if (item == null && !path.StartsWith(String.Format(@"\{0}\", DefaultSharefileFolder)))
@@ -249,8 +285,13 @@ namespace ShareFile.Api.Powershell
                     item = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)driveInfo, updatedPath, null, null);
                 }
 
+                if (item == null)
+                {
+                    throw new FileNotFoundException("'" + path + "' not found on current path.");
+                }
+
                 var target = new DirectoryInfo(LocalPath);
-                
+
                 // if create root folder flag is specified then create a container folder first
                 if (firstIteration && CreateRoot)
                 {
@@ -287,7 +328,7 @@ namespace ShareFile.Api.Powershell
             }
 
             actionManager.Execute();
-            
+
             // on move remove source files
             if (Move)
             {
@@ -315,7 +356,7 @@ namespace ShareFile.Api.Powershell
             if (source is Models.Folder)
             {
                 var subdir = CreateLocalFolder(target, source as Folder);
-                                
+
                 var children = client.Items.GetChildren(source.url).Execute();
 
                 if (children != null)
@@ -334,12 +375,12 @@ namespace ShareFile.Api.Powershell
                             actionManager.AddAction(downloadAction);
                         }
                     }
-                    
+
                     actionManager.Execute();
                 }
             }
         }
-        
+
         /// <summary>
         /// Delete the Sharefile items if Move flag is used
         /// </summary>
@@ -375,14 +416,14 @@ namespace ShareFile.Api.Powershell
 
             var directories = target.GetDirectories();
             var children = client.Items.GetChildren(source.url).Execute();
-            
+
             foreach (DirectoryInfo directory in directories)
             {
                 foreach (var child in children.Feed)
                 {
                     if (child is Models.Folder && child.Name.Equals(directory.Name))
                     {
-                        DeleteLocalStrictRecursive(client, child, directory);   
+                        DeleteLocalStrictRecursive(client, child, directory);
                         break;
                     }
                 }
@@ -408,13 +449,13 @@ namespace ShareFile.Api.Powershell
             }
         }
 
-       /// <summary>
-       /// Create local folder
-       /// </summary>
+        /// <summary>
+        /// Create local folder
+        /// </summary>
         private DirectoryInfo CreateLocalFolder(DirectoryInfo target, Folder source)
         {
             string sourceFolderName = string.Empty;
-            
+
             // if source is user's Home/Root folder then specify default name
             if (source.Info.IsAHomeFolder == true && source.Info.IsAStartFolder == true)
             {
@@ -453,7 +494,7 @@ namespace ShareFile.Api.Powershell
 
             ActionManager actionManager = new ActionManager();
             bool firstIteration = true;
-            
+
             foreach (string path in resolvedPaths)
             {
                 FileAttributes attr = System.IO.File.GetAttributes(path);
@@ -480,7 +521,7 @@ namespace ShareFile.Api.Powershell
             }
 
             actionManager.Execute();
-            
+
             if (Move)
             {
                 foreach (string path in resolvedPaths)
@@ -514,7 +555,8 @@ namespace ShareFile.Api.Powershell
                     {
                         string path = String.Format("/{0}", source.Name);
                         Item item = null;
-                        try{
+                        try
+                        {
                             item = client.Items.ByPath(target.url, path).Execute();
                         }
                         catch (ODataException e)
@@ -527,10 +569,10 @@ namespace ShareFile.Api.Powershell
                         isExist = item != null && item is Folder;
                         newFolder = (Folder)item;
                     }
-                    catch {}
+                    catch { }
                 }
-                
-                if(!isExist)
+
+                if (!isExist)
                 {
                     newFolder = client.Items.CreateFolder(target.url, newFolder, OverWrite, false).Execute();
                 }
@@ -549,7 +591,7 @@ namespace ShareFile.Api.Powershell
                         actionManager.AddAction(uploadAction);
                     }
                 }
-                
+
                 actionManager.Execute();
             }
         }
@@ -649,7 +691,7 @@ namespace ShareFile.Api.Powershell
                 RemoveLocalItem(source);
             }
         }
-        
+
         #endregion
 
         #region Utility Methods
@@ -660,7 +702,7 @@ namespace ShareFile.Api.Powershell
         private bool RemoveShareFileItem(ShareFileClient client, Item item)
         {
             Query<ODataObject> query = new Query<ODataObject>(client);
-            
+
             query.HttpMethod = "DELETE";
             query.Id(item.Id);
             query.From("Items");
@@ -669,11 +711,11 @@ namespace ShareFile.Api.Powershell
             {
                 client.Execute(query);
             }
-            catch 
+            catch
             {
                 return false;
             }
-            
+
             return true;
         }
 
