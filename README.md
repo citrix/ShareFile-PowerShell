@@ -15,6 +15,9 @@ As well as .Net version 4.x
 http://msdn.microsoft.com/en-us/library/5a4x27ek(v=vs.110).aspx
 
 Install
+
+We have an MSI which makes installing the PowerShell SDK a snap, just go to our <a href="https://github.com/citrix/ShareFile-PowerShell/releases">releases page to download</a>.  If you would prefer to use the .dll installation method, you can find that below.
+
 ----
     To install the snap-in, just download and extract the files in ShareFileSnapIn.zip from the link above 
     and then follow these steps:
@@ -45,5 +48,5 @@ References
 For examples of usage, check out the PowerShell SDK Wiki here:
 https://github.com/citrix/ShareFile-PowerShell/wiki
 
-For some blogs on using the PoswerShell SDK take a look here:
+For some blogs on using the PowerShell SDK take a look here:
 http://blogs.citrix.com/tag/powershell-sdk/
