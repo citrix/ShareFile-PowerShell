@@ -15,7 +15,7 @@ As well as .Net version 4.x
 http://msdn.microsoft.com/en-us/library/5a4x27ek(v=vs.110).aspx
 
 Install
-
+----
 We have an MSI which makes installing the PowerShell SDK a snap, just go to our <a href="https://github.com/citrix/ShareFile-PowerShell/releases">releases page to download</a>.  If you would prefer to use the .dll installation method, you can find that below.
 
 ----
