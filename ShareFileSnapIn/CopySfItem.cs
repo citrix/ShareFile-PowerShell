@@ -14,6 +14,7 @@ using ShareFile.Api.Client.Transfers.Uploaders;
 using System.Threading;
 using ShareFile.Api.Powershell.Parallel;
 using ShareFile.Api.Powershell.Log;
+using System.Collections.ObjectModel;
 
 namespace ShareFile.Api.Powershell
 {
@@ -81,7 +82,8 @@ namespace ShareFile.Api.Powershell
                 Logger.Instance.Info("Last command wasn't successful due to discconnection.");
 
                 Console.Write("Last command wasn't successful due to discconnection, enter 'y' to complete or any other key to ignore: ");
-                String userOption = Console.ReadLine();
+                Collection<PSObject> result = InvokeCommand.InvokeScript("Read-Host");
+                string userOption = result != null && result.Count > 0 ? result[0].ToString() : string.Empty;
                 
                 if (userOption.ToLower().Equals("y"))
                 {
@@ -92,7 +94,7 @@ namespace ShareFile.Api.Powershell
 
                     Logger.Instance.Info("Copying operation completed for missing files");
                     ResumeSupport.End();
-                    Console.Write("Last command completed, starting current operation");
+                    WriteObject("Last command completed, starting current operation");
                 }
             }
 
@@ -101,6 +103,7 @@ namespace ShareFile.Api.Powershell
             ResumeSupport.Start(Path, Destination, Force, Details);
 
             StartCopying(Path, Destination, Force, Details);
+            Thread.Sleep(100);
 
             ResumeSupport.End();
             Logger.Instance.Info("Command executed successfully");

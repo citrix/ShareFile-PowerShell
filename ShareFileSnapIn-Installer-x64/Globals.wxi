@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+	<?define Version = "1.5" ?>
+  <?define Description = "PowerShell Snap-In for ShareFile API. Version $(var.Version)" ?>
+  <?define Vendor = "Citrix" ?>
+  <?define SourceRootPath = "..\ShareFileSnapIn\bin\Release" ?>
+  <?define SourcePathAssets = "$(var.SourceRootPath)\Assets" ?>
+</Include>

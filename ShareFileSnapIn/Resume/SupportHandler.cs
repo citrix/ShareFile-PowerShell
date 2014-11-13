@@ -11,6 +11,8 @@ namespace ShareFile.Api.Powershell.Resume
     /// <typeparam name="T">Generic type</typeparam>
     class SupportHandler<T> where T : class
     {
+        private static readonly object syncFileLock = new object();
+
         /// <summary>
         /// Load/de-serialize file to object
         /// </summary>
@@ -38,12 +40,15 @@ namespace ShareFile.Api.Powershell.Resume
         /// <param name="path">Path + File Name</param>
         public static void Save(T serializableObject, string path)
         {
-            using (Stream textWriter = CreateTextWriter(path))
+            lock (syncFileLock)
             {
-                XmlSerializer xmlSerializer = CreateXmlSerializer();
-                xmlSerializer.Serialize(textWriter, serializableObject);
+                using (Stream textWriter = CreateTextWriter(path))
+                {
+                    XmlSerializer xmlSerializer = CreateXmlSerializer();
+                    xmlSerializer.Serialize(textWriter, serializableObject);
 
-                textWriter.Close();
+                    textWriter.Close();
+                }
             }
         }
 
