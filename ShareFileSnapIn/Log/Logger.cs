@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,10 +32,11 @@ namespace ShareFile.Api.Powershell.Log
                 {
                     String targetName = "logfile";
                     String directory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                    LogManager.Configuration = new XmlLoggingConfiguration(String.Format("{0}{1}{2}", directory, "\\", Resources.LogConfigFile));
+                    LogManager.Configuration = new XmlLoggingConfiguration(Path.Combine(directory, Resources.LogConfigFile));
 
+                    directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                     var fileTarget = LogManager.Configuration.FindTargetByName(targetName) as FileTarget;
-                    fileTarget.FileName = String.Format("{0}{1}{2}", directory, "\\", Resources.LogFile);
+                    fileTarget.FileName = Path.Combine(directory, Resources.AppName, Resources.LogFile);
                 }
 
                 return LogManager.GetCurrentClassLogger();

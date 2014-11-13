@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using ShareFile.Api.Powershell.Properties;
 
 namespace ShareFile.Api.Powershell.Resume
 {
@@ -23,22 +24,10 @@ namespace ShareFile.Api.Powershell.Resume
         /// </summary>
         public ResumeSupport()
         {
-            if (!string.IsNullOrEmpty(Properties.Resources.ProgressFile))
-            {
-                if (Directory.Exists(Properties.Resources.ProgressFile))
-                {
-                    XML_FILE_NAME = Path.Combine(Properties.Resources.ProgressFile, XML_FILE_NAME);
-                }
-                else
-                {
-                    XML_FILE_NAME = Properties.Resources.ProgressFile;
-                }
-            }
-            else
-            { 
-                XML_FILE_NAME = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), XML_FILE_NAME);
-            }
 
+            string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            XML_FILE_NAME = Path.Combine(directory, Resources.AppName, XML_FILE_NAME);
+            
             progressObject = LoadFile();
         }
 
@@ -68,6 +57,7 @@ namespace ShareFile.Api.Powershell.Resume
         public void MarkFileStatus(String fileName)
         {
             progressObject.CompletedFiles.Add(fileName);
+            progressObject.IsPending = true;
 
             SaveFile(progressObject);
         }
@@ -89,7 +79,7 @@ namespace ShareFile.Api.Powershell.Resume
         public void End()
         {
             progressObject.CompletedFiles = new System.Collections.ArrayList();
-            progressObject.IsExecuted = true;
+            progressObject.IsPending = false;
 
             SaveFile(progressObject);
         }
@@ -101,7 +91,7 @@ namespace ShareFile.Api.Powershell.Resume
         {
             get
             {
-                return progressObject.IsExist && !progressObject.IsExecuted;
+                return progressObject.IsExist && progressObject.IsPending;
             }
         }
 
