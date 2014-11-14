@@ -45,7 +45,7 @@ namespace ShareFile.Api.Powershell.Parallel
             }
             else if (!duplicateFile || actionType == ActionType.Force || (actionType == ActionType.Sync && !hashcodeMatches))
             {
-                using (var fileStream = new FileStream(fileName, actionType == ActionType.Force ? FileMode.Create : FileMode.CreateNew))
+                using (var fileStream = new FileStream(fileName, actionType == ActionType.Force || actionType == ActionType.Sync ? FileMode.Create : FileMode.CreateNew))
                 {
                     var progressBar = new ProgressBar(copySfItem);
                     progressBar.SetProgress(child.FileName, 0);
