@@ -26,7 +26,7 @@ namespace ShareFile.Api.Powershell.Browser
         {
             InitializeComponent();
             browser.AllowNavigation = true;
-            browser.ScriptErrorsSuppressed = true;
+            browser.ScriptErrorsSuppressed = false;
             browser.ScrollBarsEnabled = true;
             browser.TabIndex = 1;
         }

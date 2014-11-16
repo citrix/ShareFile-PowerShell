@@ -449,11 +449,11 @@ namespace ShareFile.Api.Powershell
                 Uri requestUri = null;
                 if (_formUri == null)
                 {
-                    requestUri = new Uri(string.Format("https://{0}.{1}/oauth/authorize?response_type=code&client_id={2}{3}{4}&redirect_uri={5}&autoredirect=true",
+                    requestUri = new Uri(string.Format("https://{0}.{1}/oauth/authorize?response_type=code&client_id={2}{3}{4}&redirect_uri={5}",
                         _requestDomain.Account ?? "secure",
                         _requestDomain.Domain,
                         Resources.ClientId,
-                        _requestDomain.Account != null ? "&subdomain=" + _requestDomain.Account : "",
+                        _requestDomain.Account != null && !_requestDomain.Account.Equals("secure") ? "&subdomain=" + _requestDomain.Account : "",
                         _requestDomain.Username != null ? "&username=" + Uri.EscapeUriString(_requestDomain.Username) : "",
                         Uri.EscapeUriString(Resources.RedirectURL)));
 
