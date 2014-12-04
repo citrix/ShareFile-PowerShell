@@ -216,7 +216,7 @@ namespace ShareFile.Api.Powershell
                 var newFolder = new Models.Folder() { Name = source.Name };
                 newFolder = client.Items.CreateFolder(target.url, newFolder, Force || ResumeSupport.IsPending, false).Execute();
                 
-                ActionManager actionManager = new ActionManager();
+                ActionManager actionManager = new ActionManager(this, source.Name);
                 ActionType actionType = Force ? ActionType.Force : ActionType.None;
 
                 foreach (var fsInfo in ((DirectoryInfo)source).EnumerateFileSystemInfos())
@@ -239,7 +239,7 @@ namespace ShareFile.Api.Powershell
             }
             else if (source is FileInfo)
             {
-                ActionManager actionManager = new ActionManager();
+                ActionManager actionManager = new ActionManager(this, source.Name);
                 if (!ResumeSupport.IsPending || !ResumeSupport.CheckFileStatus(source.Name))
                 {
                     ActionType actionType = Force || ResumeSupport.IsPending ? ActionType.Force : ActionType.None;
@@ -260,7 +260,7 @@ namespace ShareFile.Api.Powershell
                 var subdir = target.CreateSubdirectory(source.FileName);
                 if (children != null)
                 {
-                    ActionManager actionManager = new ActionManager();
+                    ActionManager actionManager = new ActionManager(this, source.FileName);
 
                     foreach (var child in children.Feed)
                     {
@@ -285,7 +285,7 @@ namespace ShareFile.Api.Powershell
             }
             else if (source is Models.File)
             {
-                ActionManager actionManager = new ActionManager();
+                ActionManager actionManager = new ActionManager(this, source.FileName);
                 if (!ResumeSupport.IsPending || !ResumeSupport.CheckFileStatus(source.FileName))
                 {
                     ActionType actionType = Force || ResumeSupport.IsPending ? ActionType.Force : ActionType.None;

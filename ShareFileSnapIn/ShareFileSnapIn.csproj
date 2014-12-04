@@ -46,15 +46,15 @@
       <HintPath>bin\Release\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
-      <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
+      <HintPath>bin\Release\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="ShareFile.Api.Client.Core, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ShareFile.Api.Client.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=8e51300fc9259180, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ShareFile.Api.Client.3.0.8\lib\net45\ShareFile.Api.Client.Core.dll</HintPath>
+      <HintPath>bin\Release\ShareFile.Api.Client.Core.dll</HintPath>
     </Reference>
-    <Reference Include="ShareFile.Api.Client.Net45, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ShareFile.Api.Client.Net45, Version=3.0.0.0, Culture=neutral, PublicKeyToken=8e51300fc9259180, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ShareFile.Api.Client.3.0.8\lib\net45\ShareFile.Api.Client.Net45.dll</HintPath>
+      <HintPath>bin\Release\ShareFile.Api.Client.Net45.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
@@ -89,6 +89,7 @@
       <DependentUpon>OAuthAuthenticationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Parallel\ActionType.cs" />
+    <Compile Include="Parallel\ProgressInfo.cs" />
     <Compile Include="Parallel\Utility.cs" />
     <Compile Include="SyncSfItem.cs" />
     <Compile Include="GetSfClient.cs" />
@@ -101,7 +102,6 @@
     <Compile Include="Parallel\IAction.cs" />
     <Compile Include="Parallel\UploadAction.cs" />
     <Compile Include="Parallel\DownloadAction.cs" />
-    <Compile Include="Parallel\ProgressBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -128,13 +128,25 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Assets\branding.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\sf-icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Citrix EULA.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Assets\Citrix EULA.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="ShareFile.Format.ps1xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

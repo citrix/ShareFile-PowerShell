@@ -26,8 +26,15 @@ namespace ShareFile.Api.Powershell.Parallel
 
         public static String GetMD5HashFromFile(String fileName)
         {
-            FileStream file = new FileStream(fileName, FileMode.Open);
-            return GetMD5HashFromFile(file);
+            string fileHashCode = string.Empty;
+            using (FileStream file = new FileStream(fileName, FileMode.Open))
+            {
+
+                fileHashCode = GetMD5HashFromFile(file);
+                file.Close();
+            }
+
+            return fileHashCode;
         }
     }
 }
