@@ -81,15 +81,21 @@ namespace ShareFile.Api.Powershell.Parallel
 
                         Task t = Task.Factory.StartNew(() =>
                         {
-                            ProgressInfo fileProgressInfo = new ProgressInfo();
-                            fileProgressInfo.ProgressTransferred = this.ProgressDone;
-                            fileProgressInfo.ProgressTotal = this.ProgressTotal;
-                            fileProgressInfo.FileIndex = threadIndex;
+                            try
+                            {
+                                ProgressInfo fileProgressInfo = new ProgressInfo();
+                                fileProgressInfo.ProgressTransferred = this.ProgressDone;
+                                fileProgressInfo.ProgressTotal = this.ProgressTotal;
+                                fileProgressInfo.FileIndex = threadIndex;
 
-                            ProgressInfoList.Add(threadIndex++, fileProgressInfo);
+                                ProgressInfoList.Add(threadIndex++, fileProgressInfo);
 
-                            downloadAction.CopyFileItem(fileProgressInfo);
-
+                                downloadAction.CopyFileItem(fileProgressInfo);
+                            }
+                            catch (Exception error)
+                            {
+                                Log.Logger.Instance.Error(error.Message);
+                            }
                             remainingCounter--;
                             runningThreads--;
                         });

@@ -102,7 +102,7 @@ namespace ShareFile.Api.Powershell
                 String.Join(",", Path), Destination, Force, Details));
             ResumeSupport.Start(Path, Destination, Force, Details);
 
-            StartCopying(Path, Destination, Force, Details);
+            StartCopying(Path, Destination.Trim(), Force, Details.Trim());
             Thread.Sleep(100);
 
             ResumeSupport.End();
@@ -118,23 +118,24 @@ namespace ShareFile.Api.Powershell
                 ProviderInfo sourceProvider;
                 PSDriveInfo sourceDrive;
                 List<string> filePaths = new List<string>();
+
                 if (_shouldExpandWildcards)
                 {
                     // Turn *.txt into foo.txt,foo2.txt etc.
                     // if path is just "foo.txt," it will return unchanged.
-                    var expandedPaths = this.GetResolvedProviderPathFromPSPath(path, out sourceProvider);
+                    var expandedPaths = this.GetResolvedProviderPathFromPSPath(path.Trim(), out sourceProvider);
                     // Not sure how to get the sourceDrive from this expansion
                     // I will get from the first element on this collection
                     // Is it possible to enumerate from multiple drives?? Is that why the method won't return the drive info?
                     if (expandedPaths.Count == 0) continue;
                     var firstPath = expandedPaths.FirstOrDefault();
-                    this.SessionState.Path.GetUnresolvedProviderPathFromPSPath(path, out sourceProvider, out sourceDrive);
+                    this.SessionState.Path.GetUnresolvedProviderPathFromPSPath(path.Trim(), out sourceProvider, out sourceDrive);
                     filePaths.AddRange(expandedPaths);
                 }
                 else
                 {
                     // no wildcards, so don't try to expand any * or ? symbols.                    
-                    filePaths.Add(this.SessionState.Path.GetUnresolvedProviderPathFromPSPath(path, out sourceProvider, out sourceDrive));
+                    filePaths.Add(this.SessionState.Path.GetUnresolvedProviderPathFromPSPath(path.Trim(), out sourceProvider, out sourceDrive));
                 }
                 bool isSourceLocal = sourceProvider.ImplementingType == typeof(Microsoft.PowerShell.Commands.FileSystemProvider);
                 bool isSourceSF = sourceProvider.ImplementingType == typeof(ShareFileProvider);

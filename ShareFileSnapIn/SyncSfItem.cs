@@ -161,7 +161,7 @@ namespace ShareFile.Api.Powershell
                     throw new PSArgumentException("Upload or Download switch must be specified");
                 }
 
-                if (string.IsNullOrEmpty(LocalPath))
+                if (string.IsNullOrEmpty(LocalPath) || string.IsNullOrEmpty(LocalPath.Trim()))
                 {
                     // use current user directory location if Local path is not specified in arguments
                     LocalPath = this.SessionState.Path.CurrentFileSystemLocation.Path;
@@ -181,6 +181,9 @@ namespace ShareFile.Api.Powershell
                 {
                     Recursive = true;
                 }
+
+                ShareFilePath = ShareFilePath.Trim();
+                LocalPath = LocalPath.Trim();
 
                 ActionType actionType = OverWrite ? ActionType.Force : (Synchronize ? ActionType.Sync : ActionType.None);
 
