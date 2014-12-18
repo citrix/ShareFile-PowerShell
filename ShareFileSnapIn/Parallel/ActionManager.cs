@@ -4,24 +4,49 @@ using System.IO;
 using System.Linq;
 using System.Management.Automation;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ShareFile.Api.Powershell.Parallel
 {
+    delegate void ProgressDoneDelegate(int index, long done);
+    delegate void ProgressTotalDelegate(int index, long total);
+
     /// <summary>
     /// ActionManager class to start parallel copying operations
     /// </summary>
     class ActionManager
     {
-        public static int MaxParallelThreads { get; set; }
-        private List<IAction> actionsList;
-        
+        private Queue<IAction> ActionsQueue;
+
+        private ProgressDoneDelegate ProgressDone;
+        private ProgressTotalDelegate ProgressTotal;
+
+        private PSCmdlet CmdLetObj;
+        private Dictionary<int, ProgressInfo> ProgressInfoList;
+
+        private object LockTransferred;
+        private object LockTotal;
+
+        private string folderName;
+
         /// <summary>
-        /// Initialize list of copy actions
+        /// Initialize
         /// </summary>
-        public ActionManager()
+        public ActionManager(PSCmdlet cmdLetObj, string name)
         {
-            actionsList = new List<IAction>();
+            this.ActionsQueue = new Queue<IAction>();
+
+            this.ProgressDone = new ProgressDoneDelegate(UpdateCurrent);
+            this.ProgressTotal = new ProgressTotalDelegate(UpdateTotal);
+            this.LockTransferred = new object();
+            this.LockTotal = new object();
+
+            this.CmdLetObj = cmdLetObj;
+
+            this.folderName = name;
+
+            this.ProgressInfoList = new Dictionary<int, ProgressInfo>();
         }
 
         /// <summary>
@@ -30,58 +55,139 @@ namespace ShareFile.Api.Powershell.Parallel
         /// <param name="action">Action type: UploadAction or DownloadAction</param>
         internal void AddAction(IAction action)
         {
-            actionsList.Add(action);
+            this.ActionsQueue.Enqueue(action);
         }
-        
+
         /// <summary>
         /// Execute all actions list in parallel (threads)
         /// </summary>
         internal void Execute()
         {
-            if (actionsList.Count > 0)
+            int remainingCounter = ActionsQueue.Count;
+            
+            if (remainingCounter > 0)
             {
-                try
+                int maxParallelThreads = System.Environment.ProcessorCount * 2;
+                int runningThreads = 0;
+                int threadIndex = 1;
+
+                while (remainingCounter > 0)
                 {
-                    Action[] systemActionsArray = new Action[actionsList.Count];
-                    int index = 0;
-                    foreach (IAction action in actionsList)
+                    // if actions queue is not empty and current running threads are less than the allowed max parallel threads count
+                    if (ActionsQueue.Count > 0 && runningThreads < maxParallelThreads)
                     {
-                        Action systemAction = new Action(() => action.CopyFileItem());
-                        systemActionsArray[index++] = systemAction;
-                    }
-                    
-                    // if user didn't specify maximum threads to run in parallel then set default to available processors
-                    if (MaxParallelThreads == 0)
-                    {
-                        MaxParallelThreads = System.Environment.ProcessorCount;
+                        runningThreads++;
+                        IAction downloadAction = ActionsQueue.Dequeue();
+
+                        Task t = Task.Factory.StartNew(() =>
+                        {
+                            try
+                            {
+                                ProgressInfo fileProgressInfo = new ProgressInfo();
+                                fileProgressInfo.ProgressTransferred = this.ProgressDone;
+                                fileProgressInfo.ProgressTotal = this.ProgressTotal;
+                                fileProgressInfo.FileIndex = threadIndex;
+
+                                ProgressInfoList.Add(threadIndex++, fileProgressInfo);
+
+                                downloadAction.CopyFileItem(fileProgressInfo);
+                            }
+                            catch (Exception error)
+                            {
+                                Log.Logger.Instance.Error(error.Message);
+                            }
+                            remainingCounter--;
+                            runningThreads--;
+                        });
                     }
 
-                    // setting maximum number of threads
-                    ParallelOptions options = new ParallelOptions { MaxDegreeOfParallelism = MaxParallelThreads };
-                    System.Threading.Tasks.Parallel.Invoke(options, systemActionsArray);
+                    UpdateProgress();
+                    Thread.Sleep(1000);
                 }
-                catch (AggregateException e)
-                {
-                    if (e.InnerException != null)
-                    {
-                        throw e.InnerException;
-                    }
-                    else 
-                    {
-                        throw e;
-                    }
-                }
+
+
+                UpdateProgress();
+                Thread.Sleep(1000);
             }
         }
 
         /// <summary>
         /// Get total number of actions
         /// </summary>
-        public int TotalActions {
-            get 
+        public int TotalActions
+        {
+            get
             {
-                return actionsList.Count;
+                return ActionsQueue.Count;
             }
+        }
+
+        private void UpdateCurrent(int index, long d)
+        {
+            lock (LockTransferred)
+            {
+                ProgressInfoList[index].Transferred = d;
+            }
+        }
+
+        private void UpdateTotal(int index, long t)
+        {
+            lock (LockTotal)
+            {
+                ProgressInfoList[index].Total = t;
+            }
+        }
+
+        private void UpdateProgress()
+        {
+            long total = 0, done = 0;
+            int length = this.ProgressInfoList.Count;
+            
+            for (int i = 0; i < length; i++) 
+            { 
+                ProgressInfo p = this.ProgressInfoList.Values.ElementAt(i);
+                total += p.Total;
+                done += p.Transferred;
+            }
+            
+            if (total == 0)
+            {
+                return;
+            }
+                        
+            int percentComplete = (int)(done * 100 / total);
+            ProgressRecord progress = new ProgressRecord(1, 
+                string.Format("Copying '{0}'", this.folderName), 
+                string.Format("{0}% of {1}", percentComplete, GetSize(total)));
+
+            progress.PercentComplete = percentComplete;
+            //progress.CurrentOperation = "Downloading files";
+            //progress.StatusDescription = done + "/" + total;
+            
+            //progress.StatusDescription = string.Format("{0}% of {1}", percentComplete, GetSize(total));
+
+            this.CmdLetObj.WriteProgress(progress);
+        }
+
+        private string GetSize(long total)
+        {
+            if (total > 1048576)
+            {
+                return string.Format("{0} MB", this.GetSizeRound(total, 1048576));
+            }
+            else if (total > 1024)
+            {
+                return string.Format("{0} KB", this.GetSizeRound(total, 1024));
+            }
+            else
+            {
+                return "1KB";
+            }
+        }
+
+        private string GetSizeRound(long total, long divider)
+        {
+            return Math.Round((double)total / divider, 2).ToString();
         }
     }
 }

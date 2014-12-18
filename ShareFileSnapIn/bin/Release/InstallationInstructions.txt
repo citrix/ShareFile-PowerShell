@@ -1,4 +1,0 @@
-1. Right-click each .dll, select "Properties" and Unblock the DLL
-2. Open a command prompt as Administrator
-3. CD into the directory with the Release output
-4. Run C:\Windows\Microsoft.NET\v4.0.30319\installutil -i .\ShareFileSnapIn.dll

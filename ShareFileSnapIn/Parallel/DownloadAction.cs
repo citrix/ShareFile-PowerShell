@@ -21,19 +21,19 @@ namespace ShareFile.Api.Powershell.Parallel
         private int downloadId;
         private FileSystemInfo target;
         private ActionType actionType;
-        private FileSupport copySfItem;
+        private FileSupport fileSupport;
 
-        public DownloadAction(FileSupport cmdLet, Client.ShareFileClient client, int downloadId, Models.File child, FileSystemInfo target, ActionType type)
+        public DownloadAction(FileSupport fileSupport, Client.ShareFileClient client, int downloadId, Models.File child, FileSystemInfo target, ActionType type)
         {
             this.child = child;
             this.client = client;
             this.downloadId = downloadId;
             this.target = target;
             this.actionType = type;
-            this.copySfItem = cmdLet;
+            this.fileSupport = fileSupport;
         }
 
-        void IAction.CopyFileItem()
+        void IAction.CopyFileItem(ProgressInfo progressInfo)
         {
             string fileName = System.IO.Path.Combine(target.FullName, child.FileName);
             bool duplicateFile = File.Exists(fileName);
@@ -47,30 +47,24 @@ namespace ShareFile.Api.Powershell.Parallel
             {
                 using (var fileStream = new FileStream(fileName, actionType == ActionType.Force || actionType == ActionType.Sync ? FileMode.Create : FileMode.CreateNew))
                 {
-                    var progressBar = new ProgressBar(copySfItem);
-                    progressBar.SetProgress(child.FileName, 0);
                     var downloader = client.GetAsyncFileDownloader(child);
+
+                    progressInfo.ProgressTotal(progressInfo.FileIndex, child.FileSizeBytes.GetValueOrDefault());
+
                     downloader.OnTransferProgress =
                         (sender, args) =>
                         {
                             if (args.Progress.TotalBytes > 0)
                             {
-                                var pct = (int)(((double)args.Progress.BytesTransferred / (double)args.Progress.TotalBytes) * 100);
-                                progressBar.SetProgress(child.FileName, pct);
+                                progressInfo.ProgressTransferred(progressInfo.FileIndex, args.Progress.BytesTransferred);
                             }
                         };
 
-                    ThreadPool.QueueUserWorkItem(new WaitCallback(progressBar.UpdateLoop));
-
-                    Task task = downloader.DownloadToAsync(fileStream);
-                    task.ContinueWith(t => progressBar.Finish());
-                    task.Wait();
-
+                    downloader.DownloadToAsync(fileStream).Wait();
+                    
                     fileStream.Close();
                 }
             }
         }
-
-        
     }
 }

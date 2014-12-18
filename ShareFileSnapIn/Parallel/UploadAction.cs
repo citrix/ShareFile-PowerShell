@@ -37,7 +37,7 @@ namespace ShareFile.Api.Powershell.Parallel
             actionType = type;
         }
 
-        void IAction.CopyFileItem()
+        void IAction.CopyFileItem(ProgressInfo progressInfo)
         {
             var fileInfo = (FileInfo)child;
             Models.Item fileItem = null;
@@ -75,19 +75,19 @@ namespace ShareFile.Api.Powershell.Parallel
 
                 var uploader = client.GetAsyncFileUploader(uploadSpec, new PlatformFileInfo(fileInfo));
 
-                var progressBar = new ProgressBar(copySfItem);
-                progressBar.SetProgress(fileInfo.Name, 0);
+                progressInfo.ProgressTotal(progressInfo.FileIndex, fileInfo.Length);
+
                 uploader.OnTransferProgress =
                     (sender, args) =>
                     {
-                        int pct = 100;
                         if (args.Progress.TotalBytes > 0)
-                            pct = (int)(((float)args.Progress.BytesTransferred / args.Progress.TotalBytes) * 100);
-                        progressBar.SetProgress(fileInfo.Name, pct);
+                        {
+                            progressInfo.ProgressTransferred(progressInfo.FileIndex, args.Progress.BytesTransferred);
+                        }
+                        
                     };
-                Task task = Task.Run(() => uploader.UploadAsync());
-                task.ContinueWith(t => progressBar.Finish());
-                task.Wait();
+                
+                Task.Run(() => uploader.UploadAsync()).Wait();
             }
         }
 
