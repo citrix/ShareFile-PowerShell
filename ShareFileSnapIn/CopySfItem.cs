@@ -102,7 +102,7 @@ namespace ShareFile.Api.Powershell
                 String.Join(",", Path), Destination, Force, Details));
             ResumeSupport.Start(Path, Destination, Force, Details);
 
-            StartCopying(Path, Destination.Trim(), Force, Details.Trim());
+            StartCopying(Path, Destination.Trim(), Force, Details);
             Thread.Sleep(100);
 
             ResumeSupport.End();
