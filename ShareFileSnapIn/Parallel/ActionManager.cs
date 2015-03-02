@@ -64,7 +64,7 @@ namespace ShareFile.Api.Powershell.Parallel
         internal void Execute()
         {
             int remainingCounter = ActionsQueue.Count;
-            
+
             if (remainingCounter > 0)
             {
                 int maxParallelThreads = System.Environment.ProcessorCount * 2;
@@ -140,33 +140,37 @@ namespace ShareFile.Api.Powershell.Parallel
 
         private void UpdateProgress()
         {
-            long total = 0, done = 0;
-            int length = this.ProgressInfoList.Count;
-            
-            for (int i = 0; i < length; i++) 
-            { 
-                ProgressInfo p = this.ProgressInfoList.Values.ElementAt(i);
-                total += p.Total;
-                done += p.Transferred;
-            }
-            
-            if (total == 0)
+            try
             {
-                return;
+                long total = 0, done = 0;
+                int length = this.ProgressInfoList.Count;
+
+                for (int i = 0; i < length; i++)
+                {
+                    ProgressInfo p = this.ProgressInfoList.Values.ElementAt(i);
+                    total += p.Total;
+                    done += p.Transferred;
+                }
+
+                if (total == 0)
+                {
+                    return;
+                }
+
+                int percentComplete = (int)(done * 100 / total);
+                ProgressRecord progress = new ProgressRecord(1,
+                    string.Format("Copying '{0}'", this.folderName),
+                    string.Format("{0}% of {1}", percentComplete, GetSize(total)));
+
+                progress.PercentComplete = percentComplete;
+                //progress.CurrentOperation = "Downloading files";
+                //progress.StatusDescription = done + "/" + total;
+
+                //progress.StatusDescription = string.Format("{0}% of {1}", percentComplete, GetSize(total));
+
+                this.CmdLetObj.WriteProgress(progress);
             }
-                        
-            int percentComplete = (int)(done * 100 / total);
-            ProgressRecord progress = new ProgressRecord(1, 
-                string.Format("Copying '{0}'", this.folderName), 
-                string.Format("{0}% of {1}", percentComplete, GetSize(total)));
-
-            progress.PercentComplete = percentComplete;
-            //progress.CurrentOperation = "Downloading files";
-            //progress.StatusDescription = done + "/" + total;
-            
-            //progress.StatusDescription = string.Format("{0}% of {1}", percentComplete, GetSize(total));
-
-            this.CmdLetObj.WriteProgress(progress);
+            catch { }
         }
 
         private string GetSize(long total)

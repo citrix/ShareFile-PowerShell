@@ -2,14 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Management.Automation;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using ShareFile.Api.Models;
 
 namespace ShareFile.Api.Powershell.Parallel
 {
     class Utility
     {
+        #region Local Variables
+        public const string DefaultSharefileFolder = "My Files & Folders";
+        #endregion
+
         public static String GetMD5HashFromFile(Stream file)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
@@ -35,6 +41,24 @@ namespace ShareFile.Api.Powershell.Parallel
             }
 
             return fileHashCode;
+        }
+
+        /// <summary>
+        /// Resolve ShareFile item path if ShareFile drive letter or root folder is not provided
+        /// </summary>
+        public static Item ResolveShareFilePath(PSDriveInfo driveInfo, string path)
+        {
+            var item = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)driveInfo, path, null, null);
+
+            // if user didn't specify the Sharefile HomeFolder in path then append in path
+            // e.g. if user tries sf:/Folder1 as sharefile source then resolve this path to sf:/My Files & Folders/Folder1
+            if (item == null && !path.StartsWith(String.Format(@"\{0}\", DefaultSharefileFolder)))
+            {
+                string updatedPath = String.Format(@"\{0}\{1}", DefaultSharefileFolder, path);
+                item = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)driveInfo, updatedPath, null, null);
+            }
+
+            return item;
         }
     }
 }

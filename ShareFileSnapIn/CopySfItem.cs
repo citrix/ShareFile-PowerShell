@@ -151,6 +151,7 @@ namespace ShareFile.Api.Powershell
                 if (isTargetSF)
                 {
                     targetItem = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)targetDrive, targetProviderPath);
+                    //targetItem = Utility.ResolveShareFilePath(sourceDrive, targetProviderPath);
                 }
 
                 // Process each input path
@@ -160,9 +161,16 @@ namespace ShareFile.Api.Powershell
                     {
                         // ShareFile to local: perform download
                         var client = ((ShareFileDriveInfo)sourceDrive).Client;
-                        var item = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)sourceDrive, filePath, null, null);
+                        var item = Utility.ResolveShareFilePath(sourceDrive, filePath); //ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)sourceDrive, filePath, null, null);
+                        if (item == null)
+                        {
+                            throw new Exception(string.Format("Source path '{0}' not found on ShareFile server.", filePath));
+                        }
                         var target = new DirectoryInfo(paramDestination);
-                        Logger.Instance.Info("Downloading files from ShareFile server.");
+                        if (!target.Exists)
+                        {
+                            throw new Exception(string.Format("Destination path '{0}' not found on local drive.", paramDestination));
+                        }
                         RecursiveDownload(client, new Random((int)DateTime.Now.Ticks).Next(), item, target);
                     }
                     else if (isSourceSF && isTargetSF)
@@ -188,7 +196,16 @@ namespace ShareFile.Api.Powershell
                         {
                             source = new FileInfo(filePath);
                         }
-                        Logger.Instance.Info("Uploading files to ShareFile server.");
+
+                        if (targetItem == null)
+                        {
+                            throw new Exception(string.Format("Destination path '{0}' not found on ShareFile server.", targetProviderPath));
+                        }
+                        if (!source.Exists)
+                        {
+                            throw new Exception(string.Format("Local path '{0}' not found on local drive.", filePath));
+                        }
+
                         RecursiveUpload(client, new Random((int)DateTime.Now.Ticks).Next(), source, targetItem);
                     }
                     else if (isSourceLocal && isTargetLocal)
