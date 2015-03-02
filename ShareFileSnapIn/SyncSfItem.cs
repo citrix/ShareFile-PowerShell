@@ -37,8 +37,6 @@ namespace ShareFile.Api.Powershell
         private const string SetNamePos = "SetPos";
         private const string SetNameHelp = "SetHelp";
 
-        private const string DefaultSharefileFolder = "My Files & Folders";
-
         private FileSupport FileSupport;
 
         // Keep track of abandone/resume functionality if disconnected meanwhile any operation
@@ -123,6 +121,7 @@ namespace ShareFile.Api.Powershell
         /// <summary>
         /// Strict param flag
         /// </summary>
+        [Parameter()]
         public SwitchParameter Strict { get; set; }
 
         /// <summary>
@@ -170,11 +169,6 @@ namespace ShareFile.Api.Powershell
                 if (Synchronize)
                 {
                     Recursive = true;
-                }
-
-                if (Strict)
-                {
-                    Move = true;
                 }
 
                 if (Move)
@@ -228,9 +222,9 @@ namespace ShareFile.Api.Powershell
                     var client = ((ShareFileDriveInfo)driveInfo).Client;
                     Item targetItem = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)driveInfo, unresolvedPath);
 
-                    if (targetItem == null && !unresolvedPath.StartsWith(String.Format(@"\{0}\", DefaultSharefileFolder)))
+                    if (targetItem == null && !unresolvedPath.StartsWith(String.Format(@"\{0}\", Utility.DefaultSharefileFolder)))
                     {
-                        string updatedPath = String.Format(@"\{0}\{1}", DefaultSharefileFolder, unresolvedPath);
+                        string updatedPath = String.Format(@"\{0}\{1}", Utility.DefaultSharefileFolder, unresolvedPath);
                         targetItem = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)driveInfo, updatedPath, null, null);
                     }
                     //else if (targetItem == null)
@@ -247,7 +241,7 @@ namespace ShareFile.Api.Powershell
                     // e.g. if user tries sf:/Folder1 as sharefile target then resolve this path to sf:/My Files & Folders/Folder1
                     if ((targetItem as Folder).Info.IsAccountRoot == true)
                     {
-                        string updatedPath = String.Format(@"\{0}\{1}", DefaultSharefileFolder, unresolvedPath);
+                        string updatedPath = String.Format(@"\{0}\{1}", Utility.DefaultSharefileFolder, unresolvedPath);
                         targetItem = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)driveInfo, updatedPath, null, null);
                     }
 
@@ -271,29 +265,25 @@ namespace ShareFile.Api.Powershell
         private void StartDownload(ShareFileClient client, PSDriveInfo driveInfo, ICollection<string> resolvedPaths, ActionType actionType)
         {
             int transactionId = new Random((int)DateTime.Now.Ticks).Next();
-            Logger.Instance.Info("Downloading files from ShareFile server.");
 
             ActionManager actionManager = new ActionManager(this, string.Empty);
             bool firstIteration = true;
 
             foreach (string path in resolvedPaths)
             {
-                var item = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)driveInfo, path, null, null);
-
-                // if user didn't specify the Sharefile HomeFolder in path then append in path
-                // e.g. if user tries sf:/Folder1 as sharefile source then resolve this path to sf:/My Files & Folders/Folder1
-                if (item == null && !path.StartsWith(String.Format(@"\{0}\", DefaultSharefileFolder)))
-                {
-                    string updatedPath = String.Format(@"\{0}\{1}", DefaultSharefileFolder, path);
-                    item = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)driveInfo, updatedPath, null, null);
-                }
+                var item = Utility.ResolveShareFilePath(driveInfo, path);
 
                 if (item == null)
                 {
-                    throw new FileNotFoundException("'" + path + "' not found on current path.");
+                    throw new FileNotFoundException(string.Format("Source path '{0}' not found on ShareFile server.", path));
                 }
 
                 var target = new DirectoryInfo(LocalPath);
+
+                if (!target.Exists)
+                {
+                    throw new Exception(string.Format("Destination '{0}' path not found on local drive.", LocalPath));
+                }
 
                 // if create root folder flag is specified then create a container folder first
                 if (firstIteration && CreateRoot)
@@ -332,6 +322,30 @@ namespace ShareFile.Api.Powershell
 
             actionManager.Execute();
 
+            // if strict flag is specified then also clean the target files which are not in source
+            if (Strict)
+            {
+                var target = new DirectoryInfo(LocalPath);
+                var directories = target.GetDirectories();
+
+                foreach (string path in resolvedPaths)
+                {
+                    var item = Utility.ResolveShareFilePath(driveInfo, path);
+                    
+                    if (item is Folder)
+                    {
+                        foreach (DirectoryInfo directory in directories)
+                        {
+                            if (directory.Name.Equals(item.Name))
+                            {
+                                DeleteLocalStrictRecursive(client, item, directory);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
             // on move remove source files
             if (Move)
             {
@@ -339,12 +353,6 @@ namespace ShareFile.Api.Powershell
                 {
                     var item = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)driveInfo, path, null, null);
                     var target = new DirectoryInfo(LocalPath);
-
-                    // if strict flag is specified then also clean the target files which are not in source
-                    if (Strict)
-                    {
-                        DeleteLocalStrictRecursive(client, item, target);
-                    }
 
                     DeleteShareFileItemRecursive(client, item, CreateRoot && Recursive);
                 }
@@ -416,19 +424,26 @@ namespace ShareFile.Api.Powershell
         /// </summary>
         private void DeleteLocalStrictRecursive(ShareFileClient client, Models.Item source, DirectoryInfo target)
         {
-
             var directories = target.GetDirectories();
             var children = client.Items.GetChildren(source.url).Execute();
 
             foreach (DirectoryInfo directory in directories)
             {
+                bool found = false;
+
                 foreach (var child in children.Feed)
                 {
                     if (child is Models.Folder && child.Name.Equals(directory.Name))
                     {
                         DeleteLocalStrictRecursive(client, child, directory);
+                        found = true;
                         break;
                     }
+                }
+
+                if (!found)
+                {
+                    RemoveLocalItem(directory);
                 }
             }
 
@@ -442,6 +457,7 @@ namespace ShareFile.Api.Powershell
                     if (child is Models.File && child.Name.Equals(file.Name))
                     {
                         found = true;
+                        break;
                     }
                 }
 
@@ -462,7 +478,7 @@ namespace ShareFile.Api.Powershell
             // if source is user's Home/Root folder then specify default name
             if (source.Info.IsAHomeFolder == true && source.Info.IsAStartFolder == true)
             {
-                sourceFolderName = DefaultSharefileFolder;
+                sourceFolderName = Utility.DefaultSharefileFolder;
             }
             else
             {
@@ -491,9 +507,7 @@ namespace ShareFile.Api.Powershell
         /// </summary>
         private void StartUpload(ShareFileClient client, int uploadId, Models.Item target, ICollection<string> resolvedPaths, ActionType actionType)
         {
-
             int transactionId = new Random((int)DateTime.Now.Ticks).Next();
-            Logger.Instance.Info("Uploading files to ShareFile server.");
 
             ActionManager actionManager = new ActionManager(this, string.Empty);
             bool firstIteration = true;
@@ -525,17 +539,35 @@ namespace ShareFile.Api.Powershell
 
             actionManager.Execute();
 
+            if (Strict)
+            {
+                foreach (string path in resolvedPaths)
+                {
+                    FileAttributes attr = System.IO.File.GetAttributes(path);
+                    if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
+                    {
+                        DirectoryInfo source = new DirectoryInfo(path);
+
+                        var children = client.Items.GetChildren(target.url).Execute();
+                        
+                        foreach (var child in children.Feed)
+                        {
+                            if (child is Models.Folder && child.Name.Equals(source.Name))
+                            {
+                                DeleteSharefileStrictRecursive(client, source as DirectoryInfo, child);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
             if (Move)
             {
                 foreach (string path in resolvedPaths)
                 {
                     FileAttributes attr = System.IO.File.GetAttributes(path);
                     FileSystemInfo source = ((attr & FileAttributes.Directory) == FileAttributes.Directory) ? new DirectoryInfo(path) : source = new FileInfo(path);
-
-                    if (Strict && source is DirectoryInfo)
-                    {
-                        DeleteSharefileStrictRecursive(client, source as DirectoryInfo, target);
-                    }
 
                     DeleteLocalItemRecursive(source, Recursive);
                 }
@@ -614,6 +646,7 @@ namespace ShareFile.Api.Powershell
 
             foreach (var child in children.Feed)
             {
+                bool found = false;
                 if (child is Models.Folder)
                 {
                     foreach (DirectoryInfo directory in directories)
@@ -621,14 +654,12 @@ namespace ShareFile.Api.Powershell
                         if (directory.Name.Equals(child.Name))
                         {
                             DeleteSharefileStrictRecursive(client, directory, child);
+                            found = true;
                         }
                     }
                 }
                 else if (child is Models.File)
                 {
-
-                    bool found = false;
-
                     foreach (FileInfo file in files)
                     {
                         if (file.Name.Equals(child.Name))
@@ -637,44 +668,44 @@ namespace ShareFile.Api.Powershell
                             break;
                         }
                     }
-
-                    if (!found)
-                    {
-                        RemoveShareFileItem(client, child);
-                    }
-                }
-            }
-
-            foreach (DirectoryInfo directory in directories)
-            {
-                foreach (var child in children.Feed)
-                {
-                    if (child is Models.Folder && child.Name.Equals(directory.Name))
-                    {
-                        DeleteLocalStrictRecursive(client, child, directory);
-                        break;
-                    }
-                }
-            }
-
-
-
-            foreach (FileInfo file in files)
-            {
-                bool found = false;
-                foreach (var child in children.Feed)
-                {
-                    if (child is Models.File && child.Name.Equals(file.Name))
-                    {
-                        found = true;
-                    }
                 }
 
                 if (!found)
                 {
-                    RemoveLocalItem(file);
+                    RemoveShareFileItem(client, child);
                 }
             }
+
+            //foreach (DirectoryInfo directory in directories)
+            //{
+            //    foreach (var child in children.Feed)
+            //    {
+            //        if (child is Models.Folder && child.Name.Equals(directory.Name))
+            //        {
+            //            DeleteLocalStrictRecursive(client, child, directory);
+            //            break;
+            //        }
+            //    }
+            //}
+
+
+
+            //foreach (FileInfo file in files)
+            //{
+            //    bool found = false;
+            //    foreach (var child in children.Feed)
+            //    {
+            //        if (child is Models.File && child.Name.Equals(file.Name))
+            //        {
+            //            found = true;
+            //        }
+            //    }
+
+            //    if (!found)
+            //    {
+            //        RemoveLocalItem(file);
+            //    }
+            //}
         }
 
         /// <summary>
