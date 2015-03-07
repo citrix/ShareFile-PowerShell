@@ -1,4 +1,5 @@
 Add-PSSnapin ShareFile
+$sfClient = New-SfClient
 
 #The import file would typically be an exported contact list from Outlook or equivalent
 $contacts = Import-Csv .\Contacts.CSV
@@ -19,6 +20,6 @@ foreach ($contact in $contacts)
         $user.Company = $contact.Company
 
         #create client user
-        Send-SfRequest $sfClient -Method POST -Entity Users -Body $user
+        Send-SfRequest $sfClient -Method POST -Entity Users -Body $user -Parameters @{"addshared" = "true"}
     }
 }
