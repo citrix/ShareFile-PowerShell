@@ -12,10 +12,7 @@
 
 #Run the following interactively to create a login token that can be used by Get-SfClient in unattended scripts
 #$sfClient = New-SfClient -Name ((Join-Path $env:USERPROFILE "Documents") + "\YourSubdomain.sfps") -Account YourSubdomain
-#$sfClient = Get-SfClient -Name ((Join-Path $env:USERPROFILE "Documents") + "\YourSubdomain.sfps")
-
-#REMOVE AND UNCOMMENT ABOVE
-$sfClient = Get-SfClient -Name ((Join-Path $env:USERPROFILE "Documents") + "\peterschulz.sfps")
+$sfClient = Get-SfClient -Name ((Join-Path $env:USERPROFILE "Documents") + "\YourSubdomain.sfps")
 
 #create script variable to store items and IDs that for cache lookup purposes
 #this is only needed for the full path details
