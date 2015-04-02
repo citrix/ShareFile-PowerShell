@@ -9,7 +9,7 @@
 #
 
 #Set this to the Id of the folder all the files are uploaded to
-$parentID = "foa42c71-cd4d-4b3a-a496-f900f889d4fe"
+$parentID = "Enter Parent Folder ID here"
 #Set this to the number of files you want to process at a time (recommended 1000 or less)
 $filesAtOnce = 1000;
 
