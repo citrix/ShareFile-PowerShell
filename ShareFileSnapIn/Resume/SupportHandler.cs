@@ -20,17 +20,20 @@ namespace ShareFile.Api.Powershell.Resume
         /// <returns>File Object</returns>
         public static T Load(string path)
         {
-            T serializableObject = null;
-
-            using (Stream textReader = CreateTextReader(path))
+            lock (syncFileLock)
             {
-                XmlSerializer xmlSerializer = CreateXmlSerializer();
-                serializableObject = xmlSerializer.Deserialize(textReader) as T;
+                T serializableObject = null;
 
-                textReader.Close();
+                using (Stream textReader = CreateTextReader(path))
+                {
+                    XmlSerializer xmlSerializer = CreateXmlSerializer();
+                    serializableObject = xmlSerializer.Deserialize(textReader) as T;
+
+                    textReader.Close();
+                }
+
+                return serializableObject;
             }
-
-            return serializableObject;
         }
 
         /// <summary>

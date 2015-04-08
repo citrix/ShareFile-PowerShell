@@ -106,7 +106,6 @@ namespace ShareFile.Api.Powershell
             Thread.Sleep(100);
 
             ResumeSupport.End();
-            Logger.Instance.Info("Command executed successfully");
             WriteObject("Files copied successfully");
         }
 
