@@ -72,40 +72,57 @@ namespace ShareFile.Api.Powershell
         [Parameter(Mandatory = false)]
         public bool Force { get; set; }
 
+        /// <summary>
+        /// Resume flag, if 'true' then it will keep track of command status
+        /// if command is unsuccessful due to disconnection then it will prompt user next time to complete it first
+        /// </summary>
+        [Parameter()]
+        [Alias("ResumeFlag")]
+        public SwitchParameter Resume { get; set; }
+
         protected override void ProcessRecord()
         {
             ResumeSupport = new Resume.ResumeSupport();
             FileSupport = new FileSupport(MarkFileStatus);
-            
-            if (ResumeSupport.IsPending)
+
+            if (Resume)
             {
-                Logger.Instance.Info("Last command wasn't successful due to discconnection.");
-
-                Console.Write("Last command wasn't successful due to discconnection, enter 'y' to complete or any other key to ignore: ");
-                Collection<PSObject> result = InvokeCommand.InvokeScript("Read-Host");
-                string userOption = result != null && result.Count > 0 ? result[0].ToString() : string.Empty;
-                
-                if (userOption.ToLower().Equals("y"))
+                if (ResumeSupport.IsPending)
                 {
-                    Logger.Instance.Info("Copying those files which were missed due to discconnection with following parameters. Source Path:{0} Destination:{1} Forced:{2} Details:{3}", 
-                        String.Join(",", ResumeSupport.GetPath), ResumeSupport.GetDestination, ResumeSupport.GetForce, ResumeSupport.GetDetails);
+                    Logger.Instance.Info("Last command wasn't successful due to discconnection.");
 
-                    StartCopying(ResumeSupport.GetPath, ResumeSupport.GetDestination, ResumeSupport.GetForce, ResumeSupport.GetDetails);
+                    WriteObject("Last command wasn't successful due to discconnection, enter 'y' to complete or any other key to ignore: ");
+                    Collection<PSObject> result = InvokeCommand.InvokeScript("Read-Host");
+                    string userOption = result != null && result.Count > 0 ? result[0].ToString() : string.Empty;
 
-                    Logger.Instance.Info("Copying operation completed for missing files");
-                    ResumeSupport.End();
-                    WriteObject("Last command completed, starting current operation");
+                    if (userOption.ToLower().Equals("y"))
+                    {
+                        Logger.Instance.Info("Copying those files which were missed due to discconnection with following parameters. Source Path:{0} Destination:{1} Forced:{2} Details:{3}",
+                            String.Join(",", ResumeSupport.GetPath), ResumeSupport.GetDestination, ResumeSupport.GetForce, ResumeSupport.GetDetails);
+
+                        StartCopying(ResumeSupport.GetPath, ResumeSupport.GetDestination, ResumeSupport.GetForce, ResumeSupport.GetDetails);
+
+                        Logger.Instance.Info("Copying operation completed for missing files");
+                        ResumeSupport.End();
+                        WriteObject("Last command completed, starting current operation");
+                    }
                 }
             }
+            else
+            {
+                ResumeSupport.UnmarkResumeFlag();
+            }
 
-            Logger.Instance.Info(String.Format("Starting Copy Operation with following parameters. Source Path:{0} Destination:{1} Forced:{2} Details:{3}", 
+            Logger.Instance.Info(String.Format("Starting Copy Operation with following parameters. Source Path:{0} Destination:{1} Forced:{2} Details:{3}",
                 String.Join(",", Path), Destination, Force, Details));
-            ResumeSupport.Start(Path, Destination, Force, Details);
 
+            if (Resume) ResumeSupport.Start(Path, Destination, Force, Details);
+            
             StartCopying(Path, Destination.Trim(), Force, Details);
             Thread.Sleep(100);
 
-            ResumeSupport.End();
+            if (Resume) ResumeSupport.End();
+
             WriteObject("Files copied successfully");
         }
 
@@ -232,7 +249,7 @@ namespace ShareFile.Api.Powershell
             {
                 var newFolder = new Models.Folder() { Name = source.Name };
                 newFolder = client.Items.CreateFolder(target.url, newFolder, Force || ResumeSupport.IsPending, false).Execute();
-                
+
                 ActionManager actionManager = new ActionManager(this, source.Name);
                 ActionType actionType = Force ? ActionType.Force : ActionType.None;
 
@@ -251,7 +268,7 @@ namespace ShareFile.Api.Powershell
                         }
                     }
                 }
-                
+
                 actionManager.Execute();
             }
             else if (source is FileInfo)
@@ -315,7 +332,10 @@ namespace ShareFile.Api.Powershell
 
         private void MarkFileStatus(String fileName)
         {
-            ResumeSupport.MarkFileStatus(fileName);
+            if (Resume)
+            {
+                ResumeSupport.MarkFileStatus(fileName);
+            }
         }
 
         #region Previous Implementations (commented) > Upload/Download
@@ -409,7 +429,7 @@ namespace ShareFile.Api.Powershell
         //        }
         //    }
         //}
-        
+
         #endregion
 
         protected void RecursiveCopy(FileSystemInfo source, DirectoryInfo target)

@@ -21,7 +21,7 @@ namespace ShareFile.Api.Powershell.Parallel
         private int downloadId;
         private FileSystemInfo target;
         private ActionType actionType;
-        private FileSupport fileSupport;
+        private FileSupport fileSupportDelegate;
 
         public DownloadAction(FileSupport fileSupport, Client.ShareFileClient client, int downloadId, Models.File child, FileSystemInfo target, ActionType type)
         {
@@ -30,7 +30,7 @@ namespace ShareFile.Api.Powershell.Parallel
             this.downloadId = downloadId;
             this.target = target;
             this.actionType = type;
-            this.fileSupport = fileSupport;
+            this.fileSupportDelegate = fileSupport;
         }
 
         void IAction.CopyFileItem(ProgressInfo progressInfo)
@@ -63,6 +63,7 @@ namespace ShareFile.Api.Powershell.Parallel
                     downloader.DownloadToAsync(fileStream).Wait();
                     
                     fileStream.Close();
+                    fileSupportDelegate(fileName);
                 }
             }
         }
