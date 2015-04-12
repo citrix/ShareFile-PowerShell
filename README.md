@@ -41,6 +41,15 @@ The PowerShell SDK requires <a href="http://social.technet.microsoft.com/wiki/co
     </tr>
     <tr>
         <td>
+            <a href="Scheduling-Scripts"><img src="https://github.com/citrix/ShareFile-PowerShell/blob/master/Samples/Images/ScheduleScript.png"/></a>
+        </td>
+        <td>
+            <b>Scheduling Scripts</b><br>
+            Found a great script that you want to run automatically on a regular basis? Check here for more information on how to schedule scripts.
+        </td>
+    </tr>
+    <tr>
+        <td>
             <a href="https://github.com/citrix/ShareFile-PowerShell/wiki/Syncing-Files"><img src="https://github.com/citrix/ShareFile-PowerShell/blob/master/Samples/Images/SyncingFiles.png"/></a>
         </td>
         <td>
