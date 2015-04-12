@@ -45,7 +45,7 @@ The PowerShell SDK requires <a href="http://social.technet.microsoft.com/wiki/co
         </td>
         <td>
             <b>Scheduling Scripts</b><br>
-            Found a great script that you want to run automatically on a regular basis? Check here for more information on how to schedule scripts.
+            Found a great script that you want to run automatically on a regular basis? Check <a href="https://github.com/citrix/ShareFile-PowerShell/wiki/Scheduling-Scripts">here</a> for more information on how to schedule scripts.
         </td>
     </tr>
     <tr>
