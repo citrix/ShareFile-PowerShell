@@ -1,52 +1,65 @@
-ShareFile-PowerShell
-====================
+ShareFile PowerShell SDK
+========================
 The ShareFile PowerShell SDK is a PowerShell snap-in that provides support for saving a user login for use in scripts, provides access to the ShareFile API, and also a provider that can be used within PowerShell to map to a ShareFile account.
 
-Download
-----
-Download the latest release here: https://github.com/citrix/ShareFile-PowerShell/releases
+<table>
+    <tr>
+        <td height="69" width="69">
+            <a href="https://github.com/citrix/ShareFile-PowerShell/releases"><img src="https://github.com/citrix/ShareFile-PowerShell/blob/master/Samples/Images/Download.png"/></a>
+        </td>
+        <td>
+            <b>Download</b><br>
+            Download the latest release <a href="https://github.com/citrix/ShareFile-PowerShell/releases">here</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="http://msdn.microsoft.com/en-us/library/5a4x27ek(v=vs.110).aspx" target="_blank"><img src="https://github.com/citrix/ShareFile-PowerShell/blob/master/Samples/Images/SystemRequirements.png"/></a>
+        </td>
+        <td>
+            <b>System Requirements</b><br>
+The PowerShell SDK requires <a href="http://social.technet.microsoft.com/wiki/contents/articles/21016.how-to-install-windows-powershell-4-0.aspx" target="_blank">PowerShell 4.x</a> and <a href="http://msdn.microsoft.com/en-us/library/5a4x27ek(v=vs.110).aspx" target="_blank">.NET 4.x</a>.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://github.com/citrix/ShareFile-PowerShell/wiki/Getting-Started"><img src="https://github.com/citrix/ShareFile-PowerShell/blob/master/Samples/Images/GettingStarted.png"/></a>
+        </td>
+        <td>
+            <b>Getting Started</b><br>
+            Click <a href="https://github.com/citrix/ShareFile-PowerShell/wiki/Getting-Started">here</a> if you are just getting started for a list of common operations. We will walk you through your first time using the SDK using some basic operations.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://github.com/citrix/ShareFile-PowerShell/wiki/Sample-Scripts"><img src="https://github.com/citrix/ShareFile-PowerShell/blob/master/Samples/Images/SampleScripts.png"/></a>
+        </td>
+        <td>
+            <b>Sample Scripts</b><br>
+            <a href="https://github.com/citrix/ShareFile-PowerShell/wiki/Sample-Scripts">Here</a> you will find some example scripts that are commonly used by customers.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://github.com/citrix/ShareFile-PowerShell/wiki/Syncing-Files"><img src="https://github.com/citrix/ShareFile-PowerShell/blob/master/Samples/Images/SyncingFiles.png"/></a>
+        </td>
+        <td>
+            <b>Syncing Files</b><br>
+            Coming from the SFCLI tool? <a href="https://github.com/citrix/ShareFile-PowerShell/wiki/Syncing-Files">This section</a> contains details on how you can use the PowerShell SDK to do the same type of activities.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://github.com/citrix/ShareFile-PowerShell/blob/master/ShareFileSnapIn/LICENSE.txt"><img src="https://github.com/citrix/ShareFile-PowerShell/blob/master/Samples/Images/Agreement.png"/></a>
+        </td>
+        <td>
+            <b>License</b><br>
+            All code is licensed under the <a href="https://github.com/citrix/ShareFile-PowerShell/blob/master/ShareFileSnapIn/LICENSE.txt">MIT
+License</a>
+        </td>
+    </tr>
+</table>
 
-Requirements
-----
-The PowerShell SDK requires PowerShell version 4.0 which you can learn more about here
-http://social.technet.microsoft.com/wiki/contents/articles/21016.how-to-install-windows-powershell-4-0.aspx
 
-As well as .Net version 4.x
-http://msdn.microsoft.com/en-us/library/5a4x27ek(v=vs.110).aspx
-
-Install
-----
-We have an MSI which makes installing the PowerShell SDK a snap, just go to our <a href="https://github.com/citrix/ShareFile-PowerShell/releases">releases page to download</a>.  If you would prefer to use the .dll installation method, you can find that below.
-
-----
-    To install the snap-in, just download and extract the files in ShareFileSnapIn.zip from the link above 
-    and then follow these steps:
-    * Right-click each .dll, select "Properties" and Unblock the DLL (or just run "gci | Unblock-File" in PowerShell)
-    * Open a command prompt or PowerShell window as Administrator
-    * Navigate to the directory where you copied the binaries
-    * Run C:\Windows\Microsoft.NET\Framework\v4.0.30319\installutil -i .\ShareFileSnapIn.dll
-    * (for x64) Run C:\Windows\Microsoft.NET\Framework64\v4.0.30319\installutil -i .\ShareFileSnapIn.dll
-    * Note: To uninstall, just run the above commands with -u instead of -i
-
-    Note: The PowerShell SDK is not signed, so you will need to modify the execution policy in PowerShell. 
-    The easiest way is to run "Set-ExecutionPolicy RemoteSigned", but check the documentation on script 
-    signing to understand what the options are. http://technet.microsoft.com/en-us/library/hh849812.aspx
-
-
-Samples
-----
-Sample scripts using the SDK are posted in the wiki: https://github.com/citrix/ShareFile-PowerShell/wiki
-
-License
-----
-All code is licensed under the [MIT
-License](https://github.com/citrix/ShareFile-PowerShell/blob/master/ShareFileSnapIn/LICENSE.txt).
-
-
-References
-----
-For examples of usage, check out the PowerShell SDK Wiki here:
-https://github.com/citrix/ShareFile-PowerShell/wiki
-
-For some blogs on using the PowerShell SDK take a look here:
+To follow us on the Citrix blog, check here:
 http://blogs.citrix.com/tag/powershell-sdk/

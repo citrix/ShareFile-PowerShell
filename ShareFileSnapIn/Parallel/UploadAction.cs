@@ -24,16 +24,16 @@ namespace ShareFile.Api.Powershell.Parallel
         private Client.ShareFileClient client;
         private Models.Item uploadTarget;
         private String details;
-        private FileSupport copySfItem;
+        private FileSupport fileSupportDelegate;
         private ActionType actionType;
 
-        public UploadAction(FileSupport cmdLet, Client.ShareFileClient client, FileSystemInfo source, Models.Item target, String details, ActionType type)
+        public UploadAction(FileSupport fileSupport, Client.ShareFileClient client, FileSystemInfo source, Models.Item target, String details, ActionType type)
         {
             this.client = client;
             this.child = source;
             this.uploadTarget = target;
             this.details = details;
-            this.copySfItem = cmdLet;
+            this.fileSupportDelegate = fileSupport;
             actionType = type;
         }
 
@@ -88,6 +88,7 @@ namespace ShareFile.Api.Powershell.Parallel
                     };
                 
                 Task.Run(() => uploader.UploadAsync()).Wait();
+                fileSupportDelegate(fileInfo.Name);
             }
         }
 

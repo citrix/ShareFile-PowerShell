@@ -34,3 +34,5 @@ packages/*
 Build/runbuild.txt
 docs/*
 
+*/bin
+*/obj

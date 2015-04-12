@@ -18,6 +18,7 @@ namespace ShareFile.Api.Powershell.Resume
     {
         private String XML_FILE_NAME = @".progressfile";
         private ProgressFile progressObject;
+        private bool flagResume;
 
         /// <summary>
         /// Initialize/Load the progressfile and de-serialize the object
@@ -27,7 +28,7 @@ namespace ShareFile.Api.Powershell.Resume
 
             string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             XML_FILE_NAME = Path.Combine(directory, Resources.AppName, XML_FILE_NAME);
-            
+            flagResume = true;
             progressObject = LoadFile();
         }
 
@@ -40,7 +41,7 @@ namespace ShareFile.Api.Powershell.Resume
         /// <param name="details">Upload Specification Request Details</param>
         public void Start(String[] source, String target, bool force, String details)
         {
-            progressObject  = new ProgressFile();
+            progressObject = new ProgressFile();
 
             progressObject.ArgumentSource = source;
             progressObject.ArgumentTarget = target;
@@ -91,7 +92,7 @@ namespace ShareFile.Api.Powershell.Resume
         {
             get
             {
-                return progressObject.IsExist && progressObject.IsPending;
+                return flagResume && progressObject.IsExist && progressObject.IsPending;
             }
         }
 
@@ -137,6 +138,11 @@ namespace ShareFile.Api.Powershell.Resume
             {
                 return progressObject.ArgumentDetails;
             }
+        }
+
+        public void UnmarkResumeFlag()
+        {
+            this.flagResume = false;
         }
 
         /// <summary>
