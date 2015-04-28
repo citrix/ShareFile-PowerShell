@@ -1,9 +1,10 @@
 # Monitor_Uploads_From_ShareFile_Queue_SYMC_DLP.ps1
 # Script written by Cameron Erens & Brian Mathews
-# Code is provided as-is
+# This example code is provided as-is.
 # Last Revised April 28, 2015
 # For full instructions, including configuration & dependencies please see
 # 'Setup Instructions to Monitor ShareFile Uploads to on-prem with Symantec DLP (v1.1).docx'
+# available at https://labs.sharefile.com/d-sfc59f9171214584a
 # and also read through the comments in this code.
 
 
