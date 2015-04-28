@@ -32,7 +32,7 @@ foreach ($qitem in $qitems)
 	# ShareFile V3 api and StorageZones upload / av queue use dashes, but persistentstoage filenames 
 	# use underscores, so replace any dashes with underscores
 	$storageGuid = $storageGuid.Replace("-","_")
-	$storagefile = "$StoragePath\$storageGuid"
+	$storagefile = "$StoragePath$storageGuid"
 
 
 	# look up additional file attributes from ShareFile regarding upload
@@ -67,7 +67,7 @@ foreach ($qitem in $qitems)
 	Write-Host "Creator=$CreatorName"
 
 	#t his command returns a path of folder Ids which we need to parse to string names
-	$ folderPath = $item.Path.ToString()
+	$folderPath = $item.Path.ToString()
 	# remove first slash before split so it doesn't create empty string
 	$fullPath = $folderPath.Substring(1).Split("/")
 	$returnPath = "/"
