@@ -11,6 +11,7 @@ using ShareFile.Api.Client.Requests;
 using Newtonsoft.Json;
 using ShareFile.Api.Client.Exceptions;
 using ShareFile.Api.Client.Requests.Filters;
+using System.Text.RegularExpressions;
 
 namespace ShareFile.Api.Powershell
 {
@@ -138,32 +139,30 @@ namespace ShareFile.Api.Powershell
             return builder.Build();
         }
 
-
-        private enum OperatorType
-        {
-            eq,
-            ne,
-            gt,
-            ge,
-            lt,
-            le,
-            and,
-            or,
-            not,
-            add,
-            sub,
-            mul,
-            div,
-            mod,
-
-            startswith,
-            endswith,
-            substr,
-            type
-        }
-
         private class FilterBuilder
         {
+            private enum OperatorType
+            {
+                eq,
+                ne,
+                gt,
+                ge,
+                lt,
+                le,
+                and,
+                or,
+                not,
+                add,
+                sub,
+                mul,
+                div,
+                mod,
+
+                startswith,
+                endswith,
+                substr,
+                type
+            }
 
             private Stack<string> OperatorsStack;
             private Stack<string> PropertiesStack;
@@ -192,88 +191,78 @@ namespace ShareFile.Api.Powershell
                 string filter = string.Empty;
                 string propertyValue = string.Empty;
 
-
-                if (IsNotOperator(filterText))
+                Match match = CheckIfLogicalOperation(filterText);
+                if (match.Success)
                 {
-                    OperatorsStack.Push("not");
-                    filterText = filterText.Substring(4).Trim();
-                }
-
-                if (IsBracesOperator(filterText))
-                {
-                    result = filterText.Split(sepBraces, 4, StringSplitOptions.RemoveEmptyEntries);
-
-                    filter = result[0].Trim();
-                    propertyName = result[1].Trim();
-                    propertyValue = result[2].Trim();
-
-                    if (result.Length == 4)
-                    {
-                        propertyValue += result[3];
-                    }
+                    OperatorsStack.Push(match.Value.Trim());
+                    filterText = filterText.Substring(match.Length).Trim();
+                    SplitText(filterText);
                 }
                 else
                 {
-                    result = filterText.Split(sepSpace, 3, StringSplitOptions.RemoveEmptyEntries);
 
-                    propertyName = result[0].Trim();
-                    filter = result[1].Trim();
-                    propertyValue = result[2].Trim();
+                    match = CheckIfBracesOperation(filterText);
+                    if (match.Success)
+                    {
+                        result = filterText.Split(sepBraces, 4, StringSplitOptions.RemoveEmptyEntries);
+
+                        filter = result[0].Trim();
+                        propertyName = result[1].Trim();
+                        propertyValue = result[2].Trim();
+
+                        if (result.Length == 4)
+                        {
+                            SplitText(result[3].Trim());
+                        }
+                    }
+                    else
+                    {
+                        match = CheckIfComparisionOperation(filterText);
+                        if (match.Success)
+                        {
+                            result = match.Value.Split(sepSpace, 3, StringSplitOptions.RemoveEmptyEntries);
+
+                            propertyName = result[0].Trim();
+                            filter = result[1].Trim();
+                            propertyValue = result[2].Trim();
+
+                            filterText = filterText.Substring(match.Length).Trim();
+                            if (!string.IsNullOrWhiteSpace(filterText))
+                            {
+                                SplitText(filterText);
+                            }
+                        }
+                    }
+
+                    propertyValue = RemoveQuotes(propertyValue);
+
+                    OperatorsStack.Push(filter);
+                    PropertiesStack.Push(propertyName);
+                    PropertiesStack.Push(propertyValue);
                 }
-
-                string[] nextFilter = MoveToNext(propertyValue);
-                if (nextFilter != null && nextFilter.Length == 3)
-                {
-                    propertyValue = nextFilter[0];
-                    OperatorsStack.Push(nextFilter[1]);
-                    SplitText(nextFilter[2]);
-                }
-
-                OperatorsStack.Push(filter);
-                PropertiesStack.Push(propertyName);
-                PropertiesStack.Push(propertyValue);
-
             }
 
-            private bool IsNotOperator(string filterText)
+            private string RemoveQuotes(string value)
             {
-                return filterText.StartsWith("not ", StringComparison.CurrentCultureIgnoreCase);
+                return value.Trim("'\"".ToCharArray());
             }
 
-            private bool IsBracesOperator(string filterText)
+            private Match CheckIfLogicalOperation(string filterText)
             {
-                return filterText.StartsWith("startswith(", StringComparison.CurrentCultureIgnoreCase)
-                    || filterText.StartsWith("endswith(", StringComparison.CurrentCultureIgnoreCase);
+                Regex exp = new Regex(@"^(and|or|not)\s");
+                return exp.Match(filterText);
             }
 
-            private string[] MoveToNext(string filterText)
+            private Match CheckIfComparisionOperation(string filterText)
             {
-                string[] array = null;
-                string remainingText = null;
-                string logicalOperator = null;
+                Regex exp = new Regex(@"^\w+\s*(eq|ne|lt|le|gt|ge)\s*(?:"".*?""|'.*?'|(\d+(\.\d+)?)\b)");
+                return exp.Match(filterText);
+            }
 
-                if (filterText.StartsWith("'") || filterText.StartsWith("\""))
-                {
-                    char delimeter = filterText.ElementAt(0);
-
-                    logicalOperator = filterText.Substring(0, filterText.IndexOf(delimeter, 1)).Trim();
-                    remainingText = filterText.Substring(filterText.IndexOf(delimeter, 1) + 1).Trim();
-                }
-                else if (filterText.IndexOf(" ") > -1)
-                {
-                    logicalOperator = filterText.Substring(0, filterText.IndexOf(" ")).Trim();
-                    remainingText = filterText.Substring(filterText.IndexOf(" ")).Trim();
-                }
-
-                if (!string.IsNullOrWhiteSpace(remainingText))
-                {
-                    array = new string[3];
-                    array[0] = logicalOperator;
-                    array[1] = remainingText.Substring(0, remainingText.IndexOf(" "));
-                    array[2] = remainingText.Substring(remainingText.IndexOf(" ") + 1);
-                }
-
-                return array;
+            private Match CheckIfBracesOperation(string filterText)
+            {
+                Regex exp = new Regex(@"^(endswith|startswith)\(\w+\s*\,\s*(?:"".*?""|'.*?'|(\d+(\.\d+)?)\b)\)");
+                return exp.Match(filterText);
             }
 
             private IFilter GetFilter()
@@ -282,7 +271,7 @@ namespace ShareFile.Api.Powershell
 
                 Stack<IFilter> Operations = new Stack<IFilter>();
 
-                while (Operations.Count > 0)
+                while (OperatorsStack.Count > 0)
                 {
                     string propertyName = null;
                     string propertyValue = null;
@@ -316,7 +305,7 @@ namespace ShareFile.Api.Powershell
                         case OperatorType.or:
                             right = Operations.Pop();
                             left = Operations.Pop();
-                            filterType = new AndFilter(left, right);
+                            filterType = new OrFilter(left, right);
                             break;
 
                         case OperatorType.not:
@@ -331,7 +320,7 @@ namespace ShareFile.Api.Powershell
                 return Operations.Pop();
             }
 
-            private static IFilter CreateFilter(OperatorType operators, string propertyName, string propertyValue)
+            private IFilter CreateFilter(OperatorType operators, string propertyName, string propertyValue)
             {
                 IFilter filter = null;
                 switch (operators)
