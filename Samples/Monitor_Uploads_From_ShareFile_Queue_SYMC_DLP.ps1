@@ -1,10 +1,10 @@
 # Monitor_Uploads_From_ShareFile_Queue_SYMC_DLP.ps1
 # Script written by Cameron Erens & Brian Mathews
 # This example code is provided as-is.
-# Last Revised April 28, 2015
+# Last Revised May 7, 2015
 # For full instructions, including configuration & dependencies please see
 # 'Setup Instructions to Monitor ShareFile Uploads to on-prem with Symantec DLP (v1.1).docx'
-# available at https://labs.sharefile.com/d-sfc59f9171214584a
+# available at https://github.com/citrix/ShareFile-PowerShell/blob/master/Samples/Monitor_Uploads_From_ShareFile_Queue_SYMC_DLP_INSTRUCTIONS_1.1.docx
 # and also read through the comments in this code.
 
 
