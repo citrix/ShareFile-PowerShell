@@ -9,8 +9,6 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "ShareFileSnapIn-Installer-x
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test-ShareFileSnapIn", "Test-ShareFileSnapIn\Test-ShareFileSnapIn.csproj", "{95E10D74-0853-4701-A8E3-F1B391E019A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareFile.Api.Client.Core-net45", "..\ShareFile-NET\Core\ShareFile.Api.Client.Core-net45.csproj", "{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		BetaRelease|Any CPU = BetaRelease|Any CPU
@@ -213,48 +211,6 @@ Global
 		{95E10D74-0853-4701-A8E3-F1B391E019A0}.SingleImage|Mixed Platforms.Build.0 = Release|Any CPU
 		{95E10D74-0853-4701-A8E3-F1B391E019A0}.SingleImage|x64.ActiveCfg = Release|Any CPU
 		{95E10D74-0853-4701-A8E3-F1B391E019A0}.SingleImage|x86.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.BetaRelease|Any CPU.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.BetaRelease|Any CPU.Build.0 = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.BetaRelease|ARM.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.BetaRelease|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.BetaRelease|Mixed Platforms.Build.0 = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.BetaRelease|x64.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.BetaRelease|x86.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.CD_ROM|ARM.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.CD_ROM|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.CD_ROM|Mixed Platforms.Build.0 = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.CD_ROM|x64.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.CD_ROM|x86.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.DVD-5|ARM.ActiveCfg = Debug|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.DVD-5|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.DVD-5|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.DVD-5|x64.ActiveCfg = Debug|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.DVD-5|x86.ActiveCfg = Debug|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.Release|ARM.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.Release|x64.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.Release|x86.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.SingleImage|Any CPU.Build.0 = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.SingleImage|ARM.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.SingleImage|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.SingleImage|Mixed Platforms.Build.0 = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.SingleImage|x64.ActiveCfg = Release|Any CPU
-		{5ADB6950-D609-4847-A842-0BDD6CDBBFB9}.SingleImage|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

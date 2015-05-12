@@ -143,25 +143,25 @@ namespace ShareFile.Api.Powershell
         {
             private enum OperatorType
             {
-                eq,
-                ne,
-                gt,
-                ge,
-                lt,
-                le,
-                and,
-                or,
-                not,
-                add,
-                sub,
-                mul,
-                div,
-                mod,
-
-                startswith,
-                endswith,
-                substr,
-                type
+                none,
+                eq,// Equal to 
+                ne,// Not Equal to
+                gt,// Greater than
+                ge,// Greater than or Equal to
+                lt,// Less than
+                le,// Less than or Equal to
+                and,// logical And operator
+                or,// logical Or operator
+                not,// logical Not operator
+                add,// arithmetic ADDITION operator
+                sub,// arithmetic SUBTRACTION operator
+                mul,// arithmetic Multiplication operator
+                div,// arithmetic Division operator
+                mod,// arithmetic Modulo operator
+                startswith,// string Starts With operator
+                endswith,// string Ends With operator
+                substr,// string Sub String operator
+                precedence // Precedence grouping (parenthesis)
             }
 
             private Stack<string> OperatorsStack;
@@ -177,8 +177,15 @@ namespace ShareFile.Api.Powershell
 
             public IFilter Build()
             {
-                SplitText(FilterBody);
-                return GetFilter();
+                try
+                {
+                    SplitText(FilterBody);
+                    return GetFilter();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Invalid filter, please check syntax and try again.", ex);
+                }
             }
 
             private void SplitText(string filterText)
@@ -220,25 +227,77 @@ namespace ShareFile.Api.Powershell
                         match = CheckIfComparisionOperation(filterText);
                         if (match.Success)
                         {
-                            result = match.Value.Split(sepSpace, 3, StringSplitOptions.RemoveEmptyEntries);
+                            Regex expLeft = new Regex(@"^\w+\b");
+                            Regex expOperator = new Regex(@"^((eq|ne|lt|le|gt|ge)\b|(=|==|!=|<>|<|<=|>|>=))");
+                            Regex expRight = new Regex(@"^(?:"".*?""|'.*?'|[a-zA-Z0-9.]+)");
 
-                            propertyName = result[0].Trim();
-                            filter = result[1].Trim();
-                            propertyValue = result[2].Trim();
-
+                            match = expLeft.Match(filterText);
+                            propertyName = match.Value.Trim();
                             filterText = filterText.Substring(match.Length).Trim();
+
+                            match = expOperator.Match(filterText);
+                            filter = match.Value.Trim();
+                            filterText = filterText.Substring(match.Length).Trim();
+
+                            match = expRight.Match(filterText);
+                            propertyValue = match.Value.Trim();
+                            filterText = filterText.Substring(match.Length).Trim();
+
                             if (!string.IsNullOrWhiteSpace(filterText))
                             {
                                 SplitText(filterText);
                             }
                         }
-                    }
+                        else
+                        {
+                            match = CheckIfArithmeticOperation(filterText);
+                            if (match.Success)
+                            {
+                                Regex expLeft = new Regex(@"^\w+\b");
+                                Regex expOperator = new Regex(@"^(add|sub|mul|div|mod)\b");
 
-                    propertyValue = RemoveQuotes(propertyValue);
+                                Regex innerExpLeft = new Regex(@"^(?:"".*?""|'.*?'|[a-zA-Z0-9.]+)");
+                                Regex innerExpOperator = new Regex(@"^(((eq|ne|lt|le|gt|ge)\s+)|(\s*(=|==|!=|<>|<|<=|>|>=)\s*))\b");
+                                Regex innerExpRight = new Regex(@"^(?:"".*?""|'.*?'|[a-zA-Z0-9.]+)");
+
+                                match = expLeft.Match(filterText);
+                                propertyName = match.Value.Trim();
+                                filterText = filterText.Substring(match.Length).Trim();
+
+                                match = expOperator.Match(filterText);
+                                filter = match.Value.Trim();
+                                filterText = filterText.Substring(match.Length).Trim();
+
+                                match = innerExpLeft.Match(filterText);
+                                propertyValue = match.Value.Trim();
+                                filterText = filterText.Substring(match.Length).Trim();
+
+                                match = innerExpOperator.Match(filterText);
+                                string innerOperator = match.Value.Trim();
+                                filterText = filterText.Substring(match.Length).Trim();
+
+                                match = innerExpRight.Match(filterText);
+                                string propertyValue2 = match.Value.Trim();
+                                filterText = filterText.Substring(match.Length).Trim();
+
+                                if (!string.IsNullOrWhiteSpace(filterText))
+                                {
+                                    SplitText(filterText);
+                                }
+
+                                OperatorsStack.Push(innerOperator);
+                                PropertiesStack.Push(RemoveQuotes(propertyValue2));
+                            }
+                            else
+                            {
+                                throw new Exception("Invalid filter, please check syntax and try again.");
+                            }
+                        }
+                    }
 
                     OperatorsStack.Push(filter);
                     PropertiesStack.Push(propertyName);
-                    PropertiesStack.Push(propertyValue);
+                    PropertiesStack.Push(RemoveQuotes(propertyValue));
                 }
             }
 
@@ -255,13 +314,19 @@ namespace ShareFile.Api.Powershell
 
             private Match CheckIfComparisionOperation(string filterText)
             {
-                Regex exp = new Regex(@"^\w+\s*(eq|ne|lt|le|gt|ge)\s*(?:"".*?""|'.*?'|(\d+(\.\d+)?)\b)");
+                Regex exp = new Regex(@"^\w+((\s+(eq|ne|lt|le|gt|ge)\s+)|(\s*(=|==|!=|<>|<|<=|>|>=)\s*))(?:"".*?""|'.*?'|[a-zA-Z0-9.]+)");
                 return exp.Match(filterText);
             }
 
             private Match CheckIfBracesOperation(string filterText)
             {
-                Regex exp = new Regex(@"^(endswith|startswith)\(\w+\s*\,\s*(?:"".*?""|'.*?'|(\d+(\.\d+)?)\b)\)");
+                Regex exp = new Regex(@"^(endswith|startswith)\(\w+\s*\,\s*(?:"".*?""|'.*?'|[a-zA-Z0-9.]+)\)");
+                return exp.Match(filterText);
+            }
+
+            private Match CheckIfArithmeticOperation(string filterText)
+            {
+                Regex exp = new Regex(@"^\w+\s+(add|sub|mul|div|mod)\s+(?:"".*?""|'.*?'|[a-zA-Z0-9.]+)((\s+(eq|ne|lt|le|gt|ge)\s+)|(\s*(=|==|!=|<>|<|<=|>|>=)\s*))(?:"".*?""|'.*?'|[a-zA-Z0-9.]+)");
                 return exp.Match(filterText);
             }
 
@@ -269,7 +334,7 @@ namespace ShareFile.Api.Powershell
             {
                 IFilter filterType = null;
 
-                Stack<IFilter> Operations = new Stack<IFilter>();
+                Stack<IFilter> operations = new Stack<IFilter>();
 
                 while (OperatorsStack.Count > 0)
                 {
@@ -278,7 +343,7 @@ namespace ShareFile.Api.Powershell
                     IFilter left = null;
                     IFilter right = null;
                     string op = OperatorsStack.Pop();
-                    OperatorType operators = (OperatorType)Enum.Parse(typeof(OperatorType), op, true);
+                    OperatorType operators = GetOperator(op);
 
                     switch (operators)
                     {
@@ -296,28 +361,69 @@ namespace ShareFile.Api.Powershell
                             filterType = CreateFilter(operators, propertyName, propertyValue);
                             break;
 
+                        case OperatorType.add:
+                        case OperatorType.sub:
+                        case OperatorType.mul:
+                        case OperatorType.div:
+                        case OperatorType.mod:
+                            propertyValue = PropertiesStack.Pop();
+                            propertyName = PropertiesStack.Pop();
+                            string propertyValue2 = PropertiesStack.Pop();
+                            OperatorType operatorInner = GetOperator(OperatorsStack.Pop());
+
+                            filterType = CreateFilter(operators, propertyName, propertyValue, operatorInner, propertyValue2);
+                            break;
+
                         case OperatorType.and:
-                            right = Operations.Pop();
-                            left = Operations.Pop();
+                            right = operations.Pop();
+                            left = operations.Pop();
                             filterType = new AndFilter(left, right);
                             break;
 
                         case OperatorType.or:
-                            right = Operations.Pop();
-                            left = Operations.Pop();
+                            right = operations.Pop();
+                            left = operations.Pop();
                             filterType = new OrFilter(left, right);
                             break;
 
                         case OperatorType.not:
-                            right = Operations.Pop();
+                            right = operations.Pop();
                             filterType = new NotFilter(right);
                             break;
                     }
 
-                    Operations.Push(filterType);
+                    operations.Push(filterType);
                 }
 
-                return Operations.Pop();
+                return operations.Pop();
+            }
+
+            private OperatorType GetOperator(string op)
+            {
+                if (Enum.IsDefined(typeof(OperatorType), op))
+                {
+                    return (OperatorType)Enum.Parse(typeof(OperatorType), op, true);
+                }
+
+                switch (op)
+                {
+                    case "=":
+                    case "==":
+                        return OperatorType.eq;
+                    case "!=":
+                    case "<>":
+                        return OperatorType.ne;
+                    case "<":
+                        return OperatorType.le;
+                    case "<=":
+                        return OperatorType.lt;
+                    case ">":
+                        return OperatorType.gt;
+                    case ">=":
+                        return OperatorType.ge;
+                    default:
+                        return OperatorType.none;
+                }
             }
 
             private IFilter CreateFilter(OperatorType operators, string propertyName, string propertyValue)
@@ -354,6 +460,30 @@ namespace ShareFile.Api.Powershell
                 return filter;
             }
 
+            private IFilter CreateFilter(OperatorType operators, string propertyName, string propertyValue1, OperatorType innerOperator, string propertyValue2)
+            {
+                IFilter filter = null;
+                switch (operators)
+                {
+                    case OperatorType.add:
+                        filter = new AdditionFilter(propertyName, propertyValue1, innerOperator.ToString(), propertyValue2);
+                        break;
+                    case OperatorType.sub:
+                        filter = new SubtractionFilter(propertyName, propertyValue1, innerOperator.ToString(), propertyValue2);
+                        break;
+                    case OperatorType.mul:
+                        filter = new MultiplicationFilter(propertyName, propertyValue1, innerOperator.ToString(), propertyValue2);
+                        break;
+                    case OperatorType.div:
+                        filter = new DivisionFilter(propertyName, propertyValue1, innerOperator.ToString(), propertyValue2);
+                        break;
+                    case OperatorType.mod:
+                        filter = new ModuloFilter(propertyName, propertyValue1, innerOperator.ToString(), propertyValue2);
+                        break;
+                }
+
+                return filter;
+            }
         }
     }
 }
