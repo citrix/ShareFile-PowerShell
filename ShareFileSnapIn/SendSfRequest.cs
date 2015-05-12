@@ -140,8 +140,7 @@ namespace ShareFile.Api.Powershell
         }
 
         /// <summary>
-        /// This class to be use to create the filter objects from string
-        /// 
+        /// This class to be used to create the filter objects from string
         /// </summary>
         private class FilterBuilder
         {
