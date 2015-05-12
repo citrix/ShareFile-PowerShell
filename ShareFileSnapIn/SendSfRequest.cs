@@ -139,6 +139,10 @@ namespace ShareFile.Api.Powershell
             return builder.Build();
         }
 
+        /// <summary>
+        /// This class to be use to create the filter objects from string
+        /// 
+        /// </summary>
         private class FilterBuilder
         {
             private enum OperatorType
@@ -165,16 +169,24 @@ namespace ShareFile.Api.Powershell
             }
 
             private Stack<string> OperatorsStack;
-            private Stack<string> PropertiesStack;
+            private Stack<string> OperandsStack;
             private string FilterBody;
 
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="filterBody">Filter parameter text</param>
             public FilterBuilder(string filterBody)
             {
                 OperatorsStack = new Stack<string>();
-                PropertiesStack = new Stack<string>();
+                OperandsStack = new Stack<string>();
                 FilterBody = filterBody;
             }
 
+            /// <summary>
+            /// Parse the filter body text and created Filter object
+            /// </summary>
+            /// <returns>Return a composite IFilter object</returns>
             public IFilter Build()
             {
                 try
@@ -188,35 +200,43 @@ namespace ShareFile.Api.Powershell
                 }
             }
 
+            /// <summary>
+            /// Parse and split the text into filters and store them into stacks of Filter operands(properties) and operators
+            /// It will match the text with different set of operator types, and then split text accordingly
+            /// </summary>
+            /// <param name="filterText">Filter body text</param>
             private void SplitText(string filterText)
             {
-                string[] sepSpace = { " " };
-                string[] sepBraces = { "(", ",", ")" };
                 string[] result = null;
 
                 string propertyName = string.Empty;
-                string filter = string.Empty;
+                string filterOperator = string.Empty;
                 string propertyValue = string.Empty;
 
+                // first match if text starts with any logical (and, or, not) operator
                 Match match = CheckIfLogicalOperation(filterText);
                 if (match.Success)
                 {
+                    // if expression matches then add the logical operator in OperatorsStack and check & split rest of text recursively
                     OperatorsStack.Push(match.Value.Trim());
                     filterText = filterText.Substring(match.Length).Trim();
                     SplitText(filterText);
                 }
                 else
                 {
-
-                    match = CheckIfBracesOperation(filterText);
+                    // if it is some string operation (endswith, startswith)
+                    match = CheckIfStringOperation(filterText);
                     if (match.Success)
                     {
+                        // if expression matches then split the operands and operator and add them in stacks
+                        string[] sepBraces = { "(", ",", ")" };
                         result = filterText.Split(sepBraces, 4, StringSplitOptions.RemoveEmptyEntries);
 
-                        filter = result[0].Trim();
+                        filterOperator = result[0].Trim();
                         propertyName = result[1].Trim();
                         propertyValue = result[2].Trim();
 
+                        // perform the split operation on rest of text if there is any
                         if (result.Length == 4)
                         {
                             SplitText(result[3].Trim());
@@ -224,9 +244,12 @@ namespace ShareFile.Api.Powershell
                     }
                     else
                     {
-                        match = CheckIfComparisionOperation(filterText);
+                        // if it is some relational/comparision operator (eq,ne,lt,le,gt,ge)
+                        match = CheckIfRelationalOperation(filterText);
                         if (match.Success)
                         {
+                            // if expression matches then split the operands and operator and add them in stacks
+                            // following are regular expression to split all three parts i.e. Property name, operator and property value
                             Regex expLeft = new Regex(@"^\w+\b");
                             Regex expOperator = new Regex(@"^((eq|ne|lt|le|gt|ge)\b|(=|==|!=|<>|<|<=|>|>=))");
                             Regex expRight = new Regex(@"^(?:"".*?""|'.*?'|[a-zA-Z0-9.]+)");
@@ -236,13 +259,14 @@ namespace ShareFile.Api.Powershell
                             filterText = filterText.Substring(match.Length).Trim();
 
                             match = expOperator.Match(filterText);
-                            filter = match.Value.Trim();
+                            filterOperator = match.Value.Trim();
                             filterText = filterText.Substring(match.Length).Trim();
 
                             match = expRight.Match(filterText);
                             propertyValue = match.Value.Trim();
                             filterText = filterText.Substring(match.Length).Trim();
 
+                            // perform the split operation on rest of text
                             if (!string.IsNullOrWhiteSpace(filterText))
                             {
                                 SplitText(filterText);
@@ -250,12 +274,14 @@ namespace ShareFile.Api.Powershell
                         }
                         else
                         {
+                            // if it is some arithmetic operation (add,sub,div,mul,mod)
                             match = CheckIfArithmeticOperation(filterText);
                             if (match.Success)
                             {
+                                // if expression matches then split the operands and operator and add them in stacks
+                                // following are regular expression to split all five parts i.e. Property name, operator and then sub operation details i.e. two operands values and a relational operator
                                 Regex expLeft = new Regex(@"^\w+\b");
                                 Regex expOperator = new Regex(@"^(add|sub|mul|div|mod)\b");
-
                                 Regex innerExpLeft = new Regex(@"^(?:"".*?""|'.*?'|[a-zA-Z0-9.]+)");
                                 Regex innerExpOperator = new Regex(@"^(((eq|ne|lt|le|gt|ge)\s+)|(\s*(=|==|!=|<>|<|<=|>|>=)\s*))\b");
                                 Regex innerExpRight = new Regex(@"^(?:"".*?""|'.*?'|[a-zA-Z0-9.]+)");
@@ -265,7 +291,7 @@ namespace ShareFile.Api.Powershell
                                 filterText = filterText.Substring(match.Length).Trim();
 
                                 match = expOperator.Match(filterText);
-                                filter = match.Value.Trim();
+                                filterOperator = match.Value.Trim();
                                 filterText = filterText.Substring(match.Length).Trim();
 
                                 match = innerExpLeft.Match(filterText);
@@ -280,13 +306,15 @@ namespace ShareFile.Api.Powershell
                                 string propertyValue2 = match.Value.Trim();
                                 filterText = filterText.Substring(match.Length).Trim();
 
+                                // perform the split operation on rest of text
                                 if (!string.IsNullOrWhiteSpace(filterText))
                                 {
                                     SplitText(filterText);
                                 }
 
+                                // adding operands(properties & values) and operators in their respective stack
                                 OperatorsStack.Push(innerOperator);
-                                PropertiesStack.Push(RemoveQuotes(propertyValue2));
+                                OperandsStack.Push(RemoveQuotes(propertyValue2));
                             }
                             else
                             {
@@ -295,46 +323,69 @@ namespace ShareFile.Api.Powershell
                         }
                     }
 
-                    OperatorsStack.Push(filter);
-                    PropertiesStack.Push(propertyName);
-                    PropertiesStack.Push(RemoveQuotes(propertyValue));
+                    // adding operands(properties & values) and operators in their respective stack
+                    OperatorsStack.Push(filterOperator);
+                    OperandsStack.Push(propertyName);
+                    OperandsStack.Push(RemoveQuotes(propertyValue));
                 }
             }
 
+
+            /// <summary>
+            /// remove quotes around the text, as the quotes will be added in the filter classes on property values
+            /// </summary>
             private string RemoveQuotes(string value)
             {
                 return value.Trim("'\"".ToCharArray());
             }
 
+            /// <summary>
+            /// Logical operator match. Returns true if text starts with 'and', 'or' or 'not' prefix
+            /// </summary>
             private Match CheckIfLogicalOperation(string filterText)
             {
                 Regex exp = new Regex(@"^(and|or|not)\s");
                 return exp.Match(filterText);
             }
 
-            private Match CheckIfComparisionOperation(string filterText)
+            /// <summary>
+            /// Relational operator match. Returns true if expression matches e.g. Name eq 'Neil Johnson' or Name='John'
+            /// </summary>
+            private Match CheckIfRelationalOperation(string filterText)
             {
                 Regex exp = new Regex(@"^\w+((\s+(eq|ne|lt|le|gt|ge)\s+)|(\s*(=|==|!=|<>|<|<=|>|>=)\s*))(?:"".*?""|'.*?'|[a-zA-Z0-9.]+)");
                 return exp.Match(filterText);
             }
 
-            private Match CheckIfBracesOperation(string filterText)
+            /// <summary>
+            /// String operator match. Returns true if expression matches e.g. startwith(Name, 'Neil')
+            /// </summary>
+            private Match CheckIfStringOperation(string filterText)
             {
                 Regex exp = new Regex(@"^(endswith|startswith)\(\w+\s*\,\s*(?:"".*?""|'.*?'|[a-zA-Z0-9.]+)\)");
                 return exp.Match(filterText);
             }
 
+            /// <summary>
+            /// Arithmetic operator match. Returns true if expression matches e.g. Size add 250 gt 500
+            /// </summary>
             private Match CheckIfArithmeticOperation(string filterText)
             {
                 Regex exp = new Regex(@"^\w+\s+(add|sub|mul|div|mod)\s+(?:"".*?""|'.*?'|[a-zA-Z0-9.]+)((\s+(eq|ne|lt|le|gt|ge)\s+)|(\s*(=|==|!=|<>|<|<=|>|>=)\s*))(?:"".*?""|'.*?'|[a-zA-Z0-9.]+)");
                 return exp.Match(filterText);
             }
 
+            /// <summary>
+            /// Generate the IFiler object from stack of Operators and Operands.
+            /// The values in both stacks are in order, it will pick one by one operator from stack 
+            /// and depending on operator type it will fetch the property names and values (operands) to generate the Filter
+            /// </summary>
+            /// <returns></returns>
             private IFilter GetFilter()
             {
-                IFilter filterType = null;
-
+                // Keep track of all the IFilter instances, if two Filters are added in it then next operator must be 'and' or 'or' operation to generate one expression
                 Stack<IFilter> operations = new Stack<IFilter>();
+                IFilter filterType = null;
 
                 while (OperatorsStack.Count > 0)
                 {
@@ -355,8 +406,8 @@ namespace ShareFile.Api.Powershell
                         case OperatorType.le:
                         case OperatorType.gt:
                         case OperatorType.ge:
-                            propertyValue = PropertiesStack.Pop();
-                            propertyName = PropertiesStack.Pop();
+                            propertyValue = OperandsStack.Pop();
+                            propertyName = OperandsStack.Pop();
 
                             filterType = CreateFilter(operators, propertyName, propertyValue);
                             break;
@@ -366,9 +417,9 @@ namespace ShareFile.Api.Powershell
                         case OperatorType.mul:
                         case OperatorType.div:
                         case OperatorType.mod:
-                            propertyValue = PropertiesStack.Pop();
-                            propertyName = PropertiesStack.Pop();
-                            string propertyValue2 = PropertiesStack.Pop();
+                            propertyValue = OperandsStack.Pop();
+                            propertyName = OperandsStack.Pop();
+                            string propertyValue2 = OperandsStack.Pop();
                             OperatorType operatorInner = GetOperator(OperatorsStack.Pop());
 
                             filterType = CreateFilter(operators, propertyName, propertyValue, operatorInner, propertyValue2);
