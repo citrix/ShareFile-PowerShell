@@ -163,7 +163,7 @@ namespace ShareFile.Api.Powershell
                 mod,// arithmetic Modulo operator
                 startswith,// string Starts With operator
                 endswith,// string Ends With operator
-                substr,// string Sub String operator
+                substringof,// string Sub String operator
                 precedence // Precedence grouping (parenthesis)
             }
 
@@ -188,15 +188,8 @@ namespace ShareFile.Api.Powershell
             /// <returns>Return a composite IFilter object</returns>
             public IFilter Build()
             {
-                try
-                {
-                    SplitText(FilterBody);
-                    return GetFilter();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Invalid filter, please check syntax and try again.", ex);
-                }
+                SplitText(FilterBody);
+                return GetFilter();
             }
 
             /// <summary>
@@ -361,7 +354,7 @@ namespace ShareFile.Api.Powershell
             /// </summary>
             private Match CheckIfStringOperation(string filterText)
             {
-                Regex exp = new Regex(@"^(endswith|startswith)\(\w+\s*\,\s*(?:"".*?""|'.*?'|[a-zA-Z0-9.]+)\)");
+                Regex exp = new Regex(@"^(endswith|startswith|substr|substring|substringof)\(\w+\s*\,\s*(?:"".*?""|'.*?'|[a-zA-Z0-9.]+)\)");
                 return exp.Match(filterText);
             }
 
@@ -401,6 +394,7 @@ namespace ShareFile.Api.Powershell
                         case OperatorType.ne:
                         case OperatorType.startswith:
                         case OperatorType.endswith:
+                        case OperatorType.substringof:
                         case OperatorType.lt:
                         case OperatorType.le:
                         case OperatorType.gt:
@@ -471,6 +465,9 @@ namespace ShareFile.Api.Powershell
                         return OperatorType.gt;
                     case ">=":
                         return OperatorType.ge;
+                    case "substr":
+                    case "substring":
+                        return OperatorType.substringof;
                     default:
                         return OperatorType.none;
                 }
@@ -492,6 +489,9 @@ namespace ShareFile.Api.Powershell
                         break;
                     case OperatorType.endswith:
                         filter = new EndsWithFilter(propertyName, propertyValue);
+                        break;
+                    case OperatorType.substringof:
+                        filter = new SubstringFilter(propertyName, propertyValue);
                         break;
                     case OperatorType.lt:
                         filter = new LessThanFilter(propertyName, propertyValue);
