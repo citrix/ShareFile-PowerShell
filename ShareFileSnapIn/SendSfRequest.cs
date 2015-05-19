@@ -10,6 +10,7 @@ using System.IO;
 using ShareFile.Api.Client.Requests;
 using Newtonsoft.Json;
 using ShareFile.Api.Client.Exceptions;
+using System.Collections;
 
 namespace ShareFile.Api.Powershell
 {
@@ -128,6 +129,43 @@ namespace ShareFile.Api.Powershell
             {
                 WriteError(new ErrorRecord(new Exception(e.Code.ToString() + ": " + e.ODataExceptionMessage.Message), e.Code.ToString(), ErrorCategory.NotSpecified, query.GetEntity()));
             }
+            catch(Exception e)
+            {
+                ShowSuggestion(Entity,Action,Parameters);
+                throw;
+            }
+        }
+
+        private void ShowSuggestion(string Entity, string Action, System.Collections.Hashtable parameters)
+        {
+            if("Items".Equals(Entity,StringComparison.CurrentCultureIgnoreCase) &&
+               "Download".Equals(Action,StringComparison.CurrentCultureIgnoreCase) && 
+               IsMissingParam("redirect",parameters))
+
+            {                
+                WriteWarning("You may want to append:    -Parameters @{'redirect' = \"false\"}    for the command to work correctly.\n\n");
+                return;
+            }          
+  
+            ///Add more suggestions here.
+        }
+
+        private bool IsMissingParam(string param, System.Collections.Hashtable parameters)
+        {
+             if(parameters == null || param == null)
+             {
+                 return true;
+             }
+
+             foreach (DictionaryEntry entry in parameters)
+             {
+                 if(entry.Key.Equals(param))
+                 {
+                     return false;
+                 }
+             }
+
+             return true;
         }
     }
 }
