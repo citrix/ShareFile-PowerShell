@@ -136,7 +136,7 @@ namespace ShareFile.Api.Powershell
             }
         }
 
-        private void ShowSuggestion(string Entity, string Action, System.Collections.Hashtable parameters)
+        private void ShowSuggestion(string Entity, string Action, Hashtable parameters)
         {
             if("Items".Equals(Entity,StringComparison.CurrentCultureIgnoreCase) &&
                "Download".Equals(Action,StringComparison.CurrentCultureIgnoreCase) && 
@@ -150,7 +150,7 @@ namespace ShareFile.Api.Powershell
             ///Add more suggestions here.
         }
 
-        private bool IsMissingParam(string param, System.Collections.Hashtable parameters)
+        private bool IsMissingParam(string param, Hashtable parameters)
         {
              if(parameters == null || param == null)
              {
