@@ -269,6 +269,7 @@ namespace ShareFile.Api.Powershell
             ActionManager actionManager = new ActionManager(this, string.Empty);
             bool firstIteration = true;
 
+            var shareFileItems = new List<Item>();
             foreach (string path in resolvedPaths)
             {
                 var item = Utility.ResolveShareFilePath(driveInfo, path);
@@ -297,26 +298,39 @@ namespace ShareFile.Api.Powershell
                 if (item is Models.Folder)
                 {
                     // if user downloading the root drive then download its root folders
-                    if ((item as Folder).Info.IsAccountRoot == true)
+                    if ((item as Folder).Info.IsAccountRoot.GetValueOrDefault())
                     {
-                        var children = client.Items.GetChildren(item.url).Execute();
+                        var children = client.Items.GetChildren(item.url)
+                            .Select("Id")
+                            .Select("url")
+                            .Select("FileName")
+                            .Select("FileSizeBytes")
+                            .Select("Hash")
+                            .Execute();
+
                         foreach (var child in children.Feed)
                         {
                             if (child is Models.Folder)
                             {
                                 DownloadRecursive(client, transactionId, child, target, actionType);
+
+                                shareFileItems.Add(child);
                             }
                         }
                     }
                     else
                     {
                         DownloadRecursive(client, transactionId, item, target, actionType);
+
+                        shareFileItems.Add(item);
                     }
                 }
                 else if (item is Models.File)
                 {
                     DownloadAction downloadAction = new DownloadAction(FileSupport, client, transactionId, (Models.File)item, target, actionType);
                     actionManager.AddAction(downloadAction);
+
+                    shareFileItems.Add(item);
                 }
             }
 
@@ -349,11 +363,8 @@ namespace ShareFile.Api.Powershell
             // on move remove source files
             if (Move)
             {
-                foreach (string path in resolvedPaths)
+                foreach(var item in shareFileItems)
                 {
-                    var item = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)driveInfo, path, null, null);
-                    var target = new DirectoryInfo(LocalPath);
-
                     DeleteShareFileItemRecursive(client, item, CreateRoot && Recursive);
                 }
             }
@@ -368,14 +379,24 @@ namespace ShareFile.Api.Powershell
             {
                 var subdir = CreateLocalFolder(target, source as Folder);
 
-                var children = client.Items.GetChildren(source.url).Execute();
+                var children = client.Items.GetChildren(source.url)
+                    .Select("Id")
+                    .Select("url")
+                    .Select("FileName")
+                    .Select("FileSizeBytes")
+                    .Select("Hash")
+                    .Execute();
 
                 if (children != null)
                 {
+                    (source as Folder).Children = children.Feed;
+
                     ActionManager actionManager = new ActionManager(this, source.Name);
 
                     foreach (var child in children.Feed)
                     {
+                        child.Parent = source;
+
                         if (child is Models.Folder && Recursive)
                         {
                             DownloadRecursive(client, downloadId, child, subdir, actionType);
@@ -399,21 +420,30 @@ namespace ShareFile.Api.Powershell
         {
             if (source is Models.Folder)
             {
-                var children = client.Items.GetChildren(source.url).Execute();
+                var children = (source as Folder).Children;
+                var childFiles = children.OfType<Models.File>();
+                var childFolders = children.OfType<Models.Folder>();
+                
+                RemoveShareFileItems(client, source, childFiles);
 
-                if (children != null)
+                if (Recursive)
                 {
-                    foreach (var child in children.Feed)
+                    foreach (var childFolder in childFolders)
                     {
-                        if (child is Models.File || Recursive)
-                        {
-                            DeleteShareFileItemRecursive(client, child, !KeepFolders);
-                        }
+                        DeleteShareFileItemRecursive(client, childFolder, !KeepFolders);
+                    }
+                }
+
+                if (deleteFolder)
+                {
+                    if(!HasChildren(client, source as Models.Folder))
+                    {
+                        RemoveShareFileItem(client, source);
                     }
                 }
             }
-
-            if (source is Models.File || deleteFolder)
+            
+            if (source is Models.File)
             {
                 RemoveShareFileItem(client, source);
             }
@@ -755,6 +785,32 @@ namespace ShareFile.Api.Powershell
             }
 
             return true;
+        }
+
+        private bool RemoveShareFileItems(ShareFileClient client, Item parentFolder, IEnumerable<Item> items)
+        {
+            try
+            {
+                client.Items.BulkDelete(parentFolder.url, items.Select(x => x.Id)).Execute();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private bool HasChildren(ShareFileClient client, Folder folder)
+        {
+            try
+            {
+                var children = client.Items.GetChildren(folder.url).Top(1).Execute();
+                return children.count > 0;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
