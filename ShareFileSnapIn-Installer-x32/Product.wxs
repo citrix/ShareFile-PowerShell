@@ -78,12 +78,8 @@
         </File>
         <File Id="ShareFile.Formats" Name="ShareFile.Format.ps1xml" Source="$(var.SourceRootPath)\ShareFile.Format.ps1xml" />
       </Component>
-      <Component Id="ShareFile.Api.Client.Net45.dll" Guid="197793b8-c7a0-4cce-829a-56061065ea72" Win64="no">
-        <File Id="ShareFile.Api.Client.Net45.dll" Name="ShareFile.Api.Client.Net45.dll" Source="$(var.SourceRootPath)\ShareFile.Api.Client.Net45.dll">
-        </File>
-      </Component>
-      <Component Id="ShareFile.Api.Client.Core.dll" Guid="19c723f4-43be-4d3a-aef4-f9ecfe1fd13b" Win64="no">
-        <File Id="ShareFile.Api.Client.Core.dll" Name="ShareFile.Api.Client.Core.dll" Source="$(var.SourceRootPath)\ShareFile.Api.Client.Core.dll">
+      <Component Id="ShareFile.Api.Client.dll" Guid="197793b8-c7a0-4cce-829a-56061065ea72" Win64="yes">
+        <File Id="ShareFile.Api.Client.dll" Name="ShareFile.Api.Client.dll" Source="$(var.SourceRootPath)\ShareFile.Api.Client.dll">
         </File>
       </Component>
       <Component Id="Newtonsoft.Json.dll" Guid="4b1b1ae5-b719-4d7d-b6ce-cfe20a09a0ea" Win64="no">
