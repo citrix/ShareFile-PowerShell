@@ -73,16 +73,10 @@ namespace ShareFile.Api.Powershell
         public string Account { get; set; }
 
         [Parameter]
-        public string ZKUserName { get; set; }
-
-        [Parameter]
-        public string ZKDomainName { get; set; }
+        public bool Redirect{ get; set; }
         
         [Parameter]
-        public SecureString ZKPassword { get; set; }
-
-        [Parameter]
-        public bool Redirect{ get; set; }
+        public PSCredential Credential{ get; set; }
 
 
         protected override void ProcessRecord()
@@ -95,13 +89,13 @@ namespace ShareFile.Api.Powershell
 
             if (Redirect)
             {
-                if (!(string.IsNullOrEmpty(ZKUserName) || string.IsNullOrEmpty(ZKDomainName) || ZKPassword == null))
+                if (Credential != null)
                 {
-                    Client.Client.AddCredentials(Uri, "Basic", new NetworkCredential(ZKUserName, ZKPassword, ZKDomainName));
+                    Client.Client.AddCredentials(Uri, "Basic", Credential.GetNetworkCredential());
                 }
                 else
                 {
-                    throw new Exception("Missing parameters for a redirection uri. Required parameters => ZKUserName, ZKPassword, ZKDomainName.");
+                    throw new Exception("Parameter 'Credential' missing for a redirection uri.");
                 }
             }
 
