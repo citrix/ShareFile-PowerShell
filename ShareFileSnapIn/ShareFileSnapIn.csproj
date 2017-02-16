@@ -49,7 +49,7 @@
       <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="ShareFile.Api.Client, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ShareFile.Api.Client.3.3.1476\lib\net45\ShareFile.Api.Client.dll</HintPath>
+      <HintPath>..\packages\ShareFile.Api.Client.3.3.1597\lib\net45\ShareFile.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
