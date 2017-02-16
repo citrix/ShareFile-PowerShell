@@ -70,6 +70,12 @@ namespace ShareFile.Api.Powershell
         [Parameter]
         public string Account { get; set; }
 
+        [Parameter]
+        public bool Redirect { get; set; }
+
+        [Parameter]
+        public PSCredential Credential { get; set; }
+
         protected override void ProcessRecord()
         {
             if (Id != null && Uri != null) throw new Exception("Set only Id or Uri");
@@ -77,6 +83,18 @@ namespace ShareFile.Api.Powershell
             if (Action == null && Navigation != null) Action = Navigation;
             if (Method == null) Method = "GET";
             Method = Method.ToUpper();
+
+            if (Redirect)
+            {
+                if (Credential != null)
+                {
+                    Client.Client.AddCredentials(Uri, "Basic", Credential.GetNetworkCredential());
+                }
+                else
+                {
+                    throw new Exception("Parameter 'Credential' missing for a redirection uri.");
+                }
+            }
 
             Query<ODataObject> query = new Query<ODataObject>(Client.Client);
             query.HttpMethod = Method;
