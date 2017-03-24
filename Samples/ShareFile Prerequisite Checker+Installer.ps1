@@ -16,6 +16,50 @@ the sample scripts or documentation, even if Citrix has been advised of the poss
 This script will automatically install .NET Framework 4.5.2 (minimum requirement for StorageCenter to run) if the .NET Framework version is less than 4.5.2.
 
 #>
+## Gather .NET version information and update to at least the minimum version of .NET 4.5.2, if applicable, in order to run the StorageCenter software. Restart may be required
+
+$dotnetver = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full"
+Write-Host "Checking the version of .NET Framework.."
+If ($dotnetver.Release -eq '378389') {Write-Host ".NET Framework 4.5 is installed - Please upgrade to the latest before installation!" -ForegroundColor Red }
+ElseIf ($dotnetver.Release -eq '378675') {Write-Host ".NET Framework 4.5.1 is installed - Please upgrade to the latest before installation!" -ForegroundColor Red  }
+ElseIf ($dotnetver.Release -eq '379893') {Write-Host ".NET Framework 4.5.2 is installed" -ForegroundColor Green }
+ElseIf ($dotnetver.Release -eq '393297') {Write-Host ".NET Framework 4.6 is installed" -ForegroundColor Green }
+ElseIf ($dotnetver.Release -eq '394271') {Write-Host ".NET Framework 4.6.1 is installed" -ForegroundColor Green }
+ElseIf ($dotnetver.Release -eq '394748') {Write-Host ".NET Framework 4.6.2 is installed" -ForegroundColor Green }
+Else {Write-Host "Please install the latest version of .NET Framework before beginning." -ForegroundColor Red }
+
+If ($dotnetver.Release -ge ’378389’ -and $dotnetver.Release -lt '379893') {
+Write-Host "Downloading .Net 4.5.2, Please wait..."
+$SourceURI = "https://download.microsoft.com/download/B/4/1/B4119C11-0423-477B-80EE-7A474314B347/NDP452-KB2901954-Web.exe"
+$FileName = $SourceURI.Split('/')[-1]
+$BinPath = Join-Path $env:SystemRoot -ChildPath "Temp\$FileName"
+
+if (!(Test-Path $BinPath))
+ {
+ Invoke-Webrequest -Uri $SourceURI -OutFile $BinPath
+ }
+Write-Host "Installing .NET 4.5.2, Please wait... Restart may be required..."
+Start-Process -FilePath $BinPath -ArgumentList "/q /norestart" -Wait -NoNewWindow
+    If ($dotnetver.Release -lt '379893') {
+    Restart-Computer -Confirm
+    }
+}
+ElseIf ($dotnetver.Release -lt ’379893’) {
+Write-Host "Downloading .Net 4.5.2, Please wait..."
+$SourceURI = "https://download.microsoft.com/download/B/4/1/B4119C11-0423-477B-80EE-7A474314B347/NDP452-KB2901954-Web.exe"
+$FileName = $SourceURI.Split('/')[-1]
+$BinPath = Join-Path $env:SystemRoot -ChildPath "Temp\$FileName"
+
+if (!(Test-Path $BinPath))
+ {
+ (New-Object System.Net.WebClient).DownloadFile($SourceURI, $BinPath)
+ }
+Write-Host "Installing .NET 4.5.2, Please wait... Restart may be required..."
+Start-Process -FilePath $BinPath -ArgumentList "/q /norestart" -Wait -NoNewWindow
+    If ($dotnetver.Release -lt '379893') {
+    Restart-Computer -Confirm
+    }
+} else {
 
 ##This function tests connectivity from the StorageZone Controller to the ShareFile control plane.
 function TestPort
@@ -74,36 +118,10 @@ $extIP | ForEach {TestPort -ComputerName "$_" -Port 443 -Protocol TCP}
 ## Gathers server version information and continues to appropriate line of script. 
 $Winserv2012="6.2.0"    
 $Version=(Get-WmiObject win32_operatingsystem).version    
+Import-Module ServerManager
 
-## After testing connectivity, the .NET version information is gathered and updated to at least the minimum version of .NET 4.5.2 in order to run the StorageCenter software. Restart may be required
+## For Windows Server 2012 R2
 if($version -ge "6.2.0"){
-$dotnetver = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full"
-Write-Host "Checking the version of .NET Framework.."
-If ($dotnetver.Release -eq '378389') {Write-Host ".NET Framework 4.5 is installed - Please upgrade to the latest before installation!" -ForegroundColor Red }
-ElseIf ($dotnetver.Release -eq '378675') {Write-Host ".NET Framework 4.5.1 is installed - Please upgrade to the latest before installation!" -ForegroundColor Red  }
-ElseIf ($dotnetver.Release -eq '379893') {Write-Host ".NET Framework 4.5.2 is installed" -ForegroundColor Green }
-ElseIf ($dotnetver.Release -eq '393297') {Write-Host ".NET Framework 4.6 is installed" -ForegroundColor Green }
-ElseIf ($dotnetver.Release -eq '394271') {Write-Host ".NET Framework 4.6.1 is installed" -ForegroundColor Green }
-ElseIf ($dotnetver.Release -eq '394748') {Write-Host ".NET Framework 4.6.2 is installed" -ForegroundColor Green }
-Else {Write-Host "Please install the latest version of .NET Framework before beginning." -ForegroundColor Red }
-
-If ($dotnetver.Release -lt '379893') {
-Write-Host "Downloading .Net 4.5.2, Please wait..."
-$SourceURI = "https://download.microsoft.com/download/B/4/1/B4119C11-0423-477B-80EE-7A474314B347/NDP452-KB2901954-Web.exe"
-$FileName = $SourceURI.Split('/')[-1]
-$BinPath = Join-Path $env:SystemRoot -ChildPath "Temp\$FileName"
-
-if (!(Test-Path $BinPath))
- {
- Invoke-Webrequest -Uri $SourceURI -OutFile $BinPath
- }
-Write-Host "Installing .NET 4.5.2, Please wait... Restart may be required..."
-Start-Process -FilePath $BinPath -ArgumentList "/q /norestart" -Wait -NoNewWindow
-    If ($dotnetver.Release -lt '379893') {
-    Restart-Computer -Confirm
-    }
-} else {
-
 ## Check the local server for necessary roles/features - if not currently installed, gives the user the option to install missing roles/features.
 $features = @()
 $features += @("FileAndStorage-Services","Storage-Services","Web-Server","Web-WebServer","Web-Common-Http","Web-Default-Doc","Web-Dir-Browsing","Web-Http-Errors","Web-Static-Content","Web-Health","Web-Http-Logging","Web-Performance","Web-Stat-Compression","Web-Security","Web-Filtering","Web-Basic-Auth","Web-Windows-Auth","Web-App-Dev","Web-Net-Ext45","Web-Asp-Net45","Web-ISAPI-Ext","Web-ISAPI-Filter","Web-Mgmt-Tools","Web-Mgmt-Console","Web-Scripting-Tools","NET-Framework-45-Features","NET-Framework-45-Core","NET-Framework-45-ASPNET","NET-WCF-Services45","NET-WCF-TCP-PortSharing45","FS-SMB1","User-Interfaces-Infra","Server-Gui-Mgmt-Infra","Server-Gui-Shell","PowerShellRoot","
@@ -154,37 +172,10 @@ PowerShell","PowerShell-ISE","WoW64-Support")
      pause
 }
 until ($localfeatures=Get-WindowsFeature | where-object {$_.Installed -eq $True})
-}
+
 } else {
 
-## After testing connectivity, the .NET version information is gathered and updated to at least the minimum version of .NET 4.5.2 in order to run the StorageCenter software. Restart may be required
-$dotnetver = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full"
-Write-Host "Checking the version of .NET Framework.."
-If ($dotnetver.Release -eq '378389') {Write-Host ".NET Framework 4.5 is installed - Please upgrade to the latest before installation!" -ForegroundColor Red }
-ElseIf ($dotnetver.Release -eq '378675') {Write-Host ".NET Framework 4.5.1 is installed - Please upgrade to the latest before installation!" -ForegroundColor Red  }
-ElseIf ($dotnetver.Release -eq '379893') {Write-Host ".NET Framework 4.5.2 is installed" -ForegroundColor Green }
-ElseIf ($dotnetver.Release -eq '393297') {Write-Host ".NET Framework 4.6 is installed" -ForegroundColor Green }
-ElseIf ($dotnetver.Release -eq '394271') {Write-Host ".NET Framework 4.6.1 is installed" -ForegroundColor Green }
-ElseIf ($dotnetver.Release -eq '394748') {Write-Host ".NET Framework 4.6.2 is installed" -ForegroundColor Green }
-Else {Write-Host "Please install the latest version of .NET Framework before beginning." -ForegroundColor Red }
-
-If ($dotnetver.Release -lt '379893') {
-Write-Host "Downloading .NET 4.5.2, please wait..."
-$SourceURI = "https://download.microsoft.com/download/B/4/1/B4119C11-0423-477B-80EE-7A474314B347/NDP452-KB2901954-Web.exe"
-$FileName = $SourceURI.Split('/')[-1]
-$BinPath = Join-Path $env:SystemRoot -ChildPath "Temp\$FileName"
-
-if (!(Test-Path $BinPath))
- {
- Invoke-Webrequest -Uri $SourceURI -OutFile $BinPath
- }
-Write-Host "Installing .Net 4.5.2, please wait... Restart may be required..."
-Start-Process -FilePath $BinPath -ArgumentList "/q /norestart" -Wait -NoNewWindow
-    If ($dotnetver.Release -lt '379893') {
-    Restart-Computer -Confirm
-    }
-} else {
- 
+## For Windows Server 2008 R2
 $features = @()
 $features += @("File-Services","FS-FileServer","Web-Server","Web-WebServer","Web-Common-Http","Web-Default-Doc","Web-Dir-Browsing","Web-Http-Errors","Web-Static-Content","Web-Health","Web-Http-Logging","Web-Performance","Web-Stat-Compression","Web-Security","Web-Filtering","Web-Basic-Auth","Web-Windows-Auth","Web-App-Dev","Web-Net-Ext","Web-Asp-Net","Web-ISAPI-Ext","Web-ISAPI-Filter","Web-Mgmt-Tools","Web-Mgmt-Console","Web-Scripting-Tools","Application-Server","AS-NET-Framework","AS-Web-Support","AS-TCP-Port-Sharing","PowerShell-ISE")
  
@@ -216,7 +207,6 @@ do
      {
              'Y' {
                 'Installing roles/features, please wait...'
-            import-module ServerManager
             $features = @()
             $features += @("File-Services","FS-FileServer","Web-Server","Web-WebServer","Web-Common-Http","Web-Default-Doc","Web-Dir-Browsing","Web-Http-Errors","Web-Static-Content","Web-Health","Web-Http-Logging","Web-Performance","Web-Stat-Compression","Web-Security","Web-Filtering","Web-Basic-Auth","Web-Windows-Auth","Web-App-Dev","Web-Net-Ext","Web-Asp-Net","Web-ISAPI-Ext","Web-ISAPI-Filter","Web-Mgmt-Tools","Web-Mgmt-Console","Web-Scripting-Tools","Application-Server","AS-NET-Framework","AS-Web-Support","AS-TCP-Port-Sharing","PowerShell-ISE")
             $features=Get-WindowsFeature | Where-Object {$features.Installed -eq $False} | Select-Object | Add-WindowsFeature -Name File-Services,FS-FileServer,Web-Server,Web-WebServer,Web-Common-Http,Web-Default-Doc,Web-Dir-Browsing,Web-Http-Errors,Web-Static-Content,Web-Health,Web-Http-Logging,Web-Performance,Web-Stat-Compression,Web-Security,Web-Filtering,Web-Basic-Auth,Web-Windows-Auth,Web-App-Dev,Web-Net-Ext,Web-Asp-Net,Web-ISAPI-Ext,Web-ISAPI-Filter,Web-Mgmt-Tools,Web-Mgmt-Console,Web-Scripting-Tools,Application-Server,AS-NET-Framework,AS-Web-Support,AS-TCP-Port-Sharing,PowerShell-ISE
@@ -232,6 +222,3 @@ do
 }
 until ($localfeatures=Get-WindowsFeature | where-object {$_.Installed -eq $True})
 }
-}
-
-
