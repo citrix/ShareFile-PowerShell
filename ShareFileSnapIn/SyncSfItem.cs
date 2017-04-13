@@ -599,7 +599,7 @@ namespace ShareFile.Api.Powershell
                     FileAttributes attr = System.IO.File.GetAttributes(path);
                     FileSystemInfo source = ((attr & FileAttributes.Directory) == FileAttributes.Directory) ? new DirectoryInfo(path) : source = new FileInfo(path);
 
-                    DeleteLocalItemRecursive(source, Recursive);
+                    DeleteLocalItemRecursive(source, !KeepFolders);
                 }
             }
         }
