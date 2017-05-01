@@ -40,7 +40,7 @@ if (!(Test-Path $BinPath))
  }
 Write-Host "Installing .NET 4.5.2, Please wait... Restart may be required..."
 Start-Process -FilePath $BinPath -ArgumentList "/q /norestart" -Wait -NoNewWindow
-    If ($dotnetver.Release -lt '379893') {
+    If ($dotnetver.Release -lt '379389') {
     Restart-Computer -Confirm
     }
 }
