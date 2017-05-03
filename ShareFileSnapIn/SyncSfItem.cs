@@ -306,6 +306,7 @@ namespace ShareFile.Api.Powershell
                             .Select("FileName")
                             .Select("FileSizeBytes")
                             .Select("Hash")
+                            .Select("Info")
                             .Execute();
 
                         foreach (var child in children.Feed)
@@ -385,6 +386,7 @@ namespace ShareFile.Api.Powershell
                     .Select("FileName")
                     .Select("FileSizeBytes")
                     .Select("Hash")
+                    .Select("Info")
                     .Execute();
 
                 if (children != null)
