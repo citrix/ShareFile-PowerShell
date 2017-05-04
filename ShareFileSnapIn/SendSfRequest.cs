@@ -11,8 +11,6 @@ using ShareFile.Api.Client.Requests;
 using Newtonsoft.Json;
 using ShareFile.Api.Client.Exceptions;
 using System.Collections;
-using System.Net;
-using System.Security;
 using ShareFile.Api.Client.Requests.Filters;
 using System.Text.RegularExpressions;
 
@@ -73,11 +71,10 @@ namespace ShareFile.Api.Powershell
         public string Account { get; set; }
 
         [Parameter]
-        public bool Redirect{ get; set; }
-        
-        [Parameter]
-        public PSCredential Credential{ get; set; }
+        public bool Redirect { get; set; }
 
+        [Parameter]
+        public PSCredential Credential { get; set; }
 
         protected override void ProcessRecord()
         {
