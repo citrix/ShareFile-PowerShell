@@ -66,22 +66,25 @@ namespace ShareFile.Api.Powershell.Parallel
                     Raw = true
                 };
 
-                var uploader = client.GetAsyncFileUploader(uploadSpec, new PlatformFileInfo(fileInfo));
+                using (var platformFileInfo = new PlatformFileInfo(fileInfo))
+                {
+                    var uploader = client.GetAsyncFileUploader(uploadSpec, platformFileInfo);
 
-                progressInfo.ProgressTotal(progressInfo.FileIndex, fileInfo.Length);
+                    progressInfo.ProgressTotal(progressInfo.FileIndex, fileInfo.Length);
 
-                uploader.OnTransferProgress =
-                    (sender, args) =>
-                    {
-                        if (args.Progress.TotalBytes > 0)
+                    uploader.OnTransferProgress =
+                        (sender, args) =>
                         {
-                            progressInfo.ProgressTransferred(progressInfo.FileIndex, args.Progress.BytesTransferred);
-                        }
-                        
-                    };
-                
-                Task.Run(() => uploader.UploadAsync()).Wait();
-                fileSupportDelegate(fileInfo.Name);
+                            if (args.Progress.TotalBytes > 0)
+                            {
+                                progressInfo.ProgressTransferred(progressInfo.FileIndex, args.Progress.BytesTransferred);
+                            }
+
+                        };
+
+                    Task.Run(() => uploader.UploadAsync()).Wait();
+                    fileSupportDelegate(fileInfo.Name);
+                }
             }
         }
 
