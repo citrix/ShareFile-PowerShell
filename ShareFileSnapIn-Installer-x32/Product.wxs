@@ -78,7 +78,7 @@
         </File>
         <File Id="ShareFile.Formats" Name="ShareFile.Format.ps1xml" Source="$(var.SourceRootPath)\ShareFile.Format.ps1xml" />
       </Component>
-      <Component Id="ShareFile.Api.Client.dll" Guid="197793b8-c7a0-4cce-829a-56061065ea72" Win64="yes">
+      <Component Id="ShareFile.Api.Client.dll" Guid="197793b8-c7a0-4cce-829a-56061065ea72" Win64="no">
         <File Id="ShareFile.Api.Client.dll" Name="ShareFile.Api.Client.dll" Source="$(var.SourceRootPath)\ShareFile.Api.Client.dll">
         </File>
       </Component>
