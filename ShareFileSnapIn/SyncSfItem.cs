@@ -366,7 +366,7 @@ namespace ShareFile.Api.Powershell
             {
                 foreach(var item in shareFileItems)
                 {
-                    DeleteShareFileItemRecursive(client, item, CreateRoot && Recursive);
+                    DeleteShareFileItemRecursive(client, item, Recursive);
                 }
             }
         }
