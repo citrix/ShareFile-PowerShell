@@ -76,7 +76,7 @@ namespace ShareFile.Api.Powershell.Parallel
                     // if actions queue is not empty and current running threads are less than the allowed max parallel threads count
                     if (ActionsQueue.Count > 0 && runningThreads < maxParallelThreads)
                     {
-                        runningThreads++;
+                        Interlocked.Increment(ref runningThreads);
                         IAction downloadAction = ActionsQueue.Dequeue();
 
                         Task t = Task.Factory.StartNew(() =>
@@ -96,8 +96,8 @@ namespace ShareFile.Api.Powershell.Parallel
                             {
                                 Log.Logger.Instance.Error(error.Message);
                             }
-                            remainingCounter--;
-                            runningThreads--;
+                            Interlocked.Decrement(ref remainingCounter);
+                            Interlocked.Decrement(ref runningThreads);
                         });
                     }
 
