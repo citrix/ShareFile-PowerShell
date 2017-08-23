@@ -196,7 +196,37 @@ namespace ShareFile.Api.Powershell
                         var targetClient = ((ShareFileDriveInfo)targetDrive).Client;
                         // TODO: verify that source and target drives are on the same account
                         var sourceItem = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)sourceDrive, filePath);
-                        sourceClient.Items.Copy(sourceItem.url, targetItem.Id, paramForce).Execute();
+                        try
+                        {
+                            sourceClient.Items.Copy(sourceItem.url, targetItem.Id, paramForce).Execute();
+                        }
+                        catch(TimeoutException e)
+                        {
+                            if (e.InnerException is TaskCanceledException)
+                            {
+                                var copiedItem = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)targetDrive, targetProviderPath + "/" + sourceItem.Name);
+                                int count = 0;
+                                while (copiedItem.FileSizeBytes < sourceItem.FileSizeBytes && count < 250)
+                                {
+                                    Thread.Sleep(2000);
+                                    copiedItem = ShareFileProvider.GetShareFileItem((ShareFileDriveInfo)targetDrive, targetProviderPath + "/" + sourceItem.Name);
+                                    count++;
+                                }
+                                if (count == 250)
+                                {
+                                    throw;
+                                }
+                            }
+                            else
+                            {
+                                throw;
+                            }                                                              
+                        }
+                        catch(Exception e)
+                        {
+                            string t = e.GetType().ToString();
+                            throw;
+                        }
                     }
                     else if (isSourceLocal && isTargetSF)
                     {

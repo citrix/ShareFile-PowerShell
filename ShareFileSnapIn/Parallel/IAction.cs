@@ -15,5 +15,7 @@ namespace ShareFile.Api.Powershell.Parallel
         /// Copy File Item method to upload/download files
         /// </summary>
         void CopyFileItem(ProgressInfo progressInfo);
+        ActionType OpActionType { get; set; }
+        string FileName { get; }
     }
 }
