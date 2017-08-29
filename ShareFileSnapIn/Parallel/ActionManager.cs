@@ -78,7 +78,7 @@ namespace ShareFile.Api.Powershell.Parallel
                     {
                         Interlocked.Increment(ref runningThreads);
                         IAction downloadAction = ActionsQueue.Dequeue();
-                        Task t = Task.Factory.StartNew(() =>
+                        Task t = Task.Factory.StartNew(async () =>
                         {
                             for (int i=1; i <= 7; i++)
                             {
@@ -118,7 +118,7 @@ namespace ShareFile.Api.Powershell.Parallel
                                     }
                                     // Wait for sometime before retrying the operation
                                     double timeToWait = Math.Pow(2, i);
-                                    Task.Delay(TimeSpan.FromSeconds(timeToWait)).Wait();
+                                    await Task.Delay(TimeSpan.FromSeconds(timeToWait));
                                 }
                                 catch (Exception e)
                                 {
