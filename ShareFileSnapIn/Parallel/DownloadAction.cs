@@ -22,6 +22,25 @@ namespace ShareFile.Api.Powershell.Parallel
         private FileSystemInfo target;
         private ActionType actionType;
         private FileSupport fileSupportDelegate;
+        private string fileName;
+        public string FileName
+        {
+            get
+            {
+                return fileName;
+            }
+        }
+        public ActionType OpActionType
+        {
+            get
+            {
+                return actionType;
+            }
+            set
+            {
+                actionType = value;
+            }
+        }
 
         public DownloadAction(FileSupport fileSupport, Client.ShareFileClient client, int downloadId, Models.File child, FileSystemInfo target, ActionType type)
         {
@@ -35,7 +54,7 @@ namespace ShareFile.Api.Powershell.Parallel
 
         void IAction.CopyFileItem(ProgressInfo progressInfo)
         {
-            string fileName = System.IO.Path.Combine(target.FullName, child.FileName);
+            fileName = System.IO.Path.Combine(target.FullName, child.FileName);
             bool duplicateFile = File.Exists(fileName);
             bool hashcodeMatches = duplicateFile ? Utility.GetMD5HashFromFile(fileName).Equals(child.Hash) : false;
 

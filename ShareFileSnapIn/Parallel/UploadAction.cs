@@ -19,6 +19,25 @@ namespace ShareFile.Api.Powershell.Parallel
         private String details;
         private FileSupport fileSupportDelegate;
         private ActionType actionType;
+        private string fileName;
+        public string FileName
+        {
+            get
+            {
+                return fileName;
+            }
+        }
+        public ActionType OpActionType
+        {
+            get
+            {
+                return actionType;
+            }
+            set
+            {
+                actionType = value;
+            }
+        }
 
         public UploadAction(FileSupport fileSupport, Client.ShareFileClient client, FileSystemInfo source, Models.Item target, String details, ActionType type)
         {
@@ -34,6 +53,7 @@ namespace ShareFile.Api.Powershell.Parallel
         {
             var fileInfo = (FileInfo)child;
             Models.Item fileItem = null;
+            fileName = child.Name;
             try
             {
                 fileItem = client.Items.ByPath(uploadTarget.url, "/" + child.Name).Execute();
@@ -48,7 +68,7 @@ namespace ShareFile.Api.Powershell.Parallel
             bool duplicate = fileItem != null && fileItem is Models.File;
             bool hashcodeMatches = duplicate ? (fileItem as Models.File).Hash.Equals(Utility.GetMD5HashFromFile(child.FullName)) : false;
 
-            if(duplicate && actionType == ActionType.None) 
+            if (duplicate && actionType == ActionType.None) 
             {
                 throw new IOException("File already exist");
             } 

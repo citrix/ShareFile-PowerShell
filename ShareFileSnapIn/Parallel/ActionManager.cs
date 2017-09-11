@@ -78,24 +78,56 @@ namespace ShareFile.Api.Powershell.Parallel
                     {
                         Interlocked.Increment(ref runningThreads);
                         IAction downloadAction = ActionsQueue.Dequeue();
-
-                        Task t = Task.Factory.StartNew(() =>
+                        Task t = Task.Factory.StartNew(async () =>
                         {
-                            try
+                            for (int i=1; i <= 7; i++)
                             {
-                                ProgressInfo fileProgressInfo = new ProgressInfo();
-                                fileProgressInfo.ProgressTransferred = this.ProgressDone;
-                                fileProgressInfo.ProgressTotal = this.ProgressTotal;
-                                fileProgressInfo.FileIndex = threadIndex;
+                                try
+                                {
+                                    ProgressInfo fileProgressInfo = new ProgressInfo();
+                                    fileProgressInfo.ProgressTransferred = this.ProgressDone;
+                                    fileProgressInfo.ProgressTotal = this.ProgressTotal;
+                                    fileProgressInfo.FileIndex = threadIndex;
 
-                                ProgressInfoList.Add(threadIndex++, fileProgressInfo);
+                                    ProgressInfoList.Add(threadIndex++, fileProgressInfo);
+                                    if (i > 1)
+                                    {
+                                        // This means that this is a retry. In that case force the operation
+                                        // Otherwise file already exists error is thrown
+                                        downloadAction.OpActionType = ActionType.Force;
+                                        downloadAction.CopyFileItem(fileProgressInfo);
+                                    }
+                                    else
+                                    {
+                                        downloadAction.CopyFileItem(fileProgressInfo);
+                                    }
+                                    // Task completed, break out of the loop.            
+                                    Log.Logger.Instance.Info("Action on Filename : "+downloadAction.FileName+" got completed in "+i+" try");
+                                    break;
+                                }
+                                catch (AggregateException tce)
+                                {
+                                    // This means ShareFile Client Api has cancelled the task.
+                                    // Retry the operation.
+                                    Log.Logger.Instance.Error(tce.Message + " Upload/Download action for " + downloadAction.FileName + "\n" + tce.StackTrace);
 
-                                downloadAction.CopyFileItem(fileProgressInfo);
-                            }
-                            catch (Exception error)
-                            {
-                                Log.Logger.Instance.Error(error.Message);
-                            }
+                                    if (i == 7)
+                                    {
+                                        // No need to wait
+                                        break;
+                                    }
+                                    // Wait for sometime before retrying the operation
+                                    double timeToWait = Math.Pow(2, i);
+                                    await Task.Delay(TimeSpan.FromSeconds(timeToWait));
+                                }
+                                catch (Exception e)
+                                {
+                                    // This means operation failed due to some other reasons.
+                                    // No need to retry, break out of the loop.
+                                    Log.Logger.Instance.Error(e.Message + "\n" + e.StackTrace);
+                                    break;
+                                }
+                            }                            
                             Interlocked.Decrement(ref remainingCounter);
                             Interlocked.Decrement(ref runningThreads);
                         });
