@@ -385,7 +385,9 @@ namespace ShareFile.Api.Powershell
 
         private ShareFileClient CreateClient(AuthenticationDomain domain)
         {
-            var client = new ShareFileClient(domain.Uri);
+            Configuration config = Configuration.Default();
+            config.HttpTimeout = 200000;
+            var client = new ShareFileClient(domain.Uri, config);
             if (domain.OAuthToken != null)
             {
                 client.AddOAuthCredentials(new Uri(domain.Uri), domain.OAuthToken);
