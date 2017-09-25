@@ -820,8 +820,18 @@ namespace ShareFile.Api.Powershell
         /// </summary>
         private bool RemoveLocalItem(FileSystemInfo item)
         {
-            item.Delete();
-
+            try
+            { 
+                item.Delete();
+            }
+            catch (IOException ioe)
+            {
+                // File could not be deleted because it is locked.
+                // Calling Garbage collector explicitly to remove the object from the heap.
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                item.Delete();
+            }
             return true;
         }
 
