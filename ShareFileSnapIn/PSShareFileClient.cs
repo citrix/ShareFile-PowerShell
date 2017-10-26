@@ -336,8 +336,8 @@ namespace ShareFile.Api.Powershell
                         else if (line.StartsWith("NetworkCredential"))
                         {
                             string cred = line.Split('=')[1].Trim();
-                            String username = cred.Split(',')[0].Trim();
-                            String password = cred.Split(',')[1].Trim();
+                            string username = cred.Split(',')[0].Trim();
+                            string password = cred.Split(',')[1].Trim();
                             domain.Credential = new NetworkCredential(username, password);
                         }
                     }
