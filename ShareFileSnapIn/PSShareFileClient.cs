@@ -48,6 +48,7 @@ namespace ShareFile.Api.Powershell
 
         public Session GetSession()
         {
+            WebpopInternetExplorerMode.SetUseCurrentIERegistryKey();
             if (PrimaryDomain != null)
             {
                 // Add username/password credentials if domain is ShareFile; Account is known; and credentials were provided
