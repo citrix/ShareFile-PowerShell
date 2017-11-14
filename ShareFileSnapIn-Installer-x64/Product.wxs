@@ -15,7 +15,7 @@
     <Feature Id="ProductFeature" Title="ShareFileSnapIn_Installer" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
       <ComponentRef Id="CMP_DocumentationShortcut" />
-      <ComponentRef Id="SIEBrowserEmulation" />
+      <ComponentRef Id="IEBrowserEmulation" />
     </Feature>
 
     <Icon Id="ShareFileIcon.ico" SourceFile="$(var.SourcePathAssets)\sf-icon.ico"/>
