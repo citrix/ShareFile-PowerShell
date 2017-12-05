@@ -15,6 +15,7 @@
     <Feature Id="ProductFeature" Title="ShareFileSnapIn_Installer" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
       <ComponentRef Id="CMP_DocumentationShortcut" />
+      <ComponentRef Id="IEBrowserEmulation" />
     </Feature>
 
     <Icon Id="ShareFileIcon.ico" SourceFile="$(var.SourcePathAssets)\sf-icon.ico"/>
@@ -37,13 +38,21 @@
                   Target="[System64Folder]windowspowershell\v1.0\powershell.exe" Arguments="-NoExit -ExecutionPolicy Bypass -Command &quot;&amp; '[#InstallTestSnapIn.ps1]'&quot;" />
         <RemoveFolder Id="RemoveShareFileShortcutsDir" On="uninstall" />
         <RegistryValue Root="HKCU" Key="Software\Microsoft\[ProductName]" Name="installed" Type="integer" Value="4" KeyPath="yes" />
+
       </Component>
     </DirectoryRef>
 
     <WixVariable Id="WixUILicenseRtf" Value="$(var.SourcePathAssets)\Citrix EULA.rtf" />
     <WixVariable Id="WixUIDialogBmp" Value="$(var.SourcePathAssets)\branding.jpg" />
   </Product>
-
+  
+  <Fragment>
+    <Component Id="IEBrowserEmulation" Win64="yes" Directory="INSTALLFOLDER">
+       <RegistryValue Type="integer" Name="powershell.exe" Value="0" Action="write" Root="HKCU" 
+                      Key="Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION"/>
+    </Component>
+  </Fragment>
+  
   <Fragment>
     <Property Id="POWERSHELL3VERSION" Secure="yes">
       <RegistrySearch Id="PowerShell3VersionSearch"

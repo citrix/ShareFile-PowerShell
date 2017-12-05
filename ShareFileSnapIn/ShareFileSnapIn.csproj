@@ -85,6 +85,7 @@
     <Compile Include="Browser\OAuthAuthenticationForm.Designer.cs">
       <DependentUpon>OAuthAuthenticationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Constants.cs" />
     <Compile Include="Parallel\ActionType.cs" />
     <Compile Include="Parallel\ProgressInfo.cs" />
     <Compile Include="Parallel\Utility.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="ShareFilePSSnapIn.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="WebpopInternetExplorerMode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Add-ShareFile-SnapIn.ps1">
