@@ -102,7 +102,7 @@ namespace ShareFile.Api.Powershell.Parallel
                                         downloadAction.CopyFileItem(fileProgressInfo);
                                     }
                                     // Task completed, break out of the loop.            
-                                    Log.Logger.Instance.Info("Action on Filename : "+downloadAction.FileName+" got completed in "+i+" try");
+                                    Log.Logger.Instance.Debug("Action on Filename : "+downloadAction.FileName+" got completed in "+i+" try");
                                     break;
                                 }
                                 catch (AggregateException tce)
