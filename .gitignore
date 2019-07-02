@@ -36,3 +36,5 @@ docs/*
 
 */bin
 */obj
+/.vs/slnx.sqlite
+/.vs/VSWorkspaceState.json
