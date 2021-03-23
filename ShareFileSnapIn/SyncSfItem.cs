@@ -165,7 +165,8 @@ namespace ShareFile.Api.Powershell
                     // use current user directory location if Local path is not specified in arguments
                     LocalPath = this.SessionState.Path.CurrentFileSystemLocation.Path;
                 }
-
+                // KA - Fix. It makes no sense why Synchronize or Move should force recursive. This is not the behavior of the original sfcli.exe.
+                /*
                 if (Synchronize)
                 {
                     Recursive = true;
@@ -174,7 +175,7 @@ namespace ShareFile.Api.Powershell
                 if (Move)
                 {
                     Recursive = true;
-                }
+                }*/
 
                 ShareFilePath = ShareFilePath.Trim();
                 LocalPath = LocalPath.Trim();
@@ -287,7 +288,9 @@ namespace ShareFile.Api.Powershell
                 }
 
                 // if create root folder flag is specified then create a container folder first
-                if (firstIteration && CreateRoot)
+                // KA - Fix. When CreateRoot is used and the source item is a folder we should NOT create the parent of that folder.
+                //      This possibly fixes another unknown scenario when the root folder is specified as the source.
+                if (firstIteration && CreateRoot && !(item is Models.Folder))
                 {
                     Models.Folder parentFolder = client.Items.GetParent(item.url).Execute() as Folder;
 
@@ -298,7 +301,11 @@ namespace ShareFile.Api.Powershell
                 if (item is Models.Folder)
                 {
                     // if user downloading the root drive then download its root folders
-                    if ((item as Folder).Info.IsAccountRoot.GetValueOrDefault())
+                    // KA - Fix. We should also process only subfolders and files if CreateRoot is not used and source is a folder.
+                    //      This prevents DownloadRecursive from creating the parent folder in conditions where CreateRoot is not specified.
+                    //      Code adapted from DownloadRecursive function and processes both file sources and folder sources appropriately now.
+                    // if ((item as Folder).Info.IsAccountRoot.GetValueOrDefault())
+                    if ((item as Folder).Info.IsAccountRoot.GetValueOrDefault() || !CreateRoot)
                     {
                         var children = client.Items.GetChildren(item.url)
                             .Select("Id")
@@ -309,14 +316,27 @@ namespace ShareFile.Api.Powershell
                             .Select("Info")
                             .Execute();
 
-                        foreach (var child in children.Feed)
+                        if (children != null)
                         {
-                            if (child is Models.Folder)
-                            {
-                                DownloadRecursive(client, transactionId, child, target, actionType);
+                            (item as Folder).Children = children.Feed;
 
-                                shareFileItems.Add(child);
+                            foreach (var child in children.Feed)
+                            {
+                                child.Parent = item;
+
+                                if (child is Models.Folder && ((item as Folder).Info.IsAccountRoot.GetValueOrDefault() || Recursive))
+                                {
+                                    DownloadRecursive(client, transactionId, child, target, actionType);
+
+                                    shareFileItems.Add(child);
+                                }
+                                else if (child is Models.File)
+                                {
+                                    DownloadAction downloadAction = new DownloadAction(FileSupport, client, transactionId, (Models.File)child, target, actionType);
+                                    actionManager.AddAction(downloadAction);
+                                }
                             }
+                            if (!(item as Folder).Info.IsAccountRoot.GetValueOrDefault()) { shareFileItems.Add(item); }
                         }
                     }
                     else
@@ -366,7 +386,10 @@ namespace ShareFile.Api.Powershell
             {
                 foreach(var item in shareFileItems)
                 {
-                    DeleteShareFileItemRecursive(client, item, Recursive);
+                    // KA - Fix. Replaced 'Recursive' with '!KeepFolders'. This prevents "Move" from deleting folders even when KeepFolders is specified.
+                    //      This fixes the bug that causes the source folder to be deleted in all scenarios where "Move" is specified and it does not contain children.
+                    // DeleteShareFileItemRecursive(client, item, Recursive);
+                    DeleteShareFileItemRecursive(client, item, !KeepFolders);
                 }
             }
         }
@@ -432,7 +455,10 @@ namespace ShareFile.Api.Powershell
                 {
                     foreach (var childFolder in childFolders)
                     {
-                        DeleteShareFileItemRecursive(client, childFolder, !KeepFolders);
+                        // KA - Fix. If we pass in 'deleteFolder' I don't know why we don't continue to use that here
+                        //      This keeps the behavior of DeleteShareFileItemRecursive consistent with the deleteFolder flag
+                        // DeleteShareFileItemRecursive(client, childFolder, !KeepFolders);
+                        DeleteShareFileItemRecursive(client, childFolder, deleteFolder);
                     }
                 }
 
