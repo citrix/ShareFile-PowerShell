@@ -24,7 +24,7 @@ $ShareFileHomeFolder = (Send-SfRequest $sfClient -Entity Items).Url
 $LocalPath = (Join-Path $env:USERPROFILE "Documents")
 
 #Create a PowerShell provider for ShareFile at the location specified
-New-PSDrive -Name sfDrive -PSProvider ShareFile -Client $sfClient -Root "\" -RootUri $ShareFilePath
+New-PSDrive -Name sfDrive -PSProvider ShareFile -Client $sfClient -Root "\" -RootUri $ShareFileHomeFolder
 
 #upload all the files (recursively) in the local folder to the specified folder in ShareFile
 Copy-SfItem -Path $LocalPath -Destination "sfDrive:"
